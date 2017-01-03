@@ -2,6 +2,7 @@
   function Recipe() {
     var arrays = [];
     var objects = [];
+    var extraBytes = 0;
 
     this.addJsonArray = function(size) {
       if (arrays[size])
@@ -15,6 +16,10 @@
         objects[size]++;
       else
         objects[size] = 1;
+    }
+
+    this.addString = function(size) {
+      extraBytes += size;
     }
 
     this.getExpression = function() {
@@ -34,6 +39,10 @@
           elements.push("JSON_OBJECT_SIZE("+size+")");
       }
       return elements.join(" + ");
+    }
+
+    this.getExtraBytes = function() {
+      return extraBytes;
     }
 
     this.computeSize = function(arch) {
@@ -58,8 +67,12 @@
     }
     else if (obj instanceof Object) {
       recipe.addJsonObject(Object.keys(obj).length);
-      for (var key in obj)
+      for (var key in obj) {
+        recipe.addString(key.length + 1);
         scanJson(recipe, obj[key]);
+      }
+    } else {
+      recipe.addString(obj.toString().length + 1);
     }
   }
 
@@ -70,9 +83,9 @@
     try {
       var recipe = new Recipe();
       scanJson(recipe, JSON.parse(input.value));
-      var expression = recipe.getExpression();
 
-      $result_expr.innerText = expression;
+      $result_expr.innerText = recipe.getExpression();
+      $extra_bytes.innerText = recipe.getExtraBytes();
 
       for (var i=0; i<architectures.length; i++) {
         var arch = architectures[i];
