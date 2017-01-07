@@ -76,7 +76,7 @@
     }
   }
 
-  input.addEventListener('input', function(e) {
+  function analyseInput() {
     results.style.display = 'none';
     error.style.visibility = 'hidden';
     $parserDiv.style.display = 'none';
@@ -105,11 +105,13 @@
       error.innerText = "ERROR: " + ex.message;
       error.style.visibility = 'visible';
     }
-  });
+  }
+
+  input.addEventListener('input', analyseInput);
 
   function setJsonInput(obj) {
     input.value = JSON.stringify(obj, undefined, 2);
-    input.dispatchEvent(new Event('input'));
+    analyseInput();
   }
 
   setJsonInput(examples.arduinoJson);
