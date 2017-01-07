@@ -7,35 +7,64 @@
 </head>
 <body>
     <div class="container">
-        <div class="page-header">
-            <h1>JsonBuffer size calculator</h1>
+        <div class="jumbotron jumbotron-primary">
+          <h1>ArduinoJson Assistant</h1>
+          <p>
+            <i>How to use ArduinoJson?</i><br>
+            <i>How to compute JsonBuffer size?</i><br>
+            Paste your JSON in the box and you'll know...
+          </p>
         </div>
         <div id='error' class="alert alert-danger" role="alert">
             Please paste your JSON in the "input" box
         </div>
         <div class="row">
             <div class="col-md-6">
-                <h2>Input</h2>
-                <textarea class="form-control" rows=30 id='input'></textarea><br>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Input</div>
+                    <div class="panel-body">
+                        <textarea class="form-control" rows=20 id='input'></textarea><br>
+                        <p>Examples:
+                            <a href="#" id="$openweathermapAnchor">OpenWeatherMap</a>, 
+                            <a href="#" id="$wundergroundAnchor">Weather Underground</a>
+                        </p>
+                    </div>
+                </div>
             </div>
             <div id='results' class="col-md-6" style='display:none'>
-                <h2>Result</h2>
-                <h3>Expression</h3>
-                <p><code id='$result_expr'></code></p>
-                <table class="table">
-                  <thead>
-                    <th>Platform</th>
-                    <th>Size (in bytes)</th>
-                  </thead>
-                  <tbody id='$result_table'>
-                  </tbody>
-                </table>
-                <h3>Additional bytes for input duplication</h3>
-                <p><code id='$extra_bytes'></code></p>
+                <div class="panel panel-info">
+                    <div class="panel-heading">JsonBuffer size</div>
+                    <div class="panel-body">
+                        <h3>Expression</h3>
+                        <p><code id='$result_expr'></code></p>
+                        <table class="table">
+                          <thead>
+                            <th>Platform</th>
+                            <th>Size (in bytes)</th>
+                          </thead>
+                          <tbody id='$result_table'>
+                          </tbody>
+                        </table>
+                        <h3>Additional bytes for input duplication</h3>
+                        <p><code id='$extra_bytes'></code></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="$parserDiv">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Parsing program</div>
+                    <div class="panel-body">
+                        <pre id="$parserPre"></pre>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </body>
 <script type="text/javascript" src="architectures.js"></script>
+<script type="text/javascript" src="examples.js"></script>
+<script type="text/javascript" src="parserGenerator.js"></script>
 <script type="text/javascript" src="calculator.js"></script>
 </html>

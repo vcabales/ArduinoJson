@@ -76,9 +76,10 @@
     }
   }
 
-  input.oninput = function(e) {
+  input.addEventListener('input', function(e) {
     results.style.display = 'none';
     error.style.visibility = 'hidden';
+    $parserDiv.style.display = 'none';
 
     try {
       var recipe = new Recipe();
@@ -96,13 +97,30 @@
         size_cell.innerText = recipe.computeSize(arch);
       }
       results.style.display = 'block';
+
+      $parserPre.innerText = generateParser(input.value, recipe.getExpression());
+      $parserDiv.style.display = 'block';
     }
     catch (ex) {
       error.innerText = "ERROR: " + ex.message;
       error.style.visibility = 'visible';
     }
+  });
+
+  function setJsonInput(obj) {
+    input.value = JSON.stringify(obj, undefined, 2);
+    input.dispatchEvent(new Event('input'));
   }
 
-  input.value = "{\"sensor\":\"gps\",\"time\":1351824120,\"data\":[48.756080,2.302038]}";
-  input.oninput();
+  setJsonInput(examples.arduinoJson);
+
+  $wundergroundAnchor.onclick = function(e) {
+    setJsonInput(examples.wunderground);
+    e.preventDefault();
+  }
+
+  $openweathermapAnchor.onclick = function(e) {
+    setJsonInput(examples.openweathermap);
+    e.preventDefault();
+  }
 })();
