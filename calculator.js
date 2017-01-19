@@ -71,6 +71,8 @@
         recipe.addString(key.length + 1);
         scanJson(recipe, obj[key]);
       }
+    } else if (obj === null) {
+      recipe.addString(5);
     } else {
       recipe.addString(obj.toString().length + 1);
     }

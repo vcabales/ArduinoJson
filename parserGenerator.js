@@ -26,7 +26,7 @@ function ProgramWriter() {
 }
 
 function makeVariableName(prefix, suffix) {
-  if (!prefix || !suffix) return prefix || suffix || "root";
+  if (prefix === undefined || suffix === undefined) return prefix || suffix || "root";
   if (typeof suffix == "number") return prefix + suffix;
   return prefix + "_" + suffix;
 }
@@ -72,7 +72,8 @@ function extractValue(prg, value, member, prefix)
     prg.addEmptyLine();
   } else {
     var type = getCppTypeFor(value);
-    prg.addLine(type + " " + prefix + " = " + member + "; // " + JSON.stringify(value));
+    if (type)
+      prg.addLine(type + " " + prefix + " = " + member + "; // " + JSON.stringify(value));
   }
 }
 
