@@ -25,6 +25,10 @@ function ProgramWriter() {
   }
 }
 
+function sanitizeName(name) {
+  return name.replace(/[^a-z0-9]+/gi, "_");
+}
+
 function makeVariableName(prefix, suffix) {
   if (prefix === undefined || suffix === undefined) return prefix || suffix || "root";
   if (typeof suffix == "number") return prefix + suffix;
@@ -61,12 +65,12 @@ function extractValue(prg, value, member, prefix)
       var objName = makeVariableName(prefix);
       prg.addLine("JsonObject& "+ objName + " = " + member + ";")
       for (var key in value) {
-        extractValue(prg, value[key], objName + "[\"" + key + "\"]", makeVariableName(prefix, key));
+        extractValue(prg, value[key], objName + "[\"" + key + "\"]", makeVariableName(prefix, sanitizeName(key)));
       }
     }
     else {
       for (var key in value) {
-        extractValue(prg, value[key], member + "[\"" + key + "\"]", makeVariableName(prefix, key));
+        extractValue(prg, value[key], member + "[\"" + key + "\"]", makeVariableName(prefix, sanitizeName(key)));
       }
     }
     prg.addEmptyLine();

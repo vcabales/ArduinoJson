@@ -83,30 +83,34 @@
     error.style.visibility = 'hidden';
     $parserDiv.style.display = 'none';
 
+    var parsedJson;
     try {
-      var recipe = new Recipe();
-      scanJson(recipe, JSON.parse(input.value));
-
-      $result_expr.innerText = recipe.getExpression();
-      $extra_bytes.innerText = recipe.getExtraBytes();
-
-      for (var i=0; i<architectures.length; i++) {
-        var arch = architectures[i];
-        var row = $result_table.rows[i] || $result_table.insertRow(i);
-        var name_cell = row.cells[0] || row.insertCell(0);
-        var size_cell = row.cells[1] || row.insertCell(1);
-        name_cell.innerText = arch.name;
-        size_cell.innerText = recipe.computeSize(arch);
-      }
-      results.style.display = 'block';
-
-      $parserPre.innerText = generateParser(input.value, recipe.getExpression());
-      $parserDiv.style.display = 'block';
+      parsedJson = JSON.parse(input.value);
     }
     catch (ex) {
       error.innerText = "ERROR: " + ex.message;
       error.style.visibility = 'visible';
+      return;
     }
+
+    var recipe = new Recipe();
+    scanJson(recipe, parsedJson);
+
+    $result_expr.innerText = recipe.getExpression();
+    $extra_bytes.innerText = recipe.getExtraBytes();
+
+    for (var i=0; i<architectures.length; i++) {
+      var arch = architectures[i];
+      var row = $result_table.rows[i] || $result_table.insertRow(i);
+      var name_cell = row.cells[0] || row.insertCell(0);
+      var size_cell = row.cells[1] || row.insertCell(1);
+      name_cell.innerText = arch.name;
+      size_cell.innerText = recipe.computeSize(arch);
+    }
+    results.style.display = 'block';
+
+    $parserPre.innerText = generateParser(input.value, recipe.getExpression());
+    $parserDiv.style.display = 'block';
   }
 
   input.addEventListener('input', analyseInput);

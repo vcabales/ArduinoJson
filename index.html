@@ -76,5 +76,11 @@
   ga('create', 'UA-89940284-1', 'auto');
   ga('send', 'pageview');
 
+  window.onerror = function (err, url, line) {
+    ga('send', 'exception', {
+        'exDescription': err + " (url="+url+", line="+line+")",
+        'exFatal': true
+    });
+  };
 </script>
 </html>
