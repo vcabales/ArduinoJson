@@ -1,3 +1,11 @@
+---
+layout: page
+name: FAQ
+---
+
+Frequently Asked Questions
+===========
+
 <!-- MarkdownTOC depth=2 autolink=true bracket=round lowercase_only_ascii=true -->
 
 - [Part 1 - Common questions](#part-1---common-questions)
