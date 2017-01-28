@@ -1,5 +1,5 @@
-name,url
-Home,/
-Documentation,/doc
-Assistant,/assistant
-F.A.Q,/faq
+name,url,tag
+Home,/,home
+Documentation,/doc,doc
+Assistant,/assistant,assistant
+F.A.Q,/faq,faq

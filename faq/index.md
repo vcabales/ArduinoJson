@@ -1,16 +1,14 @@
 ---
 layout: page
 title: FAQ
+tags: faq
 ---
 
 Frequently Asked Questions
 ===========
 
-<!-- MarkdownTOC depth=2 autolink=true bracket=round lowercase_only_ascii=true -->
-
-- [Part 1 - Common questions](#part-1---common-questions)
-  - [Compilation fails? Device crashes? Nothing on serial console?](#compilation-fails-device-crashes-nothing-on-serial-console)
-  - [Why does my device crash or reboot?](#why-does-my-device-crash-or-reboot)
+- [Part 1 - Common questions](#part-1---common-questions){% for post in site.categories.faq reversed  %}
+  - [{{ post.title }}]({{ post.url }}){% endfor %}
   - [What are the differences between `StaticJsonBuffer` and `DynamicJsonBuffer`?](#what-are-the-differences-between-staticjsonbuffer-and-dynamicjsonbuffer)
   - [How to determine the buffer size?](#how-to-determine-the-buffer-size)
   - [What are the common sizes for JsonBuffer?](#what-are-the-common-sizes-for-jsonbuffer)
@@ -40,58 +38,8 @@ Frequently Asked Questions
   - [How to fix error "Ambiguous overload for 'operator='"](#how-to-fix-error-ambiguous-overload-for-operator)
   - [Why JsonVariant cannot be converted to char?](#why-jsonvariant-cannot-be-converted-to-char)
 
-<!-- /MarkdownTOC -->
-
 
 ## Part 1 - Common questions
-
-
-
-### Compilation fails? Device crashes? Nothing on serial console?
-
-See [Compatibility issues](Compatibility issues) first.
-
-
-
-### Why does my device crash or reboot?
-
-99.999% of the time, this is caused by a "stack overflow", i.e. you have too many variables in the "stack".
-The solution is to move variables to the "heap".
-
-First, replace the `StaticJsonBuffer` by a `DynamicJsonBuffer`.
-Then, use dynamic allocation for the JSON input.
-
-For instance, if you have a program like this:
-
-```c++
-char content[MAX_CONTENT_SIZE];
-StaticJsonBuffer<JSON_BUFFER_SIZE> jsonBuffer;
-
-receive(content);
-JsonObject& root = jsonBuffer.parseObject(content);
-
-Serial.println(root["name"].asString());
-```
-
-you should transform it like that:
-
-```c++
-char* content = malloc(MAX_CONTENT_SIZE);
-DynamicJsonBuffer jsonBuffer(JSON_BUFFER_SIZE);
-
-receive(content);
-JsonObject& root = jsonBuffer.parseObject(content);
-
-Serial.println(root["name"].asString());
-
-free(content);
-```
-
-Of course, this is only possible if your target has enough memory.
-Sometimes, it's just impossible because the MCU is too small.
-
-See issues [#233](https://github.com/bblanchon/ArduinoJson/issues/233), [#234](https://github.com/bblanchon/ArduinoJson/issues/234), [#262](https://github.com/bblanchon/ArduinoJson/issues/262) and [#359](https://github.com/bblanchon/ArduinoJson/issues/359)
-
 
 
 ### What are the differences between `StaticJsonBuffer` and `DynamicJsonBuffer`?

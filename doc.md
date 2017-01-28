@@ -1,6 +1,7 @@
 ---
 layout: page
 title: API Reference
+tags: doc
 ---
 
 API Reference
