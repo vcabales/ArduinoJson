@@ -2,6 +2,9 @@
 layout: default
 ---
 
-<div class="page">
 {{ content }}
-</div>
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{{ site.baseurl }}/">Home</a></li>
+  <li class="breadcrumb-item active">{{ page.title }}</li>
+</ol>
