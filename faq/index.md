@@ -8,7 +8,7 @@ Frequently Asked Questions
 ===========
 
 - [Part 1 - Common questions](#part-1---common-questions){% for post in site.categories.faq reversed  %}
-  - [{{ post.title }}]({{ post.url }}){% endfor %}
+  - [{{ post.title }}]({{ site.baseurl }}{{ post.url }}){% endfor %}
   - [What are the differences between `StaticJsonBuffer` and `DynamicJsonBuffer`?](#what-are-the-differences-between-staticjsonbuffer-and-dynamicjsonbuffer)
   - [How to determine the buffer size?](#how-to-determine-the-buffer-size)
   - [What are the common sizes for JsonBuffer?](#what-are-the-common-sizes-for-jsonbuffer)
