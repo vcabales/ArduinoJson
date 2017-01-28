@@ -33,16 +33,19 @@ tags: assistant
             <div class="card-block">
                 <h3>Expression</h3>
                 <p><code id='$result_expr'></code></p>
+                <h3>Additional bytes for input duplication</h3>
+                <p><code id='$extra_bytes'></code></p>
                 <table class="table">
                   <thead>
-                    <th>Platform</th>
-                    <th>Size (in bytes)</th>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Size<br><small>no duplication</small></th>
+                        <th>Size<br><small>with duplication</small></th>
+                    </tr>
                   </thead>
                   <tbody id='$result_table'>
                   </tbody>
                 </table>
-                <h3>Additional bytes for input duplication</h3>
-                <p><code id='$extra_bytes'></code></p>
             </div>
         </div>
     </div>

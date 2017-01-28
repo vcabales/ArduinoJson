@@ -96,16 +96,21 @@
     var recipe = new Recipe();
     scanJson(recipe, parsedJson);
 
+    var extraSize = recipe.getExtraBytes();
+
     $result_expr.innerText = recipe.getExpression();
-    $extra_bytes.innerText = recipe.getExtraBytes();
+    $extra_bytes.innerText = extraSize;
 
     for (var i=0; i<architectures.length; i++) {
       var arch = architectures[i];
+      var size = recipe.computeSize(arch);
       var row = $result_table.rows[i] || $result_table.insertRow(i);
       var name_cell = row.cells[0] || row.insertCell(0);
       var size_cell = row.cells[1] || row.insertCell(1);
-      name_cell.innerText = arch.name;
-      size_cell.innerText = recipe.computeSize(arch);
+      var total_size_cell = row.cells[2] || row.insertCell(2);
+      name_cell.innerHTML = arch.name;
+      size_cell.innerHTML = "<code>" + (size) + "</code>";
+      total_size_cell.innerHTML = "<code>" + (size + extraSize) + "</code>";
     }
     results.style.display = 'block';
 
