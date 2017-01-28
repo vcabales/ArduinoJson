@@ -7,17 +7,26 @@ tags: faq
 Frequently Asked Questions
 ===========
 
-- [Part 1 - Common questions](#part-1---common-questions){% for post in site.categories.faq reversed  %}
-  - [{{ post.title }}]({{ site.baseurl }}{{ post.url }}){% endfor %}
-- [Part 2 - Serialization questions](#part-2---serialization-questions)
-  - [Why some parts are missing?](#why-some-parts-are-missing)
-  - [Why does the generated JSON contain garbage?](#why-does-the-generated-json-contain-garbage)
-  - [How to compute the JSON length?](#how-to-compute-the-json-length)
-  - [How to create complex nested objects?](#how-to-create-complex-nested-objects)
-  - [How to insert a `null`?](#how-to-insert-a-null)
-  - [The first serialization succeeds, why do the next ones fail?](#the-first-serialization-succeeds-why-do-the-next-ones-fail)
-  - [Why ArduinoJson is slow?](#why-arduinojson-is-slow)
-- [Part 3 - Deserialization/parsing questions](#part-3---deserializationparsing-questions)
+### Part 1 - Common questions
+
+{% for post in site.categories.faq reversed  %}
+{% capture post_year %}{{post.date | date: "%Y"}}{% endcapture %}
+{% if post_year == "2000" %}
+<li><a href='{{ site.baseurl }}{{ post.url }}'>{{ post.title }}</a></li>
+{% endif %}
+{% endfor %}
+
+### Part 2 - Serialization questions
+
+{% for post in site.categories.faq reversed  %}
+{% capture post_year %}{{post.date | date: "%Y"}}{% endcapture %}
+{% if post_year == "2001" %}
+<li><a href='{{ site.baseurl }}{{ post.url }}'>{{ post.title }}</a></li>
+{% endif %}
+{% endfor %}
+
+###  Part 3 - Deserialization/parsing
+
   - [Why do I have a segmentation fault?](#why-do-i-have-a-segmentation-fault)
   - [Can I parse data from a stream?](#can-i-parse-data-from-a-stream)
   - [Can I parse a JSON input that is too big to fit in memory?](#can-i-parse-a-json-input-that-is-too-big-to-fit-in-memory)
@@ -28,186 +37,6 @@ Frequently Asked Questions
   - [Can I access to object member by its index, instead of its key?](#can-i-access-to-object-member-by-its-index-instead-of-its-key)
   - [How to fix error "Ambiguous overload for 'operator='"](#how-to-fix-error-ambiguous-overload-for-operator)
   - [Why JsonVariant cannot be converted to char?](#why-jsonvariant-cannot-be-converted-to-char)
-
-
-## Part 2 - Serialization questions
-
-
-### Why some parts are missing?
-
-Example: you want to write `{"p1":[0, 1]}`, but instead you get `{"p1":[]}`.
-
-This is because the `StaticJsonBuffer` too small.
-
-Solution: Increase the size of the `StaticJsonBuffer` or switch to a `DynamicJsonBuffer`.
-
-See also:
-
-* [What are the differences between StaticJsonBuffer and DynamicJsonBuffer?](#what-are-the-differences-between-staticjsonbuffer-and-dynamicjsonbuffer)
-* [How to determine the buffer size?](#how-to-determine-the-buffer-size)
-* [JsonBuffer size calculator](https://bblanchon.github.io/ArduinoJson/)
-* Issues [#360](https://github.com/bblanchon/ArduinoJson/issues/360), [#372](https://github.com/bblanchon/ArduinoJson/issues/372), [#374](https://github.com/bblanchon/ArduinoJson/issues/374) and [#380](https://github.com/bblanchon/ArduinoJson/issues/380)
-
-
-### Why does the generated JSON contain garbage?
-
-There are two key concepts you need to understand to use ArduinoJson:
-
-1. `JsonObject`s and `JsonArray`s are stored in a `JsonBuffer`
-2. `char*` are not copied
-
-Similarly, there are two reasons to get garbage in the output:
-
-1. `JsonBuffer` is not in memory anymore
-2. The string pointed by the `char*` is not in memory anymore.
-
-##### Example 1 of what you should not do:
-
-```c++
-JsonObject& myFunction() {
-  StaticJsonBuffer<200> jsonBuffer;
-  return jsonBuffer.createObject();
-}
-```
-
-This is wrong because it returns a reference (a pointer if you prefer) to a `JsonObject` that is not in memory anymore.
-
-##### Example 2 of what you should not do:
-
-```c++
-void myFunction(JsonObject& obj) {
-  char myValue[] = "Hello World!";
-  obj["value"] = myValue;
-}
-```
-
-This is wrong because the `JsonObject` now contains a pointer to a string that is not in memory anymore.
-
-See also:
-
-* [Avoiding pitfalls: Do not assume that strings are copied](https://github.com/bblanchon/ArduinoJson/wiki/Avoiding-pitfalls#6-do-not-assume-that-strings-are-copied)
-* Issues [#364](https://github.com/bblanchon/ArduinoJson/issues/364), [#366](https://github.com/bblanchon/ArduinoJson/issues/366)
-
-### How to compute the JSON length?
-
-Use `measureLength()` to compute the number of characters that will be printed by `printTo()`.
-
-Use `measurePrettyLength()` to compute the number of characters that will be printed by `prettyPrintTo()`.
-
-None of these methods include the zero-terminator.
-So if you need to allocate a buffer, don't forget to add 1 to the size.
-
-```c++
-StaticJsonBuffer<200> jsonBuffer;
-JsonObject& root = jsonBuffer.createObject();
-root["hello"] = world;
-
-size_t len = root.measureLength(); // returns 17
-
-size_t size = len+1;
-char json[size];
-root.printTo(json, size); // writes {"hello":"world"}
-```
-
-See issues [#75](https://github.com/bblanchon/ArduinoJson/issues/75), [#94](https://github.com/bblanchon/ArduinoJson/issues/94), [#166](https://github.com/bblanchon/ArduinoJson/issues/166), [#178](https://github.com/bblanchon/ArduinoJson/issues/178) and [#268](https://github.com/bblanchon/ArduinoJson/issues/268).
-
-
-### How to create complex nested objects?
-
-To create a nested object, call `createNestedObject()`.
-To create a nested array, call `createNestedArray()`.
-
-For example:
-
-```c++
-DynamicJsonBuffer jsonBuffer;
-JsonObject& root = jsonBuffer.createObject();
-
-JsonObject& weather = root.createNestedObject("weather");
-weather["temperature"] = 12;
-weather["condition"] = "cloudy";
-
-JsonArray& coords = root.createNestedArray("coords");
-coords.add(48.7507371, 7);
-coords.add(2.2625587, 7);
-
-root.prettyPrintTo(Serial);
-```
-
-will generate:
-
-```json
-{
-  "weather": {
-    "temperature": 12,
-    "condition": "cloudy"
-  },
-  "coords": [
-    48.7507371,
-    2.2625587
-  ]
-}
-```
-
-See:
-
-* issues [#51](https://github.com/bblanchon/ArduinoJson/issues/51), [#252](https://github.com/bblanchon/ArduinoJson/issues/252) and [#264](https://github.com/bblanchon/ArduinoJson/issues/264)
-* [API Reference: JsonArray::createNestedArray()](https://github.com/bblanchon/ArduinoJson/wiki/API-Reference#jsonarraycreatenestedarray)
-* [API Reference: JsonArray::createNestedArray()](https://github.com/bblanchon/ArduinoJson/wiki/API-Reference#jsonarraycreatenestedarray)
-* [API Reference: JsonObject::createNestedArray()](https://github.com/bblanchon/ArduinoJson/wiki/API-Reference#jsonobjectcreatenestedarray)
-* [API Reference: JsonObject::createNestedObject()](https://github.com/bblanchon/ArduinoJson/wiki/API-Reference#jsonobjectcreatenestedobject)
-
-
-### How to insert a `null`?
-
-There are two ways to serialize a `null`:
-
-* either set the value to `(char*)0`,
-* or set the value to `RawJson("null")`
-
-For example, to generate the following JSON:
-
-```json
-{"myValue":null}
-```
-
-you can write:
-
-```c++
-DynamicJsonBuffer jsonBuffer;
-JsonObject& root = jsonBuffer.createObject();
-root["myValue"] = (char*)0; // or (char*)NULL if you prefer
-root.printTo(Serial);
-```
-
-See:
-
-* issue [#418](https://github.com/bblanchon/ArduinoJson/issues/418)
-
-
-
-### The first serialization succeeds, why do the next ones fail?
-
-This is usually caused by a reused `JsonBuffer`.
-The solution is simply to NOT reuse the `JsonBuffer`.
-
-See [The first parsing succeeds, why do the next ones fail?](#the-first-parsing-succeeds-why-do-the-next-ones-fail)
-
-
-
-### Why ArduinoJson is slow?
-
-First of all, ArduinoJson is **not slow** by itself. It's slow when used in conjunction with the `WifiClient` from the ESP8266 core.
-
-The problem is that there is no buffer between ArduinoJson and the WifiClient.
-
-To solve this, either:
-
-1. Enable the [Nagle algorithm](https://en.wikipedia.org/wiki/Nagle%27s_algorithm) on `WifiClient` by calling `setNoDelay(false)`.
-2. Serialize to a buffer and send the whole buffer in one shot.
-3. Insert a [BufferedPrint](https://github.com/bblanchon/ArduinoJson/wiki/Bag%20of%20Tricks#buffered-output) proxy between ArduinoJson and `WifiClient`.
-
-See issue [#166](https://github.com/bblanchon/ArduinoJson/issues/166), [#271](https://github.com/bblanchon/ArduinoJson/issues/271) and [#301](https://github.com/bblanchon/ArduinoJson/issues/301)
 
 
 ## Part 3 - Deserialization/parsing questions
