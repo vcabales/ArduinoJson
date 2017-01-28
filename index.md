@@ -1,6 +1,6 @@
 ---
 layout: page
-name: Home
+title: Home
 ---
 
 ArduinoJson
