@@ -107,14 +107,14 @@
       var row = $result_table.rows[i] || $result_table.insertRow(i);
       var name_cell = row.cells[0] || row.insertCell(0);
       var size_cell = row.cells[1] || row.insertCell(1);
-      var total_size_cell = row.cells[2] || row.insertCell(2);
-      name_cell.innerHTML = arch.name;
+            name_cell.innerHTML = arch.name;
       size_cell.innerHTML = "<code>" + (size) + "</code>";
-      total_size_cell.innerHTML = "<code>" + (size + extraSize) + "</code>";
     }
     results.style.display = 'block';
 
-    $parserPre.innerText = generateParser(input.value, recipe.getExpression());
+    extraSize = Math.ceil(extraSize / 9) * 10;
+
+    $parserPre.innerText = generateParser(input.value, recipe.getExpression() + " + " + extraSize);
     $parserDiv.style.display = 'block';
   }
 

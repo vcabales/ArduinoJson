@@ -88,7 +88,7 @@ function generateParser(jsonString, expression) {
   prg.addLine('const size_t bufferSize = ' + expression + ';');
   prg.addLine('DynamicJsonBuffer jsonBuffer(bufferSize);');
   prg.addEmptyLine();
-  prg.addLine('char json[] = "'+ JSON.stringify(root).replace(/"/g, '\\"') + '";');
+  prg.addLine('const char* json = "'+ JSON.stringify(root).replace(/"/g, '\\"') + '";');
   prg.addEmptyLine();
   if (root instanceof Array) {
     prg.addLine('JsonArray& root = jsonBuffer.parseArray(json);');
