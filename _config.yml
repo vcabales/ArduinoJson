@@ -33,3 +33,7 @@ exclude:
   - Gemfile
   - Gemfile.lock
 
+collections:
+  apis:
+    output: true
+    permalink: /api/:path/
