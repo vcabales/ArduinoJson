@@ -108,7 +108,7 @@
       var name_cell = row.cells[0] || row.insertCell(0);
       var size_cell = row.cells[1] || row.insertCell(1);
             name_cell.innerHTML = arch.name;
-      size_cell.innerHTML = "<code>" + (size) + "</code>";
+      size_cell.innerHTML = "<code>" + (size + extraSize) + "</code>";
     }
     results.style.display = 'block';
 

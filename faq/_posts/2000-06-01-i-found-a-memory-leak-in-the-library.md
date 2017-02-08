@@ -11,7 +11,7 @@ Each time you call `parseArray()`, `parseObject()`, `createArray()` and `createO
 To avoid running out of memory, you should discard unused data as soon as possible.
 
 The recommended practice is to do the JSON handling in a dedicated function, with a local `JsonBuffer` that will be automatically reclaimed when the function exits.
-This means that you cannot return a `JsonArray` or a `JsonObject` from that function, because they would contains dangling pointers to what used to be the `JsonBuffer`.
+This means that you cannot return a `JsonArray` or a `JsonObject` from that function, because they would contain dangling pointers to what used to be the `JsonBuffer`.
 Instead, you should convert the content of the `JsonArray` to a custom array or `vector`; or the content of the `JsonObject` to your own data structure.
 
 This seems like a constraint, but remember that you're programming for an embedded platform with very limited resources, and that requires special techniques.
