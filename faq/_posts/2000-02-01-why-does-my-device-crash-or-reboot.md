@@ -41,4 +41,4 @@ Sometimes, it's just impossible because the MCU is too small.
 
 See:
 
-* Issues [#233](https://github.com/bblanchon/ArduinoJson/issues/233), [#234](https://github.com/bblanchon/ArduinoJson/issues/234), [#262](https://github.com/bblanchon/ArduinoJson/issues/262) and [#359](https://github.com/bblanchon/ArduinoJson/issues/359)
+* Issues [#233](https://github.com/bblanchon/ArduinoJson/issues/233), [#234](https://github.com/bblanchon/ArduinoJson/issues/234), [#262](https://github.com/bblanchon/ArduinoJson/issues/262), [#359](https://github.com/bblanchon/ArduinoJson/issues/359) and [#443](https://github.com/bblanchon/ArduinoJson/issues/443)
