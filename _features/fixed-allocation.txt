@@ -1,0 +1,10 @@
+---
+title: Fixed Memory Allocation
+description: ArduinoJson uses a fixed memory allocation, allowing to work on devices with very little RAM.
+---
+
+// Memory pool on the stack
+StaticJsonBuffer<512> jsonBuffer
+
+// or, in the heap
+DynamicJsonBuffer jsonBuffer(512)

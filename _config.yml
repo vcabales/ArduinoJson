@@ -37,3 +37,5 @@ collections:
   apis:
     output: true
     permalink: /api/:path/
+  features:
+    output: false
