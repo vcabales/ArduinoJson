@@ -3,10 +3,11 @@ title: Parse From Stream
 description: ArduinoJson is able to parse directly from an input <code>Stream</code> or <code>std::istream</code>
 ---
 
-EthernetClient client;
+// parse input from the serial port
+JsonObject& root = jsonBuffer.parse(Serial);
 
-initialize(client);
-sendRequestTo(client);
-skipHttpHeader(client)
+// ...an Ethernet connection
+JsonObject& root = jsonBuffer.parse(ethernetClient);
 
-JsonObject& root = jsonBuffer.parse(client);
+// ...or a Wifi connection
+JsonObject& root = jsonBuffer.parse(wifiClient);
