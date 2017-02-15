@@ -15,11 +15,15 @@ The parsing functions, `parseArray()` and `parseObject()`, may fail for 5 reason
 #### Case 1: The input is not a valid JSON
 
 This seems obvious, but a lot of issues are caused by from an invalid input.
-In particular, if you're writing an HTTP client, you need to skip the HTTP headers and send only the JSON payload to ArduinoJson.
+
+In particular, if you're writing an HTTP client, you need to
+
+1. skip the HTTP headers,
+2. use HTTP 1.0 to prevent [chunked transfer encoding](https://fr.wikipedia.org/wiki/Chunked_transfer_encoding)
 
 See:
 
-* Issues [#108](https://github.com/bblanchon/ArduinoJson/issues/108), [#167](https://github.com/bblanchon/ArduinoJson/issues/167), [#218](https://github.com/bblanchon/ArduinoJson/issues/218), [#237](https://github.com/bblanchon/ArduinoJson/issues/237), [#424](https://github.com/bblanchon/ArduinoJson/issues/424), [#430](https://github.com/bblanchon/ArduinoJson/issues/430) and [#431](https://github.com/bblanchon/ArduinoJson/issues/431)
+* Issues [#108](https://github.com/bblanchon/ArduinoJson/issues/108), [#167](https://github.com/bblanchon/ArduinoJson/issues/167), [#218](https://github.com/bblanchon/ArduinoJson/issues/218), [#237](https://github.com/bblanchon/ArduinoJson/issues/237), [#424](https://github.com/bblanchon/ArduinoJson/issues/424), [#430](https://github.com/bblanchon/ArduinoJson/issues/430), [#431](https://github.com/bblanchon/ArduinoJson/issues/431) and [#451](https://github.com/bblanchon/ArduinoJson/issues/451)
 
 #### Case 2: The `StaticJsonBuffer` is too small
 
