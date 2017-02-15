@@ -26,9 +26,9 @@ kramdown:
   input: GFM
   hard_wrap: false
 
-theme: jekyll-theme-cayman
 gems:
-  - jemoji 
+  - jemoji
+  - jekyll-sitemap
 exclude:
   - Gemfile
   - Gemfile.lock

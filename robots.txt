@@ -1,0 +1,4 @@
+---
+---
+
+Sitemap: {{site.url}}{{site.baseurl}}/sitemap.xml
