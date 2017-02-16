@@ -4,8 +4,9 @@ title: C++ JSON library for IoT
 tags: home
 ---
 
+
 <div class="container-fluid p-0">
-<div id="carouselFeatures" class="carousel slide col-12 col-md-10 col-lg-6 mx-md-auto p-0" data-ride="carousel">
+<div id="carouselFeatures" class="carousel slide col-12 col-md-10 col-lg-6 mx-md-auto p-0 p-md-2" data-ride="carousel">
 	<ol class="carousel-indicators">
 		{% for feature in site.features %}
 		<li data-target="#carouselFeatures" data-slide-to="{{ forloop.index0 }}" {% if forloop.index == 1 %}class="active"{% endif %}></li>
@@ -22,6 +23,7 @@ tags: home
 		</div>
 	{% endfor %}
 	</div>
+	<h1 class="my-carousel-title hidden-sm-down">Features</h1>
 	<a class="carousel-control-prev hidden-sm-down" href="#carouselFeatures" role="button" data-slide="prev">
 		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 		<span class="sr-only">Previous</span>

@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="{{ site.baseurl }}/css/highlight.css">
 </head>
 <body>
-    <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse fixed-top">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsArduinoJson" aria-controls="navbarsArduinoJson" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="{{ site.baseurl }}">{{ site.title }}</a>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <div class="collapse navbar-collapse" id="navbarsArduinoJson">
         <ul class="navbar-nav mr-auto">
         {% for section in site.data.sections %}
         {% if page.tags contains section.tag %}<li class="nav-item active">
@@ -33,12 +33,15 @@
       </ul>
   </div>
 
-   <a href="https://github.com/bblanchon/ArduinoJson/"><img class="hidden-sm-down" style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 </nav>
 
 {{content}}
 
+<a href="https://github.com/bblanchon/ArduinoJson/">
+<img class="hidden-sm-down" style="position: absolute; top: 0; right: 0; border: 0;" src="{{ site.baseurl }}/images/forkme_right.png" alt="Fork me on GitHub">
+</a>
 {% include bootstrap.js.html %}
+
 {% include analytics.html %}
 </body>
 </html>

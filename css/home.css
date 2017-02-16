@@ -1,5 +1,5 @@
 .carousel-item {
-  height: 25em;
+  height: 20em;
 }
 
 .carousel-item .highlight {
@@ -8,8 +8,19 @@
   padding: 1em;
 }
 
+.my-carousel-title {
+	position: absolute;
+	top: 0.5em;
+	left: 0.5em;
+	color: white;
+}
+
 @media (min-width: 768px) {
+	.carousel-item {
+	  height: 28em;
+	}
+
 	.carousel-item .highlight {
-	  padding: 2em 5em 2em 5em;
+	  padding: 5em 5em 2em 5em;
 	}
 }
