@@ -2,6 +2,8 @@
 title: How to write a function that works with both `JsonArray` and `JsonObject`?
 layout: faq
 tags: faq
+faq-group: Common
+faq-popularity: 23
 ---
 
 There is no base class for `JsonArray` and `JsonObject`.

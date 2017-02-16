@@ -2,6 +2,8 @@
 title: Why does my device crash or reboot?
 layout: faq
 tags: faq
+faq-group: Common
+faq-popularity: 23
 ---
 
 99.999% of the time, this is caused by a "stack overflow", i.e. you have too many variables in the "stack".

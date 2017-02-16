@@ -2,6 +2,8 @@
 title: How to compute the JSON length?
 layout: faq
 tags: faq
+faq-group: Serialization
+faq-popularity: 27
 ---
 
 Use `measureLength()` to compute the number of characters that will be printed by `printTo()`.

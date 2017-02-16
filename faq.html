@@ -1,0 +1,19 @@
+---
+layout: page
+title: FAQ
+tags: faq
+permalink: /faq/index.html
+---
+
+<h1>Frequently Asked Questions</h1>
+
+{% assign groups = site.faqs | group_by: 'faq-group' | sort: 'name' %}
+{% for group in groups %}
+<h3>{{ group.name }}</h3>
+<ul>
+{% assign items = group.items | sort: 'faq-popularity' | reverse %}
+{% for faq in items %}
+  <li><a href="{{ site.baseurl }}{{ faq.url }}">{{ faq.title }}</a></li>
+{% endfor %}
+</ul>
+{% endfor %}

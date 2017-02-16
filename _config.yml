@@ -37,5 +37,8 @@ collections:
   apis:
     output: true
     permalink: /api/:path/
+  faqs:
+    output: true
+    permalink: /faq/:path/
   features:
     output: false

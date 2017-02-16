@@ -2,6 +2,8 @@
 title: I found a memory leak in the library!
 layout: faq
 tags: faq
+faq-group: Common
+faq-popularity: 21
 ---
 
 This is very unlikely. You're probably using the library incorrectly.

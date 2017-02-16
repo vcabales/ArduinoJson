@@ -2,6 +2,8 @@
 title: How to create complex nested objects?
 layout: faq
 tags: faq
+faq-group: Serialization
+faq-popularity: 23
 ---
 
 To create a nested object, call `createNestedObject()`.

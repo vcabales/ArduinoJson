@@ -2,6 +2,8 @@
 title: Compilation fails? Device crashes? Nothing on serial console?
 layout: faq
 tags: faq
+faq-group: Common
+faq-popularity: 113
 ---
 
 <!-- MarkdownTOC depth=3 autolink=true bracket=round lowercase_only_ascii=true -->

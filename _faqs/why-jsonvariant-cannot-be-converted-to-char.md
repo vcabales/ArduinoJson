@@ -2,6 +2,8 @@
 title: Why JsonVariant cannot be converted to char?
 layout: faq
 tags: faq
+faq-group: Deserialization
+faq-popularity: 8
 ---
 
 The `char` type has been intentionally disabled to avoid an ambiguity.

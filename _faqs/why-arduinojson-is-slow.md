@@ -2,6 +2,8 @@
 title: Why ArduinoJson is slow?
 layout: faq
 tags: faq
+faq-group: Serialization
+faq-popularity: 16
 ---
 
 First of all, ArduinoJson is **not slow** by itself. It's slow when used in conjunction with the `WifiClient` from the ESP8266 core.

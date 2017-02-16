@@ -2,6 +2,8 @@
 title: Why some parts are missing?
 layout: faq
 tags: faq
+faq-group: Serialization
+faq-popularity: 30
 ---
 
 Example: you want to write `{"p1":[0, 1]}`, but instead you get `{"p1":[]}`.
