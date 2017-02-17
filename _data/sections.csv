@@ -1,5 +1,5 @@
 name,url,tag
 Home,/,home
-API Reference,/api,api
-Assistant,/assistant,assistant
-F.A.Q,/faq,faq
+API Reference,/api/,api
+Assistant,/assistant/,assistant
+F.A.Q,/faq/,faq
