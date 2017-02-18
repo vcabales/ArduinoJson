@@ -5,9 +5,6 @@ tags: api
 permalink: /api/index.html
 ---
 
-API Reference
-===========
-
 This is the detailed documentation of every class and function of the ArduinoJson library.
 Some parts have been simplified to be easier to understand, so if you look at the source code, you might see some differences.
 

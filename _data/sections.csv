@@ -1,5 +1,5 @@
 name,url,tag
-Home,/,home
+Manual,/doc/,doc
 API Reference,/api/,api
-Assistant,/assistant/,assistant
 F.A.Q,/faq/,faq
+Assistant,/assistant/,assistant

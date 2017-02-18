@@ -5,8 +5,6 @@ tags: faq
 permalink: /faq/index.html
 ---
 
-<h1>Frequently Asked Questions</h1>
-
 {% assign groups = site.faqs | group_by: 'faq-group' | sort: 'name' %}
 {% for group in groups %}
 <h3>{{ group.name }}</h3>
