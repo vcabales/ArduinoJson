@@ -18,6 +18,7 @@ description: C++ JSON library for IoT. Simple and efficient.
 baseurl: "/ArduinoJson" # the subpath of your site, e.g. /blog
 url: "https://bblanchon.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 repository: bblanchon.github.io/ArduinoJson
+permalink: pretty
 
 highlighter: rouge
 markdown: kramdown
