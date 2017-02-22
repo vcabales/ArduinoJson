@@ -54,12 +54,20 @@ function extractValue(prg, value, member, prefix)
 {
   if (value instanceof Array) {
     prg.addEmptyLine();
-    for (var i=0; i<Math.min(4, value.length); i++) {
-      extractValue(prg, value[i], member + "[" + i + "]", makeVariableName(prefix, i));
+    if (prefix && value.length > 2) {
+      var arrayName = makeVariableName(prefix);
+      prg.addLine("JsonArray& "+ arrayName + " = " + member + ";")
+      for (var i=0; i<Math.min(4, value.length); i++) {
+        extractValue(prg, value[i], arrayName + "[" + i + "]", makeVariableName(prefix, i));
+      }
+    }
+    else {
+      for (var i=0; i<value.length; i++) {
+        extractValue(prg, value[i], member + "[" + i + "]", makeVariableName(prefix, i));
+      }
     }
     prg.addEmptyLine();
-  }
-  else if (value instanceof Object) {
+  } else if (value instanceof Object) {
     prg.addEmptyLine();
     if (prefix && Object.keys(value).length > 2) {
       var objName = makeVariableName(prefix);
