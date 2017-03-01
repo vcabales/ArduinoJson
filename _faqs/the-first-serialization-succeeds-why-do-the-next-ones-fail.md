@@ -9,4 +9,4 @@ faq-popularity: 24
 This is usually caused by a reused `JsonBuffer`.
 The solution is simply to NOT reuse the `JsonBuffer`.
 
-See [The first parsing succeeds, why do the next ones fail?](the-first-parsing-succeeds-why-do-the-next-ones-fail)
+See [The first parsing succeeds, why do the next ones fail?]({{ site.baseurl }}/faq/the-first-parsing-succeeds-why-do-the-next-ones-fail/)

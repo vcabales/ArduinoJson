@@ -19,7 +19,7 @@ faq-popularity: 67
 
 <sup>(1)</sup> :warning: on most platforms, the stack cannot occupy all the RAM; for instance, it's limited to 4KB on the ESP8266.
 
-<sup>(2)</sup> there is a workaround (see [How to reuse a `JsonBuffer`?](how-to-reuse-a-jsonbuffer) if you are looking for troubles).
+<sup>(2)</sup> there is a workaround (see [How to reuse a `JsonBuffer`?]({{ site.baseurl }}/faq/how-to-reuse-a-jsonbuffer/) if you are looking for troubles).
 
 <sup>(3)</sup> A `DynamicJsonBuffer` calls `malloc()` to allocate its memory, and it may have to do this several times if it needs to grow. However, you can specify an initial size to the constructor, so as to make sure that the buffer is big enough and that no further allocation will be needed.
 

@@ -46,7 +46,7 @@ double      longitude = root["data"][1];
 
 Arduino JSON uses a preallocated memory pool to store the object tree, this is done by the `StaticJsonBuffer`.
 
-Before continuing please read the page [Arduino JSON memory model]({{ site.baseurl }}/memory/) that explains everything you need to know about `StaticJsonBuffer`.
+Before continuing please read the page [Arduino JSON memory model]({{ site.baseurl }}/doc/memory/) that explains everything you need to know about `StaticJsonBuffer`.
 
 ## Step 2: Parse the JSON string
 

@@ -13,7 +13,7 @@ ArduinoJson is designed to do one thing and to do it well: **the JSON serializat
 In particular `JsonObject` and `JsonArray` should not replace your own data structures; that would be terribly inefficient.
 So before trying to use a global `JsonBuffer`, ask yourself first "Am I really using ArduinoJson for serializing, or am I pushing it beyond its initial intent?".
 
-If you believe you need to reuse a `JsonBuffer`, it's because [you're not using the library correctly](whats-the-best-way-to-use-the-library).
+If you believe you need to reuse a `JsonBuffer`, it's because [you're not using the library correctly]({{ site.baseurl }}/faq/whats-the-best-way-to-use-the-library/).
 
 ##### 1. There is a reason behind this.
 

@@ -6,7 +6,7 @@ tags: doc
 
 As `StaticJsonBuffer` is the corner stone of this library, you'll see that every pitfall listed here is related to a wrong understanding of the memory model.
 
-Make sure you read [Arduino JSON memory model](Memory model) before going further.
+Make sure you read [Arduino JSON memory model]({{ site.baseurl }}/doc/memory/) before going further.
 
 #### 1. Make `StaticJsonBuffer` big enough
 
