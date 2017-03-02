@@ -7,7 +7,14 @@ layout: default
 		<h1>ArduinoJson: User Manual</h1>
 		<h2>{{ page.title }}</h2>
 	</div>
-	{{ content }}
+	<div class="row">
+		<div class="col-md-9">
+			{{ content }}
+		</div>
+		<div class="col-md-3">
+			{% include ad_responsive.html %}
+		</div>
+	</div>
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="{{ site.baseurl }}/">Home</a></li>
 		<li class="breadcrumb-item"><a href="{{ site.baseurl }}/doc/">Manual</a></li>

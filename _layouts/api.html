@@ -7,7 +7,15 @@ layout: default
 		<h1>ArduinoJson: API Reference</h1>
 		<h2><code>{{ page.title }}</code></h2>
 	</div>
-	{{ content }}
+
+	<div class="row">
+		<div class="col-md-9">
+			{{ content }}
+		</div>
+		<div class="col-md-3">
+			{% include ad_responsive.html %}
+		</div>
+	</div>
 
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="{{ site.baseurl }}/">Home</a></li>

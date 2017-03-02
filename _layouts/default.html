@@ -6,10 +6,8 @@
     <title>ArduinoJson - {{ page.title | strip_html }}</title>
     <meta name="description" content="ArduinoJson is a simple a efficient C++ JSON library for embedded system.">
     <meta name="keywords" content="JSON,C++,Arduino,IoT,embedded">
-    {% include bootstrap.css.html %}
-    {% unless page.tags contains "no-ad" %}
-    {% include adsense.html %}
-    {% endunless %}
+    {% include bootstrap.head.html %}
+    {% include adsense.head.html %}
     <link rel="stylesheet" href="{{ site.baseurl }}/css/default.css">
     <link rel="stylesheet" href="{{ site.baseurl }}/css/home.css">
     <link rel="stylesheet" href="{{ site.baseurl }}/css/highlight.css">
@@ -43,8 +41,8 @@
 <a href="https://github.com/bblanchon/ArduinoJson/">
 <img class="hidden-sm-down" style="position: absolute; top: 0; right: 0; border: 0;" src="{{ site.baseurl }}/images/forkme_right.png" alt="Fork me on GitHub">
 </a>
-{% include bootstrap.js.html %}
-
-{% include analytics.html %}
+{% include bootstrap.tail.html %}
+{% include analytics.tail.html %}
+{% include adsense.tail.html %}
 </body>
 </html>
