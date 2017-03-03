@@ -15,7 +15,8 @@ I see two possible answers:
 * Either you see `char` as an integer; in that case, the result should be `8`.
 * Or you see `char` as a character; in that case, the result should be `56` (the ASCII code of character `8`)
 
-Since there is not good answer to this question, the `char` type has been disabled, but `unsigned char` and `signed char` works as integers.
+Since there is no good answer to this question, the `char` type has been disabled.
+You must choose either `unsigned char` and `signed char` (these are [three different types in C++](http://en.cppreference.com/w/cpp/language/types))
 
 However, I highly encourage you to use `char` to store characters, and `int8_t` or `uint8_t` to store integers. If you compile with Arduino, you also have the [byte](https://www.arduino.cc/en/Reference/Byte) type.
 
@@ -23,3 +24,4 @@ See also:
 
 * [API Reference: JsonVariant::as()](https://github.com/bblanchon/ArduinoJson/wiki/API%20Reference#jsonvariantas)
 * Issues [#337](https://github.com/bblanchon/ArduinoJson/issues/337) and [#370](https://github.com/bblanchon/ArduinoJson/issues/370)
+* [CPP Reference: Fundamental types](http://en.cppreference.com/w/cpp/language/types)
