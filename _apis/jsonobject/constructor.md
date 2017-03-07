@@ -16,10 +16,11 @@ Because the memory of a `JsonObject` is located a `JsonBuffer`, you always manip
 ```c++
 StaticJsonBuffer<200> jsonBuffer;
 
-// create an empty object
+// create an object
 JsonObject& object1 = jsonBuffer.createObject();
+object1["hello"] = "world";
 
 // parse a JSON object
-char json[] = "[1,2,3]";
+char json[] = "{\"hello\":\"world\"}";
 JsonObject& object2 = jsonBuffer.parseObject(json);
 ```
