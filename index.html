@@ -2,35 +2,57 @@
 layout: default
 title: C++ JSON library for IoT
 tags: home no-ad
+platforms:
+ - Arduino UNO
+ - Arduino Leonardo
+ - Arduino Mini
+ - Arduino Micro
+ - Arduino Mega
+ - Arduino Zero
+ - Arduino Due
+ - Arduino Y&uacute;n
+ - Arduino M0
+ - Arduino MKRZero
+ - Arduino MKR1000
+ - ESP8266
+ - ESP32
+ - Teensy
+ - Intel Galileo
+ - Intel Edison
+ - PlatformIO
+ - Energia
+ - MSP430
+ - RedBearLab BLE Nano
+ - RedBearLab BLE Mini
 ---
 
+<div class="container">
 
-<div class="container-fluid p-0">
-<div id="carouselFeatures" class="carousel slide col-12 col-md-10 col-lg-6 mx-md-auto p-0 p-md-2" data-ride="carousel">
-	<ol class="carousel-indicators">
-		{% for feature in site.features %}
-		<li data-target="#carouselFeatures" data-slide-to="{{ forloop.index0 }}" {% if forloop.index == 1 %}class="active"{% endif %}></li>
-		{% endfor %}
-	</ol>
-	<div class="carousel-inner" role="listbox">
-	{% for feature in site.features %}
-		<div class="carousel-item {% if forloop.index == 1 %}active{% endif %}">
-			{% highlight cpp %}{{ feature.output }}{% endhighlight %}
-			<div class="carousel-caption">
-				<h3>{{ feature.title }}</h3>
-				<p class="d-none d-sm-block">{{ feature.description }}</p>
-			</div>
-		</div>
-	{% endfor %}
-	</div>
-	<h1 class="my-carousel-title hidden-sm-down">Features</h1>
-	<a class="carousel-control-prev hidden-sm-down" href="#carouselFeatures" role="button" data-slide="prev">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="sr-only">Previous</span>
-	</a>
-	<a class="carousel-control-next hidden-sm-down" href="#carouselFeatures" role="button" data-slide="next">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="sr-only">Next</span>
-	</a>
+<div id="titlePane" class="jumbotron">
+<h1 class="display-1">ArduinoJson</h1>
+<div id="titlePaneCarousel" class="carousel slide display-4" data-ride="carousel" data-interval="500">
+  <span>A JSON library for</span>
+  <ul class="carousel-inner" role="listbox">
+  {% for platform in page.platforms %}
+    <li class="carousel-item{%if forloop.index==1%} active{%endif%}">{{platform}}</li>
+   {% endfor %}
+  </ul>
 </div>
+</div>
+
+<h2 class="display-3">Features</h2>
+<div class="row">
+{% for feature in site.features %}
+<div class="col-12 col-lg-6 p-2">
+	<div class="card m-4">
+	  <div class="card-block">
+	    <h4 class="card-title">{{ feature.title }}</h4>
+	    <p class="card-text">{{ feature.description }}.</p>
+	  </div>
+	  {% highlight cpp %}{{ feature.output }}{% endhighlight %}
+	</div>
+</div>
+{% endfor %}
+</div>
+
 </div>
