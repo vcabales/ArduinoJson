@@ -1,5 +1,5 @@
 ---
-title: "Error: redefinition of 'struct ArduinoJson::Internals::StringFuncs&lt;const char*&gt;'"
+title: "ESP32"
 layout: faq
 tags: faq
 faq-group: Known problems

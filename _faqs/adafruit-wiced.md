@@ -1,5 +1,5 @@
 ---
-title: "Error: cannot convert 'err_t' to 'err_t (*)()"
+title: "Adafruit WICED Feather"
 layout: faq
 tags: faq
 faq-group: Known problems
