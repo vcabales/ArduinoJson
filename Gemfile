@@ -24,3 +24,6 @@ group :jekyll_plugins do
 end
 
 gem "rouge"
+
+# Windows Directory Monitor (WDM) is a library which can be used to monitor directories for changes.
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
