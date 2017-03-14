@@ -2,7 +2,7 @@
 title: "Error: redefinition of 'struct ArduinoJson::Internals::StringFuncs&lt;const char*&gt;'"
 layout: faq
 tags: faq
-faq-group: Compilation problems
+faq-group: Known problems
 ---
 
 There is currently a bug in the [Arduino Core for ESP32](https://github.com/espressif/arduino-esp32) causing the following error:

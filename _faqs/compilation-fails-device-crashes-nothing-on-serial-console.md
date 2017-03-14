@@ -11,8 +11,6 @@ faq-popularity: 113
 - [Arduino Library Manager doesn't list the latest versions of ArduinoJson](#arduino-library-manager-doesnt-list-the-latest-versions-of-arduinojson)
 - [CodeBender](#codebender)
 - [Arduino Zero, mkr1000 and all boards based on SAMD21](#arduino-zero-mkr1000-and-all-boards-based-on-samd21)
-- [Adafruit WICED](#adafruit-wiced)
-- [Sloeber Arduino Eclipse Plugin](#sloeber-arduino-eclipse-plugin)
 
 <!-- /MarkdownTOC -->
 
@@ -52,27 +50,3 @@ They are located here on Windows:
 ```
 %LOCALAPPDATA%\Arduino15\packages\arduino\hardware\samd\1.6.6\cores\arduino\USB
 ```
-
-## Adafruit WICED
-
-There is currently a bug in the Arduino Core for Adafruit WICED Feather causing the following error:
-
-```
-error: cannot convert 'err_t' to 'err_t (*)()
-```
-
-See issue [#404](https://github.com/bblanchon/ArduinoJson/issues/404)
-
-## Sloeber Arduino Eclipse Plugin
-
-When compiling ArduinoJson within the Sloeber Arduino Eclipse Plugin, you may encounter the following error:
-
-```
-C:/Utilities/sloeber/arduinoPlugin/libraries/ArduinoJson/5.8.2/fuzzing/fuzzer.cpp:3:39: error: expected class-name before '{' token class memstream : public std::istream
-```
-
-You need to add the `fuzzin/` folder to the "Source Folder Exclusion Patterns", like on the pricture bellow:
-
-![Source Folder Exclusion Patterns](https://cloud.githubusercontent.com/assets/1175841/22299097/2af90b14-e323-11e6-8b21-5f0f91055e60.png)
-
-See issues [ArduinoJson #432](https://github.com/bblanchon/ArduinoJson/issues/432) and [Sloeber #642](https://github.com/Sloeber/arduino-eclipse-plugin/issues/642).

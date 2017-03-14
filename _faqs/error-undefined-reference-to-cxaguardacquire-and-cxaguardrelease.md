@@ -2,7 +2,7 @@
 title: "Error: undefined reference to <code>__cxa_guard_acquire</code> and <code>__cxa_guard_release</code>"
 layout: faq
 tags: faq
-faq-group: Compilation problems
+faq-group: Known problems
 ---
 
 You need to add the following flag:

@@ -2,7 +2,7 @@
 title: "Warning: ignoring packed attribute because of unpacked non-POD field"
 layout: faq
 tags: faq
-faq-group: Compilation problems
+faq-group: Known problems
 ---
 
 If you pass the flag `--fpack-struct` to the compiler, it will generate the following warning:
