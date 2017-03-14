@@ -11,10 +11,7 @@ faq-popularity: 113
 - [Arduino Library Manager doesn't list the latest versions of ArduinoJson](#arduino-library-manager-doesnt-list-the-latest-versions-of-arduinojson)
 - [CodeBender](#codebender)
 - [Arduino Zero, mkr1000 and all boards based on SAMD21](#arduino-zero-mkr1000-and-all-boards-based-on-samd21)
-- [Warning: ignoring packed attribute because of unpacked non-POD field](#warning-ignoring-packed-attribute-because-of-unpacked-non-pod-field)
-- [Error: undefined reference to `__cxa_guard_acquire` and `__cxa_guard_release`](#error-undefined-reference-to-cxaguardacquire-and-cxaguardrelease)
 - [Adafruit WICED](#adafruit-wiced)
-- [ESP32](#esp32)
 - [Sloeber Arduino Eclipse Plugin](#sloeber-arduino-eclipse-plugin)
 
 <!-- /MarkdownTOC -->
@@ -56,35 +53,6 @@ They are located here on Windows:
 %LOCALAPPDATA%\Arduino15\packages\arduino\hardware\samd\1.6.6\cores\arduino\USB
 ```
 
-## Warning: ignoring packed attribute because of unpacked non-POD field
-
-If you pass the flag `--fpack-struct` to the compiler, it will generate the following warning:
-
-```
-warning: ignoring packed attribute because of unpacked non-POD field
-```
-
-No solution has been found so far: you need to remove that flag if you want to get rid of that warning.
-
-See issue [#255](https://github.com/bblanchon/ArduinoJson/issues/255)
-
-## Error: undefined reference to `__cxa_guard_acquire` and `__cxa_guard_release`
-
-You need to add the following flag:
-
-> `-fno-threadsafe-statics`
->
-> Do not emit the extra code to use the routines specified in the C++ ABI for thread-safe initialization of local statics.
-> You can use this option to reduce code size slightly in code that doesn't need to be thread-safe.
-
-If you use the Arduino IDE, you need to edit the `platform.txt` of the board you're using:
-
-* The file is located at `%LOCALAPPDATA%\Arduino15\packages\<brand>\hardware\<board>\<version>\platform.txt`
-* The line to change is `compiler.cpp.flags`
-
-See issue [#356](https://github.com/bblanchon/ArduinoJson/issues/356) and [#389](https://github.com/bblanchon/ArduinoJson/issues/389)
-
-
 ## Adafruit WICED
 
 There is currently a bug in the Arduino Core for Adafruit WICED Feather causing the following error:
@@ -94,32 +62,6 @@ error: cannot convert 'err_t' to 'err_t (*)()
 ```
 
 See issue [#404](https://github.com/bblanchon/ArduinoJson/issues/404)
-
-## ESP32
-
-There is currently a bug in the [Arduino Core for ESP32](https://github.com/espressif/arduino-esp32) causing the following error:
-
-```
-error: redefinition of 'struct ArduinoJson::Internals::StringFuncs<const char*>'
-```
-
-The solution is to disable `PROGMEM` support in ArduinoJson.
-To do that, just add the following line at the top of your program:
-
-```c++
-#define ARDUINOJSON_ENABLE_PROGMEM 0
-```
-
-Then, you may have the following linker error:
-
-```
-undefined reference to__cxa_guard_release'
-```
-
-To solve this, you need to add `-fno-threadsafe-statics` in `platform.txt`.
-
-See issue [#407](https://github.com/bblanchon/ArduinoJson/issues/407)
-
 
 ## Sloeber Arduino Eclipse Plugin
 
