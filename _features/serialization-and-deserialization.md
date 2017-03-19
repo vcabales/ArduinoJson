@@ -5,13 +5,20 @@ popularity: 100
 
 ArduinoJson supports both JSON serialization and deserialization.
 
+Read JSON:
+
 ```c++
-// read JSON
 JsonObject& root = jsonBuffer.parseObject(myInput);
+```
 
-// modify
+...modify:
+
+```c++
 root["last_modification"] = time();
+```
 
-// write JSON
+...write back:
+
+```c++
 root.printTo(myOutput)
 ```
