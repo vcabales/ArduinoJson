@@ -1,8 +1,11 @@
 ---
 title: Implicit or Explict Casts
-description: ArduinoJson supports two coding styles, with implicit or explicit casts
+popularity: 70
 ---
 
+ArduinoJson supports two coding styles, with implicit or explicit casts
+
+```c++
 // Implicit cast
 const char* city = root["city"];
 float temp = root["temperature"];
@@ -10,3 +13,4 @@ float temp = root["temperature"];
 // Explicit cast
 auto city = root["city"].as<const char*>();
 auto temp = root["temperature"].as<float>();
+```

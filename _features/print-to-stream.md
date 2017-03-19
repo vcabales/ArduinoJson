@@ -1,8 +1,11 @@
 ---
 title: Print to Stream
-description: ArduinoJson is able to print directly to a <code>Print</code> or <code>std::ostream</code>
+popularity: 40
 ---
 
+ArduinoJson is able to print directly to a <code>Print</code> or <code>std::ostream</code>
+
+```c++
 // Send the JSON to the serial port
 root.printTo(Serial);
 
@@ -11,3 +14,4 @@ root.printTo(ethernetClient);
 
 // ...or a Wifi connection
 root.printTo(wifiClient);
+```
