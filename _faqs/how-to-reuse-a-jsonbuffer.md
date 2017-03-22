@@ -6,12 +6,17 @@ faq-group: Common
 faq-popularity: 65
 ---
 
-This is a very popular question: Where is `JsonBuffer::clear()`?
+This is a very popular question, make sure you understand the following statement:
 
-I have a strong opinion against that feature. Let me explain.
+> A `JsonBuffer` **cannot** be reused.<br>
+> You must create a new instance if you need a fresh buffer.
+{: .alert .alert-danger}
 
-In a previous draft of ArduinoJson, I added this function because I found it very convenient in my tests.
-Unfortunately, it became extremely tempting to write things like:
+### Why is there no `clear()` or `reset()` function?
+
+Many users want to reuse their buffer, so they don't understand why `JsonBuffer` doesn't have a `clear()` or `reset()` function.
+
+This is a legitimate request, but can you spot the error in the following code?
 
 ```c++
 // STEP1: parse input
@@ -26,28 +31,130 @@ JsonObject& outputObject = jsonBuffer.createObject();
 outputObject["hello"] = inputObject["world"];
 ```
 
-I became so inciting to make mistake like this that I decided to remove it.
+The program above looks OK but causes an access violation.
 
-Arduino is an environment used by programmer that are not experienced in C or C++.
-Many of them come from managed languages like C# or Java.
-When you look at the code above, it's not obvious that calling `jsonBuffer.clear()` will corrupt `inputObject`.
-Then its very hard to understand what's wrong with this code, especially because it may work for the first member if the memory hasn't been erased yet.
+An experienced C++ developer would find the error instantly, especially if she has a debugger.
+But most Arduino developers are new to C++ and none of them have a debugger.
 
-That's why I came up with the current design that enforce programmers to use `JsonBuffer` in short scopes, along with `JsonObject&` and `JsonArray&`.
+Here is what happens in this buggy program:
 
-However, I didn't hide the assignment operator...
-This mean that an advanced user, like you, can still write:
+* `inputObject` is a pointer to an object whose memory is in `jsonBuffer`.
+* `clear()` resets the memory pool in `jsonBuffer`, allowing to reuse the memory of `inputObject`
+* `outputObject` is created at the same address as `inputObject`
+* `inputObject` is now a dangling pointer and the behavior is undefined.
+
+### How to fix this code?
+
+> The error in the code above is caused by the `clear()` function.<br>
+> **That is why no such function exists in ArduinoJson**.
+{: .alert .alert-danger}
+
+To rewrite this code without `clear()`, we have two possibilities.
+
+Suggestion 1: use a bigger `JsonBuffer`:
 
 ```c++
-jsonBuffer = StaticJsonBuffer<200>();
+// STEP1: parse input
+StaticJsonBuffer<400> jsonBuffer;
+JsonObject& inputObject = jsonBuffer.parseObject(inputJson);
+
+...etc...
+
+// STEP2: generate output
+JsonObject& outputObject = jsonBuffer.createObject();
+outputObject["hello"] = inputObject["world"];
 ```
 
-to reset the buffer :wink:
+Suggestion 2: use a second `JsonBuffer`:
 
-See also:
+```c++
+// STEP1: parse input
+StaticJsonBuffer<200> jsonBuffer1;
+JsonObject& inputObject = jsonBuffer1.parseObject(inputJson);
 
-* [Bag of tricks: clear()](https://github.com/bblanchon/ArduinoJson/wiki/Bag-of-Tricks#reuse-jsonbuffer)
+...etc...
+
+// STEP2: generate output
+StaticJsonBuffer<200> jsonBuffer2;
+JsonObject& outputObject = jsonBuffer2.createObject();
+outputObject["hello"] = inputObject["world"];
+```
+
+### What if I don't reference the memory after clearing?
+
+You mean, like this?
+
+```c++
+void sendAll()
+{
+  // Create JSON buffer
+  StaticJsonBuffer<100> jsonBuffer;
+  
+  // Create object
+  JsonObject& root = jsonBuffer.createObject();
+  
+  // Send volume
+  root[F("cmd")] = F("volume");
+  root[F("volume")] = dsp.volumeData;
+  root[F("slew")] = dsp.volumeSlewData;
+  rs485.send(jsonAck, jsonBuffer);
+
+ // Send mux
+ // Clear or delete JSON buffer here
+  root[F("cmd")] = F("mux");
+  root[F("muxdata")] = dsp.muxdata;
+  rs485.send(jsonAck, jsonBuffer);
+
+//..
+}
+```
+
+well, just split the function:
+
+```c++
+void sendAll()
+{
+    sendVolume();
+    sendMux();
+    //...
+}
+
+void sendVolume()
+{
+  StaticJsonBuffer<100> jsonBuffer;
+  JsonObject& root = jsonBuffer.createObject();
+  root[F("cmd")] = F("volume");
+  root[F("volume")] = dsp.volumeData;
+  root[F("slew")] = dsp.volumeSlewData;
+  rs485.send(jsonAck, jsonBuffer);
+}
+
+void sendMux()
+{
+  StaticJsonBuffer<100> jsonBuffer;
+  JsonObject& root = jsonBuffer.createObject();
+  root[F("cmd")] = F("mux");
+  root[F("muxdata")] = dsp.muxdata;
+  rs485.send(jsonAck, jsonBuffer);
+}
+```
+
+### I get your point, but I don't care!
+
+OK smartypants, do you know that you can write your own `clear()` or `reset()` function?
+
+```c++
+template<typename T>
+void clear(T& instance)
+{
+    instance = T();
+}
+```
+
+Be sure to understand the consequence before using this.
+
+### See also
+
 * [Avoiding pitfalls: Don't reuse the same JsonBuffer]({{site.baseurl}}/doc/pitfalls/#4-dont-reuse-the-same-jsonbuffer)
 * [FAQ: Why shouldn't I use a global `JsonBuffer`?]({{site.baseurl}}/faq/why-shouldnt-i-use-a-global-jsonbuffer).
 * [FAQ: What's the best way to use the library?]({{site.baseurl}}/faq/whats-the-best-way-to-use-the-library)
-* Issues [#72](https://github.com/bblanchon/ArduinoJson/issues/72), [#115](https://github.com/bblanchon/ArduinoJson/issues/115), [#141](https://github.com/bblanchon/ArduinoJson/issues/141), [#160](https://github.com/bblanchon/ArduinoJson/issues/160), [#203](https://github.com/bblanchon/ArduinoJson/issues/203), [#219](https://github.com/bblanchon/ArduinoJson/issues/219), [#242](https://github.com/bblanchon/ArduinoJson/issues/242), [#243](https://github.com/bblanchon/ArduinoJson/issues/243), [#341](https://github.com/bblanchon/ArduinoJson/issues/341), [#347](https://github.com/bblanchon/ArduinoJson/issues/347) and [#384](https://github.com/bblanchon/ArduinoJson/issues/384).
