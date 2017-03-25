@@ -6,9 +6,10 @@ faq-group: Deserialization
 faq-popularity: 44
 ---
 
+You wrote a program that works fine for one or more iterations, but then fails.
 This can be due to two causes.
 
-##### Cause 1: reuse of `JsonBuffer`
+### Cause 1: reuse of `JsonBuffer`
 
 First, this can happen if you reuse the same `JsonBuffer`, for example:
 
@@ -48,9 +49,7 @@ for (int i=0; i<10; i++) {
 
 Note that, contrary to a common belief, moving a `StaticJsonBuffer` inside of a loop has no negative impact on performance.
 
-See issue [#243](https://github.com/bblanchon/ArduinoJson/issues/243) and [#305](https://github.com/bblanchon/ArduinoJson/issues/305).
-
-##### Cause 2: reuse of JSON input
+### Cause 2: reuse of JSON input
 
 In order to make the JSON parsing without any allocation or duplication, ArduinoJson modifies the string in place: it inserts null terminators and unescapes special characters.
 
@@ -96,5 +95,3 @@ for (int i=0; i<10; i++) {
     }
 }
 ```
-
-See issue [#153](https://github.com/bblanchon/ArduinoJson/issues/153), [#160](https://github.com/bblanchon/ArduinoJson/issues/160) and [#286](https://github.com/bblanchon/ArduinoJson/issues/286).
