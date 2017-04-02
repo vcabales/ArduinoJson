@@ -4,13 +4,13 @@ layout: default
 
 <div class="container">
 	<div class="jumbotron">
-		<h1>ArduinoJson: API Reference</h1>
+		<h1>ArduinoJson: Examples</h1>
 		<h2><code>{{ page.title }}</code></h2>
 	</div>
 
 	<div class="row">
 		<div class="col-md-9">
-			{{ content }}
+			{% highlight cpp %}{{ content }}{% endhighlight %}
 		</div>
 		<div class="col-md-3">
 			{% include ad_responsive.html %}
@@ -19,7 +19,7 @@ layout: default
 
 	<ol class="breadcrumb">
 		<li class="breadcrumb-item"><a href="{{ site.baseurl }}/">Home</a></li>
-		<li class="breadcrumb-item"><a href="{{ site.baseurl }}/api/">API</a></li>
+		<li class="breadcrumb-item"><a href="{{ site.baseurl }}/example/">Examples</a></li>
 		<li class="breadcrumb-item active">{{ page.title }}</li>
 	</ol>
 </div>

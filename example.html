@@ -1,0 +1,16 @@
+---
+layout: page
+title: Examples
+tags: example
+permalink: /example/index.html
+---
+
+<p>The following examples are also available in Arduino's "Examples" menu.</p>
+
+<dl>
+{% assign examples = site.examples | sort: 'popularity' | reverse %}
+{% for example in examples %}
+  <dt><a href="{{ site.baseurl }}{{ example.url }}">{{ example.title }}</a></dt>
+  <dd>{{ example.description }}</dd>
+{% endfor %}
+</dl>

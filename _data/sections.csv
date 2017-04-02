@@ -1,5 +1,6 @@
 name,url,tag
 Manual,/doc/,doc
+Examples,/example/,example
 API Reference,/api/,api
 F.A.Q,/faq/,faq
 Assistant,/assistant/,assistant

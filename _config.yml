@@ -42,3 +42,6 @@ collections:
     permalink: /faq/:path/
   features:
     output: false
+  examples:
+    output: true
+    permalink: /example/:path/
