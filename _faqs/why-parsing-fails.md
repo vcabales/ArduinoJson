@@ -35,6 +35,8 @@ This means that you need to specify the right size for the `StaticJsonBuffer`, o
 
 Use [ArduinoJson Assistant]({{site.baseurl}}/assistant/) to compute the required size.
 
+See also: [How to reduce memory usage?]({{site.baseurl}}/faq/how-to-reduce-memory-usage/)
+
 ## Case 3: The `StaticJsonBuffer` is too big
 
 A `StaticJsonBuffer` is usually allocated on the [stack](https://en.wikipedia.org/wiki/Stack-based_memory_allocation), if it's too big it will overlap with other variables. This usually leads to a crash or a reboot of the device.
@@ -46,6 +48,8 @@ If you are in this situation, you can either:
 
 For example, a ESP8266 has 4KB of stack memory. This means you only have 4096 bytes to store all your local variables, function parameters and calls return addresses. If the [ArduinoJson Assistant]({{site.baseurl}}/assistant/) says you need more than 1KB of RAM for the `JsonBuffer`, then you should use a `DynamicJsonBuffer`.
 
+See also: [How to reduce memory usage?]({{site.baseurl}}/faq/how-to-reduce-memory-usage/)
+
 ## Case 4: The `DynamicJsonBuffer` fails to allocate memory
 
 Unlike the `StaticJsonBuffer` which has a fixed size, the `DynamicJsonBuffer` will automatically grow when full.
@@ -56,6 +60,8 @@ If you are in this situation:
 * Make sure you have enough RAM, use [ArduinoJson Assistant]({{site.baseurl}}/assistant/) to compute the required size.
 * Make sure you don't [reuse the same `JsonBuffer`]({{site.baseurl}}/faq/how-to-reuse-a-jsonbuffer/).
   In particular make sure you don't use a [global `JsonBuffer`]({{site.baseurl}}/faq/why-shouldnt-i-use-a-global-jsonbuffer/).
+
+See also: [How to reduce memory usage?]({{site.baseurl}}/faq/how-to-reduce-memory-usage/)
 
 ## Case 5: You called `parseObject()` instead of `parseArray()`
 
@@ -82,25 +88,4 @@ then you must call [`parseArray()`]({{site.baseurl}}/api/jsonbuffer/parsearray) 
 
 Finally, if you cannot know in advance the type of the root, simply use [`JsonBuffer::parse()`]({{site.baseurl}}/api/jsonbuffer/parse/) which returns a `JsonVariant`.
 
-See also: [F.A.Q: Parsing succeeds but I can't read the values!](https://bblanchon.github.io/ArduinoJson/faq/parsing-succeeds-but-i-cant-read-the-values/).
-
-> #### How to reduce memory usage?
->
-> If the input string is constant, the `JsonBuffer` will have to make a copy of it.
-> 
-> ```c++
-> // case 1: char array => no duplication => good
-> char[] json = "{\"hello\":\"world\"}";
-> jsonBuffer.parseObject(json);
-> 
-> // case 2: const char* => duplication => bad
-> const char* json = "{\"hello\":\"world\"}";
-> jsonBuffer.parseObject(json);
-> 
-> // case 3: String => duplication => bad
-> String json = "{\"hello\":\"world\"}";
-> jsonBuffer.parseObject(json);
-> ```
-> 
-> To avoid any duplication, make sure you use an input of type `char*` or `char[]`
-{: .alert .alert-info}
+See also: [Parsing succeeds but I can't read the values!]({{site.baseurl}}/faq/parsing-succeeds-but-i-cant-read-the-values/)
