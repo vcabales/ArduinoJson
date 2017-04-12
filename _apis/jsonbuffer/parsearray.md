@@ -35,7 +35,7 @@ JsonArray& parseArray(std::istream& json, uint8_t nestingLimit=10);
 
 `nestingLimit` specifies the maximum level of nesting allowed in the JSON string.
 If set to `0`, only a flat array can be parsed.
-If set to `1`, the object can contain nested arrays or objects but only 1 level deep.
+If set to `1`, the array can contain nested arrays or objects but only 1 level deep.
 And bigger values will allow more level of nesting.
 The purpose of this feature is to prevent stack overflow that could lead to a security risk.
 

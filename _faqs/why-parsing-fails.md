@@ -70,7 +70,7 @@ For example, if the input is:
 {"mickey":["mouse"],"donald":["duck"]}
 ```
 
-then you must call `parseObject()` because the root is an object.
+then you must call [`parseObject()`]({{site.baseurl}}/api/jsonbuffer/parseobject/) because the root is an object.
 
 And, if the input is:
 
@@ -78,9 +78,9 @@ And, if the input is:
 [{"mickey":"mouse","donald":"duck"}]
 ```
 
-then you must call `parseArray()` because the root is an array.
+then you must call [`parseArray()`]({{site.baseurl}}/api/jsonbuffer/parsearray) because the root is an array.
 
-Finally, if you cannot know in advance the type of the root, simply use `JsonBuffer::parse()` which returns a `JsonVariant`.
+Finally, if you cannot know in advance the type of the root, simply use [`JsonBuffer::parse()`]({{site.baseurl}}/api/jsonbuffer/parse/) which returns a `JsonVariant`.
 
 See also: [F.A.Q: Parsing succeeds but I can't read the values!](https://bblanchon.github.io/ArduinoJson/faq/parsing-succeeds-but-i-cant-read-the-values/).
 
