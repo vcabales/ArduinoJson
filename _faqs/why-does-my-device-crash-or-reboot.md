@@ -7,10 +7,15 @@ faq-popularity: 23
 ---
 
 99.999% of the time, this is caused by a "stack overflow", i.e. you have too many variables in the "stack".
-The solution is to move variables to the "heap".
 
-First, replace the `StaticJsonBuffer` by a `DynamicJsonBuffer`.
-Then, use dynamic allocation for the JSON input.
+Before reading further, make sure that your target platform does have enough RAM to store the `JsonBuffer` and possibly the JSON input too:
+* Use [ArduinoJson Assistant]({{site.baseurl}}/assistant/) to see how much memory you need.
+* See [How to reduce memory usage?]({{site.baseurl}}/faq/how-to-reduce-memory-usage/).
+* See [Can I parse a JSON input that is too big to fit in memory?]({{site.baseurl}}/faq/can-i-parse-a-json-input-that-is-too-big-to-fit-in-memory/)
+
+Once you're sure that your device has enough RAM, you should move the `JsonBuffer` to the heap. Just replace your `StaticJsonBuffer` by a `DynamicJsonBuffer`.
+
+If your JSON input is stored in the stack, you should move it to the heap too.
 
 For instance, if you have a program like this:
 
@@ -37,10 +42,3 @@ Serial.println(root["name"].asString());
 
 free(content);
 ```
-
-Of course, this is only possible if your target has enough memory.
-Sometimes, it's just impossible because the MCU is too small.
-
-See:
-
-* Issues [#233](https://github.com/bblanchon/ArduinoJson/issues/233), [#234](https://github.com/bblanchon/ArduinoJson/issues/234), [#262](https://github.com/bblanchon/ArduinoJson/issues/262), [#359](https://github.com/bblanchon/ArduinoJson/issues/359) and [#443](https://github.com/bblanchon/ArduinoJson/issues/443)
