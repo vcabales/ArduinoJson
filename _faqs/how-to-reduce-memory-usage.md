@@ -37,3 +37,5 @@ To avoid any duplication, make sure you use an input of type `char*` or `char[]`
 >
 >See [JsonHttpClient.ino]({{site.baseurl}}/example/http-client/) for an example.
 {: .alert .alert-warning}
+
+See also [Why is the input modified?]({{site.baseurl}}/faq/why-is-the-input-modifed/)
