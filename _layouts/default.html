@@ -22,11 +22,12 @@
 
     <div class="collapse navbar-collapse" id="navbarsArduinoJson">
         <ul class="navbar-nav mr-auto">
-        {% for section in site.data.sections %}
-        {% if page.tags contains section.tag %}<li class="nav-item active">
+        {% assign sections = site.sections | sort: 'popularity' | reverse %}
+        {% for section in sections %}
+        {% if page.tags contains section.section_tag %}<li class="nav-item active">
         {% else %}<li class="nav-item">
         {% endif %}
-                <a class="nav-link" href="{{ site.baseurl }}{{ section.url }}">{{ section.name }}</a>
+                <a class="nav-link" href="{{ site.baseurl }}{{ section.url }}">{{ section.title }}</a>
             </li>
         {% endfor %}
         <li class="nav-item hidden-md-up">

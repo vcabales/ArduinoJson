@@ -2,7 +2,8 @@
 layout: page
 title: API Reference
 tags: api
-permalink: /api/index.html
+section_tag: api
+popularity: 10
 ---
 
 This is the detailed documentation of every class and function of the ArduinoJson library.
