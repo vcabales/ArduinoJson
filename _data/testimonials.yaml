@@ -1,0 +1,47 @@
+- source: "<code>jflaplante</code> on Arduino's Forum"
+  url: http://forum.arduino.cc/index.php?topic=172578.msg1596084#msg1596084
+  text: >
+    I tried <b>aJson</b> and <b>json-arduino</b> before trying your library. I always ran into memory problem after a while.
+    I have no such problem so far with your library. It is working perfectly with my web services.
+    Thanks Benoit for a very well polished product!
+
+- source: "<code>thegreendroid</code> on StackOverflow"
+  text: >
+    It has a really elegant, simple API and it works like a charm on embedded and Windows/Linux platforms.
+    We recently started using this on an embedded project and I can vouch for its quality.
+
+- source: "<code>zacsketches</code> on GitHub"
+  url: https://github.com/bblanchon/ArduinoJson/issues/26#issue-44762164
+  text: >
+    I've been watching you consistently develop this library over the past six months, and I used it today for a publish and subscribe architecture designed to help hobbyists move into more advanced robotics.
+    Your library allowed me to implement remote subscription in order to facilitate multi-processor robots.
+
+- source: "<code>erm_what_</code> on Reddit"
+  url: https://www.reddit.com/r/arduino/comments/3jj6ep/announcing_arduinojson_50/cusjk8c
+  text: >
+    This is a great library and I wouldn't be able to do the project I'm doing without it. I completely recommend it.
+
+- source: "<code>erm_what_</code> on Reddit"
+  url: https://www.reddit.com/r/arduino/comments/3jj6ep/announcing_arduinojson_50/cusjk8c
+  text: >
+    This is a great library and I wouldn't be able to do the project I'm doing without it. I completely recommend it.
+
+- source: "<code>makerhacks</code> on Reddit"
+  url: https://www.reddit.com/r/arduino/comments/3jj6ep/announcing_arduinojson_50/cusqg7b
+  text: >
+    I am just starting an ESP8266 clock project and now I can output JSON from my server script and interpret it painlessly.
+
+- source: "<code>@hemalchevli</code> on Twitter"
+  url: https://twitter.com/hemalchevli/status/715788439397011456
+  text: >
+    ArduinoJson library should be used as a benchmark/reference for making libraries. Truly elegant.
+
+- source: "<code>sticilface</code> on GitHub"
+  url: https://github.com/bblanchon/ArduinoJson/issues/381#issuecomment-260203594
+  text: >
+    its a great lib:) and i use it in everything!
+
+- source: "Nuno Santos on GitHub"
+  url: https://github.com/bblanchon/ArduinoJson/issues/491#issuecomment-298121324
+  text: >
+    Thanks for your great work on this awesome library, I will definitely keep using it in my projects and recommend to others :)

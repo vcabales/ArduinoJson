@@ -12,7 +12,7 @@ tags: home no-ad
   <span>A JSON library for</span>
   <ul class="carousel-inner" role="listbox">
   {% for platform in site.data.platforms %}
-    <li class="carousel-item{%if forloop.index==1%} active{%endif%}">{{platform.name}}</li>
+	<li class="carousel-item{%if forloop.index==1%} active{%endif%}">{{platform.name}}</li>
    {% endfor %}
   </ul>
 </div>
@@ -25,10 +25,32 @@ tags: home no-ad
 <div class="col-12 col-lg-6 p-2">
 	<div class="card m-4">
 	  <div class="card-block">
-	    <h4 class="card-title">{{ feature.title }}</h4>
-	    <p class="card-text">
-	  		{{ feature.output }}
-	  	</p>
+		<h4 class="card-title">{{ feature.title }}</h4>
+		<p class="card-text">
+			{{ feature.output }}
+		</p>
+	  </div>
+	</div>
+</div>
+{% endfor %}
+</div>
+
+<h2 class="display-3">Testimonials</h2>
+<div class="row">
+{% for testimonial in site.data.testimonials %}
+<div class="col-12">
+	<div class="card m-4">
+	  <div class="card-block">
+		<blockquote class="card-blockquote">
+			<i>{{ testimonial.text }}</i>
+		</blockquote>
+	  </div>
+	  <div class="card-footer text-muted text-right">
+		{%if testimonial.url %}
+		<a href={{testimonial.url}}>{{ testimonial.source }}</a>
+		{% else %}
+		{{ testimonial.source }}
+		{% endif %}
 	  </div>
 	</div>
 </div>
