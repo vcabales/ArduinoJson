@@ -2,29 +2,6 @@
 layout: default
 title: C++ JSON library for IoT
 tags: home no-ad
-platforms:
- - Arduino UNO
- - Arduino Leonardo
- - Arduino Mini
- - Arduino Micro
- - Arduino Mega
- - Arduino Zero
- - Arduino Due
- - Arduino Y&uacute;n
- - Arduino M0
- - Arduino MKRZero
- - Arduino MKR1000
- - ESP8266
- - ESP32
- - Teensy
- - Intel Galileo
- - Intel Edison
- - PlatformIO
- - Energia
- - MSP430
- - RedBearLab BLE Nano
- - RedBearLab BLE Mini
- - WeMos D1
 ---
 
 <div class="container">
@@ -34,8 +11,8 @@ platforms:
 <div id="titlePaneCarousel" class="carousel slide display-4" data-ride="carousel" data-interval="500">
   <span>A JSON library for</span>
   <ul class="carousel-inner" role="listbox">
-  {% for platform in page.platforms %}
-    <li class="carousel-item{%if forloop.index==1%} active{%endif%}">{{platform}}</li>
+  {% for platform in site.data.platforms %}
+    <li class="carousel-item{%if forloop.index==1%} active{%endif%}">{{platform.name}}</li>
    {% endfor %}
   </ul>
 </div>
