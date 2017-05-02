@@ -1,12 +1,14 @@
 ---
-title: How to fix error "Ambiguous overload for 'operator='"
+title: "Error: Ambiguous overload for 'operator='"
 layout: faq
 tags: faq
-faq-group: Deserialization
+faq-group: Known problems
 faq-popularity: 24
 ---
 
-There is a case where you need to help the compiler: it's when you convert a `JsonVariant` to a `String`.
+Most of the time you can rely on implicit casts.
+
+But there is one notable exception: when you convert a `JsonVariant` to a `String`.
 
 For example:
 
@@ -25,9 +27,6 @@ The solution is to remove the ambiguity with any of the following replacement:
 
 ```c++
 ssid = (const char*)network["ssid"];
-ssid = network["ssid"].asString();
 ssid = network["ssid"].as<const char*>();
 ssid = network["ssid"].as<String>();
 ```
-
-See issue [#118](https://github.com/bblanchon/ArduinoJson/issues/118), [#146](https://github.com/bblanchon/ArduinoJson/issues/146) and [#197](https://github.com/bblanchon/ArduinoJson/issues/197).
