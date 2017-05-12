@@ -18,5 +18,3 @@ If you use the Arduino IDE, you need to edit the `platform.txt` of the board you
 
 * The file is located at `%LOCALAPPDATA%\Arduino15\packages\<brand>\hardware\<board>\<version>\platform.txt`
 * The line to change is `compiler.cpp.flags`
-
-See issue [#356](https://github.com/bblanchon/ArduinoJson/issues/356) and [#389](https://github.com/bblanchon/ArduinoJson/issues/389)

@@ -18,12 +18,4 @@ To do that, just add the following line at the top of your program:
 #define ARDUINOJSON_ENABLE_PROGMEM 0
 ```
 
-Then, you may have the following linker error:
-
-```
-undefined reference to__cxa_guard_release'
-```
-
-To solve this, you need to add `-fno-threadsafe-statics` in `platform.txt`.
-
-See issue [#407](https://github.com/bblanchon/ArduinoJson/issues/407)
+Then, you may have the following linker error [undefined reference to `__cxa_guard_acquire` and `__cxa_guard_release`]({{site.baseurl}}/faq/error-undefined-reference-to-cxaguardacquire-and-cxaguardrelease/)
