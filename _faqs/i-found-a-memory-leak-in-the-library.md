@@ -22,6 +22,7 @@ A positive side effect of following this recommendation is that the code is safe
 
 See:
 
-* Issues [#72](https://github.com/bblanchon/ArduinoJson/issues/72), [#87](https://github.com/bblanchon/ArduinoJson/issues/87), [#115](https://github.com/bblanchon/ArduinoJson/issues/115), [#135](https://github.com/bblanchon/ArduinoJson/issues/135)
+* [What's the best way to use the library]({{ site.baseurl }}/faq/whats-the-best-way-to-use-the-library/)
+* [Why shouldn't I use a global JsonBuffer?]({{ site.baseurl }}/faq/why-shouldnt-i-use-a-global-jsonbuffer/)
+* [The first parsing succeeds, why do the next ones fail?]({{ site.baseurl }}/faq/the-first-parsing-succeeds-why-do-the-next-ones-fail/)
 * [ArduinoJson: Avoiding pitfalls](https://github.com/bblanchon/ArduinoJson/wiki/Avoiding%20pitfalls)
-* [FAQ: What's the best way to use the library]({{ site.baseurl }}/faq/whats-the-best-way-to-use-the-library)
