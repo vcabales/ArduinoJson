@@ -17,8 +17,8 @@ bool set(size_t index, const char *value);
 bool set(size_t index, const JsonVariant &value);
 bool set(size_t index, const std::string &value); // see Remarks
 bool set(size_t index, const String &value); // see Remarks
-bool set(size_t index, double value, uint8_t decimals = 2);
-bool set(size_t index, float value, uint8_t decimals = 2);
+bool set(size_t index, double value);
+bool set(size_t index, float value);
 bool set(size_t index, JsonArray &array);
 bool set(size_t index, JsonObject &object);
 bool set(size_t index, signed char value);

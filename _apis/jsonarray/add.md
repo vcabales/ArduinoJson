@@ -13,8 +13,8 @@ Adds a value to the end of the array.
 
 ```c++
 bool add(bool value);
-bool add(float value, uint8_t decimals = 2);
-bool add(double value, uint8_t decimals = 2);
+bool add(float value);
+bool add(double value);
 bool add(signed char value);
 bool add(signed long value);
 bool add(signed int value);
@@ -34,8 +34,6 @@ bool add(const JsonVariant &variant);
 ##### Arguments
 
 `value`: the value to add to the array.
-
-`decimals`: the number of digits to print after the decimal point.
 
 ##### Return value
 

@@ -13,8 +13,8 @@ Sets the value at specified key.
 
 ```c++
 bool set(TString key, bool value);
-bool set(TString key, float value, uint8_t decimals = 2);
-bool set(TString key, double value, uint8_t decimals = 2);
+bool set(TString key, float value);
+bool set(TString key, double value);
 bool set(TString key, signed char value);
 bool set(TString key, signed long value);
 bool set(TString key, signed int value);

@@ -28,8 +28,8 @@ root["sensor"] = "gps";
 root["time"] = 1351824120;
 
 JsonArray& data = root.createNestedArray("data");
-data.add(48.756080, 6);  // 6 is the number of decimals to print
-data.add(2.302038, 6);   // if not specified, 2 digits are printed
+data.add(48.756080);
+data.add(2.302038);
 
 //
 // Step 3: Generate the JSON string
@@ -73,20 +73,6 @@ array.add(42);
 array.add(true);
 ```
 
-There are 3 syntaxes for floating point values:
-
-```c++
-array.add(3.1415);                              // default:  2 digits -> "3.14"
-array.add(double_with_n_digits(3.1415, 4));     // explicit: 4 digits -> "3.1415"
-array.add(3.1415, 4);                           // same as previous   -> "3.1415"
-```
-
-> ##### About floating point precision
-> The overload of `add()` with 2 parameters allows you to specify the number of decimals to save in the JSON string.
-> When you use the overload with one parameter, you use the default number of decimals which is 2.
-> Note that this behavior is the same as Arduino's `Print::print(double,int)` which is implemented by `Serial`, so you may already be familiar with this behavior.
-{: .alert .alert-info }
-
 You can add a nested array or object if you have a reference to it.
 Or simpler, you can create nested array or nested objects from the array:
 
@@ -111,26 +97,19 @@ Then you can add strings, integer, booleans, etc:
 object["key1"] = "bazinga!";
 object["key2"] = 42;
 object["key3"] = true;
-```
-
-As for the arrays, there are two syntaxes for the floating point values:
-
-```c++
-object["key4"] = double_with_n_digits(3.1415, 4);  // 4 digits "3.1415"
-object["key5"] = 3.1415;                           // default: 2 digits "3.14"
+object["key4"] = 3.1415;
 ```
 
 You can add a nested array or object if you have a reference to it.
 Or simpler, you can create nested array or nested objects from the object:
 
 ```c++
-JsonArray&  nestedArray  = object.createNestedArray("key6");
-JsonObject& nestedObject = object.createNestedObject("key7");
+JsonArray&  nestedArray  = object.createNestedArray("key5");
+JsonObject& nestedObject = object.createNestedObject("key6");
 ```
 
 > ##### Other JsonObject functions
 > * `object.set(key, value)` is a synonym for `object[key] = value`
-> * `object.set(key, value, digits)` is a synonym for `object[key] = double_with_n_digits(value, digits)`
 > * `object.containsKey(key)` returns `true` is the `key` is present in `object`
 > * `object.remove(key)` removes the `value` associated with `key`
 {: .alert .alert-info }
