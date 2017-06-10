@@ -3,7 +3,7 @@ title: Why is the input modified?
 layout: faq
 tags: faq
 faq-group: Deserialization
-faq-popularity: 0
+faq-popularity: 17
 ---
 
 The JSON parser works in two different modes, depending on whether the input is read-only or not.

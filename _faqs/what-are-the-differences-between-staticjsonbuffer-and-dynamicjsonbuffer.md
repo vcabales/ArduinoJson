@@ -3,7 +3,7 @@ title: What are the differences between <code>StaticJsonBuffer</code> and <code>
 layout: faq
 tags: faq
 faq-group: Common
-faq-popularity: 67
+faq-popularity: 164
 ---
 
 |                  | `StaticJsonBuffer`  | `DynamicJsonBuffer` |

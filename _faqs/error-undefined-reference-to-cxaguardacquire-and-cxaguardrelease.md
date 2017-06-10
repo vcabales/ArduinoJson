@@ -3,7 +3,7 @@ title: "Error: undefined reference to <code>__cxa_guard_acquire</code> and <code
 layout: faq
 tags: faq
 faq-group: Known problems
-faq-popularity: 113
+faq-popularity: 32
 ---
 
 You need to add the following flag:

@@ -3,7 +3,7 @@ title: How to know the type of a value?
 layout: faq
 tags: faq
 faq-group: Deserialization
-faq-popularity: 20
+faq-popularity: 39
 ---
 
 `JsonVariant`, which is the type that hold the values in `JsonArray` and `JsonObject`, provides the method `is<T>()` that returns `true` if the value is of type `T`.

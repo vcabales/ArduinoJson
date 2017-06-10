@@ -2,6 +2,7 @@
 title: "Arduino Zero, mkr1000 and all boards based on SAMD21"
 layout: faq
 tags: faq
+faq-popularity: 13
 faq-group: Known problems
 ---
 

@@ -3,7 +3,7 @@ title: How to prevent string escaping?
 layout: faq
 tags: faq
 faq-group: Serialization
-faq-popularity: 0
+faq-popularity: 37
 ---
 
 String escaping is the feature that allows to have special characters in your encoded string.

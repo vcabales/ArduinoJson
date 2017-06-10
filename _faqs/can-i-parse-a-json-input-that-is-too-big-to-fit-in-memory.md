@@ -3,7 +3,7 @@ title: Can I parse a JSON input that is too big to fit in memory?
 layout: faq
 tags: faq
 faq-group: Deserialization
-faq-popularity: 25
+faq-popularity: 80
 ---
 
 No.

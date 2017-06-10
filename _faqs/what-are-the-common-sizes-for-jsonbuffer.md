@@ -3,7 +3,7 @@ title: What are the common sizes for JsonBuffer?
 layout: faq
 tags: faq
 faq-group: Common
-faq-popularity: 32
+faq-popularity: 44
 ---
 
 | Input                              | AVR 8-bit | ESP8266 | x86   | x64   |

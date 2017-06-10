@@ -3,7 +3,7 @@ title: How to reduce memory usage?
 layout: faq
 tags: faq
 faq-group: Deserialization
-faq-popularity: 0
+faq-popularity: 66
 ---
 
 If the input string is constant, the `JsonBuffer` will have to make a copy of it.

@@ -3,7 +3,7 @@ title: What's the best way to use the library?
 layout: faq
 tags: faq
 faq-group: Common
-faq-popularity: 81
+faq-popularity: 245
 ---
 
 Here is the canonical example for serializing and deserializing with ArduinoJson.

@@ -3,7 +3,7 @@ title: "Error: Ambiguous overload for 'operator='"
 layout: faq
 tags: faq
 faq-group: Known problems
-faq-popularity: 24
+faq-popularity: 64
 ---
 
 Most of the time you can rely on implicit casts.

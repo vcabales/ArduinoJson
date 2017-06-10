@@ -3,6 +3,7 @@ title: "Adafruit WICED Feather"
 layout: faq
 tags: faq
 faq-group: Known problems
+faq-popularity: 6
 ---
 
 There is currently a bug in the Arduino Core for Adafruit WICED Feather causing the following error:

@@ -3,7 +3,7 @@ title: Why parsing fails?
 layout: faq
 tags: faq
 faq-group: Deserialization
-faq-popularity: 38
+faq-popularity: 151
 ---
 
 The parsing functions, `parseArray()` and `parseObject()`, may fail for 5 reasons:

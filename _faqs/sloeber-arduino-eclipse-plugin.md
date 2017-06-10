@@ -3,6 +3,7 @@ title: "Sloeber Arduino Eclipse Plugin"
 layout: faq
 tags: faq
 faq-group: Known problems
+faq-popularity: 19
 ---
 
 When compiling ArduinoJson within the Sloeber Arduino Eclipse Plugin, you may encounter the following error:
