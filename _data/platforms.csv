@@ -15,10 +15,12 @@ ESP32
 Teensy
 Intel Galileo
 Intel Edison
-PlatformIO
-Energia
 MSP430
 RedBearLab BLE Nano
 RedBearLab BLE Mini
 WeMos D1
+Atmel Studio
+Energia
 IAR Embedded Workbench
+PlatformIO
+Visual Micro
