@@ -38,9 +38,12 @@ tags: home no-ad
 <h2 class="display-3">Testimonials</h2>
 <div class="row">
 {% for testimonial in site.data.testimonials %}
-<div class="col-12">
+<div class="col-12 col-lg-6 p-2">
 	<div class="card m-4">
 	  <div class="card-block">
+	  	{%if testimonial.avatar %}
+		<img src="{{testimonial.avatar}}" class="img-thumbnail float-right" style="width: 100px; height: 100px">
+		{% endif %}
 		<blockquote class="card-blockquote">
 			<i>{{ testimonial.text }}</i>
 		</blockquote>
