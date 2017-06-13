@@ -20,5 +20,5 @@ root["cond"] = F("Sunny");
 ...or as a key
 
 ```c++
-float temp = root["temp"];
+float temp = root[F("temp")];
 ```
