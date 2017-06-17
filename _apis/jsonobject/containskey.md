@@ -53,6 +53,17 @@ bool hasCountry = root.containsKey("country"); // false
 > ```
 > 
 > Can be written like this:
+>
+> ```c++
+> JsonVariant error = root["error"];
+> if (error.success()) 
+> {
+>   Serial.println(error.as<char*>());
+>   return;
+> }
+> ```
+>
+> This can even be simplified further if the default value (`0` or `NULL`) is not within the acceptable range:
 > 
 > ```c++
 > const char* error = root["error"];
