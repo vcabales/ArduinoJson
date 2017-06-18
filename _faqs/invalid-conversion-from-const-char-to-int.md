@@ -48,7 +48,6 @@ const char* name = modules[0]["hello"];
 
 See:
 
-* issue [#452](https://github.com/bblanchon/ArduinoJson/issues/452)
 * [FAQ: Parsing succeeds but I can't read the values!]({{site.baseurl}}/faq/parsing-succeeds-but-i-cant-read-the-values/)
 * [FAQ: Can I access to object member by its index, instead of its key?]({{site.baseurl}}/faq/can-i-access-to-object-member-by-its-index-instead-of-its-key/)
 * [ArduinoJson Assistant]({{site.baseurl}}/assistant/)
