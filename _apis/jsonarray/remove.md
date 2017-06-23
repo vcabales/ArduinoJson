@@ -1,8 +1,9 @@
 ---
-title: JsonArray::removeAt()
+title: JsonArray::remove()
 layout: api
 tags: api
 api-group: JsonArray
+redirect_from: /api/jsonarray/removeat/
 ---
 
 ##### Description
@@ -37,3 +38,6 @@ will print the following string to the serial output:
 ```json
 ["A","C"]
 ```
+
+>This function use to be named `removeAt()` in version older than 5.9.0
+>{: .alert .alert-info }
