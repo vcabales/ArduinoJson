@@ -7,7 +7,7 @@ faq-popularity: 156
 ---
 
 `StaticJsonBuffer` and `DynamicJsonBuffer` are designed to be throwaway memory pools, they are not intended to be reused.
-As a consequence, using a global `JsonBuffer` is not possible.
+As a consequence, using a global `JsonBuffer` is not recommended.
 
 Make sure you read: [How to reuse a `JsonBuffer`?]({{site.baseurl}}/faq/how-to-reuse-a-jsonbuffer/).
 

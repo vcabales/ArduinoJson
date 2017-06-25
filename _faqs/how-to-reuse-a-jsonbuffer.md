@@ -6,17 +6,12 @@ faq-group: Common
 faq-popularity: 257
 ---
 
-This is a very popular question, make sure you understand the following statement:
+### Disclaimer
 
-> A `JsonBuffer` **cannot** be reused.<br>
-> You must create a new instance if you need a fresh buffer.
-{: .alert .alert-danger}
+Since ArduinoJson 5.11.0, it's possible to reuse a `JsonBuffer` thank to the [`clear()`]({{site.baseurl}}/api/jsonbuffer/clear/) method.
+However, it's very risky and can be avoided most of the time.
 
-### Why is there no `clear()` or `reset()` function?
-
-Many users want to reuse their buffer, so they don't understand why `JsonBuffer` doesn't have a `clear()` or `reset()` function.
-
-This is a legitimate request, but can you spot the error in the following code?
+Please take a second to see this example:
 
 ```c++
 // STEP1: parse input
@@ -44,10 +39,6 @@ Here is what happens in this buggy program:
 * `inputObject` is now a dangling pointer and the behavior is undefined.
 
 ### How to fix this code?
-
-> The error in the code above is caused by the `clear()` function.<br>
-> **That is why no such function exists in ArduinoJson**.
-{: .alert .alert-danger}
 
 To rewrite this code without `clear()`, we have two possibilities.
 
@@ -138,20 +129,6 @@ void sendMux()
   rs485.send(jsonAck, jsonBuffer);
 }
 ```
-
-### I get your point, but I don't care!
-
-OK smartypants, do you know that you can write your own `clear()` or `reset()` function?
-
-```c++
-template<typename T>
-void clear(T& instance)
-{
-    instance = T();
-}
-```
-
-Be sure to understand the consequence before using this.
 
 ### See also
 
