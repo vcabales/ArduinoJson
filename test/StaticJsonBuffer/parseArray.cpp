@@ -9,44 +9,38 @@
 #include <catch.hpp>
 
 TEST_CASE("StaticJsonBuffer::parseArray()") {
-  SECTION("StaticJsonBuffer of the right size of 0 elements") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(0)> jb;
-    JsonArray& arr = jb.createArray();
+  SECTION("StaticJsonArray of the right size of 0 elements") {
+    StaticJsonArray<JSON_ARRAY_SIZE(0)> arr;
     char input[] = "[]";
     REQUIRE(true == parseJson(arr, input));
   }
 
-  SECTION("StaticJsonBuffer too small for 1 element") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(1) - 1> jb;
-    JsonArray& arr = jb.createArray();
+  SECTION("StaticJsonArray too small for 1 element") {
+    StaticJsonArray<JSON_ARRAY_SIZE(1) - 1> arr;
     char input[] = "[1]";
     REQUIRE(false == parseJson(arr, input));
   }
 
-  SECTION("StaticJsonBuffer of the right size of 1 element") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(1)> jb;
-    JsonArray& arr = jb.createArray();
+  SECTION("StaticJsonArray of the right size of 1 element") {
+    StaticJsonArray<JSON_ARRAY_SIZE(1)> arr;
     char input[] = "[1]";
     REQUIRE(true == parseJson(arr, input));
   }
 
-  SECTION("StaticJsonBuffer too small for 1 nested object") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(0) - 1> jb;
-    JsonArray& arr = jb.createArray();
+  SECTION("StaticJsonArray too small for 1 nested object") {
+    StaticJsonArray<JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(0) - 1> arr;
     char input[] = "[{}]";
     REQUIRE(false == parseJson(arr, input));
   }
 
-  SECTION("StaticJsonBuffer of the right size of 1 nested object") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(0)> jb;
-    JsonArray& arr = jb.createArray();
+  SECTION("StaticJsonArray of the right size of 1 nested object") {
+    StaticJsonArray<JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(0)> arr;
     char input[] = "[{}]";
     REQUIRE(true == parseJson(arr, input));
   }
 
   SECTION("Input is char* NULL") {
-    StaticJsonBuffer<100> jb;
-    JsonArray& arr = jb.createArray();
+    StaticJsonArray<100> arr;
     REQUIRE(false == parseJson(arr, static_cast<char*>(0)));
   }
 
