@@ -8,8 +8,7 @@ createArray	KEYWORD2
 createNestedArray	KEYWORD2
 createNestedObject	KEYWORD2
 createObject	KEYWORD2
-parseArray	KEYWORD2
-parseObject	KEYWORD2
+parseJson	KEYWORD1
 prettyPrintTo	KEYWORD2
 printTo	KEYWORD2
 success	KEYWORD2

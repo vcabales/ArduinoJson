@@ -33,10 +33,7 @@ class JsonArraySubscript;
 
 // An array of JsonVariant.
 //
-// The constructor is private, instances must be created via
-// JsonBuffer::createArray() or JsonBuffer::parseArray().
 // A JsonArray can be serialized to a JSON string via JsonArray::printTo().
-// It can also be deserialized from a JSON string via JsonBuffer::parseArray().
 class JsonArray : public Internals::JsonPrintable<JsonArray>,
                   public Internals::ReferenceType,
                   public Internals::NonCopyable,

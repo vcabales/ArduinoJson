@@ -7,9 +7,7 @@
 
 #pragma once
 
-#include "ArduinoJson/DynamicJsonBuffer.hpp"
-#include "ArduinoJson/JsonArray.hpp"
-#include "ArduinoJson/JsonObject.hpp"
+#include "ArduinoJson/DynamicJsonArray.hpp"
 #include "ArduinoJson/JsonVariantComparisons.hpp"
 #include "ArduinoJson/StaticJsonArray.hpp"
 #include "ArduinoJson/StaticJsonObject.hpp"

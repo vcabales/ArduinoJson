@@ -17,7 +17,7 @@ namespace Internals {
 
 // Parse JSON string to create JsonArrays and JsonObjects
 // This internal class is not indended to be used directly.
-// Instead, use JsonBuffer.parseArray() or .parseObject()
+// Instead, use parseJson()
 template <typename TReader, typename TWriter>
 class JsonParser {
  public:
