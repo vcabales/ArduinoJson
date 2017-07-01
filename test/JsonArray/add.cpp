@@ -9,8 +9,7 @@
 #include <catch.hpp>
 
 TEST_CASE("JsonArray::add()") {
-  DynamicJsonBuffer _jsonBuffer;
-  JsonArray& _array = _jsonBuffer.createArray();
+  DynamicJsonArray _array;
 
   SECTION("SizeIncreased_WhenValuesAreAdded") {
     _array.add("hello");
@@ -47,7 +46,7 @@ TEST_CASE("JsonArray::add()") {
   }
 
   SECTION("nested array") {
-    JsonArray& arr = _jsonBuffer.createArray();
+    DynamicJsonArray arr;
 
     _array.add(arr);
 
@@ -57,7 +56,7 @@ TEST_CASE("JsonArray::add()") {
   }
 
   SECTION("nested object") {
-    JsonObject& obj = _jsonBuffer.createObject();
+    DynamicJsonObject obj;
 
     _array.add(obj);
 
@@ -68,7 +67,7 @@ TEST_CASE("JsonArray::add()") {
 
   SECTION("array subscript") {
     const char* str = "hello";
-    JsonArray& arr = _jsonBuffer.createArray();
+    DynamicJsonArray arr;
     arr.add(str);
 
     _array.add(arr[0]);
@@ -78,7 +77,7 @@ TEST_CASE("JsonArray::add()") {
 
   SECTION("object subscript") {
     const char* str = "hello";
-    JsonObject& obj = _jsonBuffer.createObject();
+    DynamicJsonObject obj;
     obj["x"] = str;
 
     _array.add(obj["x"]);

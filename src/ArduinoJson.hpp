@@ -8,6 +8,7 @@
 #pragma once
 
 #include "ArduinoJson/DynamicJsonArray.hpp"
+#include "ArduinoJson/DynamicJsonObject.hpp"
 #include "ArduinoJson/JsonVariantComparisons.hpp"
 #include "ArduinoJson/StaticJsonArray.hpp"
 #include "ArduinoJson/StaticJsonObject.hpp"
