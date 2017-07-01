@@ -12,10 +12,18 @@ void check(std::string originalJson) {
   DynamicJsonBuffer jb;
 
   std::string prettyJson;
-  jb.parseObject(originalJson).prettyPrintTo(prettyJson);
+  {
+    DynamicJsonObject obj;
+    parseJson(obj, originalJson);
+    obj.prettyPrintTo(prettyJson);
+  }
 
   std::string finalJson;
-  jb.parseObject(prettyJson).printTo(finalJson);
+  {
+    DynamicJsonObject obj;
+    parseJson(obj, originalJson);
+    obj.printTo(finalJson);
+  }
 
   REQUIRE(originalJson == finalJson);
 }

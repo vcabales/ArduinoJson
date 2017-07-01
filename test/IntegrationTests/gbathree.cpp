@@ -9,9 +9,10 @@
 #include <catch.hpp>
 
 TEST_CASE("Gbathree") {
-  DynamicJsonBuffer _buffer;
+  DynamicJsonObject object;
 
-  const JsonObject& _object = _buffer.parseObject(
+  parseJson(
+      object,
       "{\"protocol_name\":\"fluorescence\",\"repeats\":1,\"wait\":0,"
       "\"averages\":1,\"measurements\":3,\"meas2_light\":15,\"meas1_"
       "baseline\":0,\"act_light\":20,\"pulsesize\":25,\"pulsedistance\":"
@@ -24,65 +25,65 @@ TEST_CASE("Gbathree") {
       "[15,15,15,15]],\"altc\":[2,2,2,2],\"altd\":[2,2,2,2]}");
 
   SECTION("Success") {
-    REQUIRE(_object.success());
+    REQUIRE(object.success());
   }
 
   SECTION("ProtocolName") {
-    REQUIRE("fluorescence" == _object["protocol_name"]);
+    REQUIRE("fluorescence" == object["protocol_name"]);
   }
 
   SECTION("Repeats") {
-    REQUIRE(1 == _object["repeats"]);
+    REQUIRE(1 == object["repeats"]);
   }
 
   SECTION("Wait") {
-    REQUIRE(0 == _object["wait"]);
+    REQUIRE(0 == object["wait"]);
   }
 
   SECTION("Measurements") {
-    REQUIRE(3 == _object["measurements"]);
+    REQUIRE(3 == object["measurements"]);
   }
 
   SECTION("Meas2_Light") {
-    REQUIRE(15 == _object["meas2_light"]);
+    REQUIRE(15 == object["meas2_light"]);
   }
 
   SECTION("Meas1_Baseline") {
-    REQUIRE(0 == _object["meas1_baseline"]);
+    REQUIRE(0 == object["meas1_baseline"]);
   }
 
   SECTION("Act_Light") {
-    REQUIRE(20 == _object["act_light"]);
+    REQUIRE(20 == object["act_light"]);
   }
 
   SECTION("Pulsesize") {
-    REQUIRE(25 == _object["pulsesize"]);
+    REQUIRE(25 == object["pulsesize"]);
   }
 
   SECTION("Pulsedistance") {
-    REQUIRE(10000 == _object["pulsedistance"]);
+    REQUIRE(10000 == object["pulsedistance"]);
   }
 
   SECTION("Actintensity1") {
-    REQUIRE(50 == _object["actintensity1"]);
+    REQUIRE(50 == object["actintensity1"]);
   }
 
   SECTION("Actintensity2") {
-    REQUIRE(255 == _object["actintensity2"]);
+    REQUIRE(255 == object["actintensity2"]);
   }
 
   SECTION("Measintensity") {
-    REQUIRE(255 == _object["measintensity"]);
+    REQUIRE(255 == object["measintensity"]);
   }
 
   SECTION("Calintensity") {
-    REQUIRE(255 == _object["calintensity"]);
+    REQUIRE(255 == object["calintensity"]);
   }
 
   SECTION("Pulses") {
     // "pulses":[50,50,50]
 
-    JsonArray& array = _object["pulses"];
+    JsonArray& array = object["pulses"];
     REQUIRE(array.success());
 
     REQUIRE(3 == array.size());
@@ -95,9 +96,8 @@ TEST_CASE("Gbathree") {
   SECTION("Act") {
     // "act":[2,1,2,2]
 
-    JsonArray& array = _object["act"];
+    JsonArray& array = object["act"];
     REQUIRE(array.success());
-
     REQUIRE(4 == array.size());
     REQUIRE(2 == array[0]);
     REQUIRE(1 == array[1]);
@@ -108,7 +108,7 @@ TEST_CASE("Gbathree") {
   SECTION("Detectors") {
     // "detectors":[[34,34,34,34],[34,34,34,34],[34,34,34,34],[34,34,34,34]]
 
-    JsonArray& array = _object["detectors"];
+    JsonArray& array = object["detectors"];
     REQUIRE(array.success());
     REQUIRE(4 == array.size());
 
@@ -125,7 +125,7 @@ TEST_CASE("Gbathree") {
   SECTION("Alta") {
     // alta:[2,2,2,2]
 
-    JsonArray& array = _object["alta"];
+    JsonArray& array = object["alta"];
     REQUIRE(array.success());
 
     REQUIRE(4 == array.size());
@@ -138,7 +138,7 @@ TEST_CASE("Gbathree") {
   SECTION("Altb") {
     // altb:[2,2,2,2]
 
-    JsonArray& array = _object["altb"];
+    JsonArray& array = object["altb"];
     REQUIRE(array.success());
 
     REQUIRE(4 == array.size());
@@ -151,7 +151,7 @@ TEST_CASE("Gbathree") {
   SECTION("Measlights") {
     // "measlights":[[15,15,15,15],[15,15,15,15],[15,15,15,15],[15,15,15,15]]
 
-    JsonArray& array = _object["measlights"];
+    JsonArray& array = object["measlights"];
     REQUIRE(array.success());
     REQUIRE(4 == array.size());
 
@@ -169,7 +169,7 @@ TEST_CASE("Gbathree") {
   SECTION("Measlights2") {
     // "measlights2":[[15,15,15,15],[15,15,15,15],[15,15,15,15],[15,15,15,15]]
 
-    JsonArray& array = _object["measlights2"];
+    JsonArray& array = object["measlights2"];
     REQUIRE(array.success());
     REQUIRE(4 == array.size());
 
@@ -186,7 +186,7 @@ TEST_CASE("Gbathree") {
   SECTION("Altc") {
     // altc:[2,2,2,2]
 
-    JsonArray& array = _object["altc"];
+    JsonArray& array = object["altc"];
     REQUIRE(array.success());
 
     REQUIRE(4 == array.size());
@@ -199,7 +199,7 @@ TEST_CASE("Gbathree") {
   SECTION("Altd") {
     // altd:[2,2,2,2]
 
-    JsonArray& array = _object["altd"];
+    JsonArray& array = object["altd"];
     REQUIRE(array.success());
 
     REQUIRE(4 == array.size());
