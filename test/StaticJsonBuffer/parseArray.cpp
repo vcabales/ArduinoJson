@@ -9,42 +9,39 @@
 #include <catch.hpp>
 
 TEST_CASE("StaticJsonBuffer::parseArray()") {
-  SECTION("BufferOfTheRightSizeForEmptyArray") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(0)> bufferOfRightSize;
-    JsonArray& arr = bufferOfRightSize.createArray();
+  SECTION("StaticJsonBuffer of the right size of 0 elements") {
+    StaticJsonBuffer<JSON_ARRAY_SIZE(0)> jb;
+    JsonArray& arr = jb.createArray();
     char input[] = "[]";
-    bool success = parseJson(arr, input);
-    REQUIRE(success);
+    REQUIRE(true == parseJson(arr, input));
   }
 
-  SECTION("TooSmallBufferForArrayWithOneValue") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(1) - 1> bufferTooSmall;
+  SECTION("StaticJsonBuffer too small for 1 element") {
+    StaticJsonBuffer<JSON_ARRAY_SIZE(1) - 1> jb;
+    JsonArray& arr = jb.createArray();
     char input[] = "[1]";
-    JsonArray& arr = bufferTooSmall.parseArray(input);
-    REQUIRE_FALSE(arr.success());
+    REQUIRE(false == parseJson(arr, input));
   }
 
-  SECTION("BufferOfTheRightSizeForArrayWithOneValue") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(1)> bufferOfRightSize;
+  SECTION("StaticJsonBuffer of the right size of 1 element") {
+    StaticJsonBuffer<JSON_ARRAY_SIZE(1)> jb;
+    JsonArray& arr = jb.createArray();
     char input[] = "[1]";
-    JsonArray& arr = bufferOfRightSize.parseArray(input);
-    REQUIRE(arr.success());
+    REQUIRE(true == parseJson(arr, input));
   }
 
-  SECTION("TooSmallBufferForArrayWithNestedObject") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(0) - 1>
-        bufferTooSmall;
+  SECTION("StaticJsonBuffer too small for 1 nested object") {
+    StaticJsonBuffer<JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(0) - 1> jb;
+    JsonArray& arr = jb.createArray();
     char input[] = "[{}]";
-    JsonArray& arr = bufferTooSmall.parseArray(input);
-    REQUIRE_FALSE(arr.success());
+    REQUIRE(false == parseJson(arr, input));
   }
 
-  SECTION("BufferOfTheRightSizeForArrayWithNestedObject") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(0)>
-        bufferOfRightSize;
+  SECTION("StaticJsonBuffer of the right size of 1 nested object") {
+    StaticJsonBuffer<JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(0)> jb;
+    JsonArray& arr = jb.createArray();
     char input[] = "[{}]";
-    JsonArray& arr = bufferOfRightSize.parseArray(input);
-    REQUIRE(arr.success());
+    REQUIRE(true == parseJson(arr, input));
   }
 
   SECTION("CharPtrNull") {
