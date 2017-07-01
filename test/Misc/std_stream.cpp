@@ -26,8 +26,7 @@ TEST_CASE("std::stream") {
 
   SECTION("JsonObject") {
     std::ostringstream os;
-    DynamicJsonBuffer jsonBuffer;
-    JsonObject& object = jsonBuffer.createObject();
+    DynamicJsonObject object;
     object["key"] = "value";
     os << object;
     REQUIRE("{\"key\":\"value\"}" == os.str());
@@ -35,8 +34,7 @@ TEST_CASE("std::stream") {
 
   SECTION("JsonObjectSubscript") {
     std::ostringstream os;
-    DynamicJsonBuffer jsonBuffer;
-    JsonObject& object = jsonBuffer.createObject();
+    DynamicJsonObject object;
     object["key"] = "value";
     os << object["key"];
     REQUIRE("\"value\"" == os.str());
@@ -44,8 +42,7 @@ TEST_CASE("std::stream") {
 
   SECTION("JsonArray") {
     std::ostringstream os;
-    DynamicJsonBuffer jsonBuffer;
-    JsonArray& array = jsonBuffer.createArray();
+    DynamicJsonArray array;
     array.add("value");
     os << array;
     REQUIRE("[\"value\"]" == os.str());
@@ -53,8 +50,7 @@ TEST_CASE("std::stream") {
 
   SECTION("JsonArraySubscript") {
     std::ostringstream os;
-    DynamicJsonBuffer jsonBuffer;
-    JsonArray& array = jsonBuffer.createArray();
+    DynamicJsonArray array;
     array.add("value");
     os << array[0];
     REQUIRE("\"value\"" == os.str());
@@ -81,8 +77,8 @@ TEST_CASE("std::stream") {
 
   SECTION("ShouldNotReadPastTheEnd") {
     std::istringstream json("{}123");
-    DynamicJsonBuffer jsonBuffer;
-    jsonBuffer.parseObject(json);
+    DynamicJsonObject obj;
+    parseJson(obj, json);
     REQUIRE('1' == json.get());
   }
 }
