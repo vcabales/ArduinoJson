@@ -38,7 +38,7 @@ void setup() {
 
   // Parse the JSON string
   if (!parseJson(root, json)) {
-    Serial.println("parseObject() failed");
+    Serial.println("parseJson() failed");
     return;
   }
 

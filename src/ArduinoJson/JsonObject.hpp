@@ -30,12 +30,6 @@ namespace ArduinoJson {
 class JsonArray;
 class JsonBuffer;
 
-// A dictionary of JsonVariant indexed by string (char*)
-//
-// The constructor is private, instances must be created via
-// JsonBuffer::createObject() or JsonBuffer::parseObject().
-// A JsonObject can be serialized to a JSON string via JsonObject::printTo().
-// It can also be deserialized from a JSON string via JsonBuffer::parseObject().
 class JsonObject : public Internals::JsonPrintable<JsonObject>,
                    public Internals::ReferenceType,
                    public Internals::NonCopyable,

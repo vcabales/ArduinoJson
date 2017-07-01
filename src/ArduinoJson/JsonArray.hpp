@@ -122,11 +122,9 @@ class JsonArray : public Internals::JsonPrintable<JsonArray>,
   }
 
   // Creates a JsonArray and adds a reference at the end of the array.
-  // It's a shortcut for JsonBuffer::createArray() and JsonArray::add()
   JsonArray &createNestedArray();
 
   // Creates a JsonObject and adds a reference at the end of the array.
-  // It's a shortcut for JsonBuffer::createObject() and JsonArray::add()
   JsonObject &createNestedObject();
 
   // Removes element at specified index.
