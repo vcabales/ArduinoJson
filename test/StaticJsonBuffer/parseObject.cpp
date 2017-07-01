@@ -14,44 +14,37 @@ TEST_CASE("StaticJsonBuffer::parseObject()") {
     REQUIRE(true == parseJson(obj, input));
   }
 
-  SECTION("TooSmallBufferForObjectWithOneValue") {
-    StaticJsonBuffer<JSON_OBJECT_SIZE(1) - 1> bufferTooSmall;
+  SECTION("StaticJsonObject too small for 1 element") {
+    StaticJsonObject<JSON_OBJECT_SIZE(1) - 1> obj;
     char input[] = "{\"a\":1}";
-    JsonObject& obj = bufferTooSmall.parseObject(input);
-    REQUIRE_FALSE(obj.success());
+    REQUIRE(false == parseJson(obj, input));
   }
 
-  SECTION("BufferOfTheRightSizeForObjectWithOneValue") {
-    StaticJsonBuffer<JSON_OBJECT_SIZE(1)> bufferOfRightSize;
+  SECTION("StaticJsonObject of the right size of 1 element") {
+    StaticJsonObject<JSON_OBJECT_SIZE(1)> obj;
     char input[] = "{\"a\":1}";
-    JsonObject& obj = bufferOfRightSize.parseObject(input);
-    REQUIRE(obj.success());
+    REQUIRE(true == parseJson(obj, input));
   }
 
-  SECTION("TooSmallBufferForObjectWithNestedObject") {
-    StaticJsonBuffer<JSON_OBJECT_SIZE(1) + JSON_ARRAY_SIZE(0) - 1>
-        bufferTooSmall;
+  SECTION("StaticJsonObject too small for 1 nested array") {
+    StaticJsonObject<JSON_OBJECT_SIZE(1) + JSON_ARRAY_SIZE(0) - 1> obj;
     char input[] = "{\"a\":[]}";
-    JsonObject& obj = bufferTooSmall.parseObject(input);
-    REQUIRE_FALSE(obj.success());
+    REQUIRE(false == parseJson(obj, input));
   }
 
-  SECTION("BufferOfTheRightSizeForObjectWithNestedObject") {
-    StaticJsonBuffer<JSON_OBJECT_SIZE(1) + JSON_ARRAY_SIZE(0)>
-        bufferOfRightSize;
+  SECTION("StaticJsonObject of the right size of 1 nested array") {
+    StaticJsonObject<JSON_OBJECT_SIZE(1) + JSON_ARRAY_SIZE(0)> obj;
     char input[] = "{\"a\":[]}";
-    JsonObject& obj = bufferOfRightSize.parseObject(input);
-    REQUIRE(obj.success());
+    REQUIRE(true == parseJson(obj, input));
   }
 
-  SECTION("CharPtrNull") {
-    REQUIRE_FALSE(
-        StaticJsonBuffer<100>().parseObject(static_cast<char*>(0)).success());
+  SECTION("Input is char* NULL") {
+    StaticJsonObject<100> obj;
+    REQUIRE(false == parseJson(obj, static_cast<char*>(0)));
   }
 
-  SECTION("ConstCharPtrNull") {
-    REQUIRE_FALSE(StaticJsonBuffer<100>()
-                      .parseObject(static_cast<const char*>(0))
-                      .success());
+  SECTION("Input is const char* NULL") {
+    StaticJsonObject<100> obj;
+    REQUIRE(false == parseJson(obj, static_cast<const char*>(0)));
   }
 }
