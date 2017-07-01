@@ -54,14 +54,14 @@ ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseArray() {
   // Create an empty array
   JsonArray &array = _buffer->createArray();
 
-  if (parseArray(array))
+  if (parse(array))
     return array;
   else
     return JsonArray::invalid();
 }
 
 template <typename TReader, typename TWriter>
-inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseArray(
+inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::parse(
     JsonArray &array) {
   // Check opening braket
   if (!eat('[')) goto ERROR_MISSING_BRACKET;
@@ -106,6 +106,15 @@ ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseObject() {
   // Create an empty object
   JsonObject &object = _buffer->createObject();
 
+  if (parse(object))
+    return object;
+  else
+    return JsonObject::invalid();
+}
+
+template <typename TReader, typename TWriter>
+inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::parse(
+    JsonObject &object) {
   // Check opening brace
   if (!eat('{')) goto ERROR_MISSING_BRACE;
   if (eat('}')) goto SUCCESS_EMPTY_OBJECT;
@@ -129,7 +138,7 @@ ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseObject() {
 
 SUCCESS_EMPTY_OBJECT:
 SUCCESS_NON_EMPTY_OBJECT:
-  return object;
+  return true;
 
 ERROR_INVALID_KEY:
 ERROR_INVALID_VALUE:
@@ -137,7 +146,7 @@ ERROR_MISSING_BRACE:
 ERROR_MISSING_COLON:
 ERROR_MISSING_COMMA:
 ERROR_NO_MEMORY:
-  return JsonObject::invalid();
+  return false;
 }
 
 template <typename TReader, typename TWriter>

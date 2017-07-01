@@ -8,18 +8,10 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 TEST_CASE("StaticJsonBuffer::parseObject()") {
-  SECTION("TooSmallBufferForEmptyObject") {
-    StaticJsonBuffer<JSON_OBJECT_SIZE(0) - 1> bufferTooSmall;
+  SECTION("StaticJsonObject of the right size of 0 elements") {
+    StaticJsonObject<JSON_OBJECT_SIZE(0)> obj;
     char input[] = "{}";
-    JsonObject& obj = bufferTooSmall.parseObject(input);
-    REQUIRE_FALSE(obj.success());
-  }
-
-  SECTION("BufferOfTheRightSizeForEmptyObject") {
-    StaticJsonBuffer<JSON_OBJECT_SIZE(0)> bufferOfRightSize;
-    char input[] = "{}";
-    JsonObject& obj = bufferOfRightSize.parseObject(input);
-    REQUIRE(obj.success());
+    REQUIRE(true == parseJson(obj, input));
   }
 
   SECTION("TooSmallBufferForObjectWithOneValue") {

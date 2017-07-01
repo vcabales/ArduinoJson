@@ -9,6 +9,12 @@
 #include <catch.hpp>
 
 TEST_CASE("StaticJsonBuffer::createObject()") {
+  SECTION("TooSmallBufferForEmptyObject") {
+    StaticJsonBuffer<JSON_OBJECT_SIZE(0) - 1> bufferTooSmall;
+    JsonObject &obj = bufferTooSmall.createObject();
+    REQUIRE_FALSE(obj.success());
+  }
+
   SECTION("GrowsWithObject") {
     StaticJsonBuffer<JSON_OBJECT_SIZE(3)> buffer;
 

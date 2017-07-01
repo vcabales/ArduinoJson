@@ -15,7 +15,7 @@ typename TypeTraits::EnableIf<!TypeTraits::IsArray<TString>::value, bool>::type
 parseJson(TDestination &destination, const TString &json,
           uint8_t nestingLimit = ARDUINOJSON_DEFAULT_NESTING_LIMIT) {
   return Internals::makeParser(&destination.buffer(), json, nestingLimit)
-      .parseArray(destination);
+      .parse(destination);
 }
 //
 //  bool parseJson(JsonArray& destination, TString json);
@@ -24,7 +24,7 @@ template <typename TDestination, typename TString>
 bool parseJson(TDestination &destination, TString *json,
                uint8_t nestingLimit = ARDUINOJSON_DEFAULT_NESTING_LIMIT) {
   return Internals::makeParser(&destination.buffer(), json, nestingLimit)
-      .parseArray(destination);
+      .parse(destination);
 }
 //
 //  bool parseJson(JsonArray& destination, TString json);
@@ -33,6 +33,6 @@ template <typename TDestination, typename TString>
 bool parseJson(TDestination &destination, TString &json,
                uint8_t nestingLimit = ARDUINOJSON_DEFAULT_NESTING_LIMIT) {
   return Internals::makeParser(&destination.buffer(), json, nestingLimit)
-      .parseArray(destination);
+      .parse(destination);
 }
 }
