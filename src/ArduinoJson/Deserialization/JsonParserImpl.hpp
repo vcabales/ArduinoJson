@@ -20,8 +20,9 @@ inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::eat(
 }
 
 template <typename TReader, typename TWriter>
-inline bool ArduinoJson::Internals::JsonParser<
-    TReader, TWriter>::parseAnythingTo(JsonVariant *destination) {
+inline bool
+ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseAnythingTo(
+    JsonVariant *destination) {
   if (_nestingLimit == 0) return false;
   _nestingLimit--;
   bool success = parseAnythingToUnsafe(destination);
@@ -30,8 +31,9 @@ inline bool ArduinoJson::Internals::JsonParser<
 }
 
 template <typename TReader, typename TWriter>
-inline bool ArduinoJson::Internals::JsonParser<
-    TReader, TWriter>::parseAnythingToUnsafe(JsonVariant *destination) {
+inline bool
+ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseAnythingToUnsafe(
+    JsonVariant *destination) {
   skipSpacesAndComments(_reader);
 
   switch (_reader.current()) {
@@ -52,6 +54,15 @@ ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseArray() {
   // Create an empty array
   JsonArray &array = _buffer->createArray();
 
+  if (parseArray(array))
+    return array;
+  else
+    return JsonArray::invalid();
+}
+
+template <typename TReader, typename TWriter>
+inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseArray(
+    JsonArray &array) {
   // Check opening braket
   if (!eat('[')) goto ERROR_MISSING_BRACKET;
   if (eat(']')) goto SUCCESS_EMPTY_ARRAY;
@@ -70,13 +81,13 @@ ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseArray() {
 
 SUCCESS_EMPTY_ARRAY:
 SUCCES_NON_EMPTY_ARRAY:
-  return array;
+  return true;
 
 ERROR_INVALID_VALUE:
 ERROR_MISSING_BRACKET:
 ERROR_MISSING_COMMA:
 ERROR_NO_MEMORY:
-  return JsonArray::invalid();
+  return false;
 }
 
 template <typename TReader, typename TWriter>

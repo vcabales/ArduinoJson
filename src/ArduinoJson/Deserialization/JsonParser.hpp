@@ -37,6 +37,8 @@ class JsonParser {
     return result;
   }
 
+  bool parseArray(JsonArray &destination);
+
  private:
   JsonParser &operator=(const JsonParser &);  // non-copiable
 
