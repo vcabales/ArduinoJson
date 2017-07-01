@@ -9,6 +9,12 @@
 #include <catch.hpp>
 
 TEST_CASE("StaticJsonBuffer::createArray()") {
+  SECTION("TooSmallBufferForEmptyArray") {
+    StaticJsonBuffer<JSON_ARRAY_SIZE(0) - 1> bufferTooSmall;
+    JsonArray &arr = bufferTooSmall.createArray();
+    REQUIRE_FALSE(arr.success());
+  }
+
   SECTION("GrowsWithArray") {
     StaticJsonBuffer<JSON_ARRAY_SIZE(2)> json;
 

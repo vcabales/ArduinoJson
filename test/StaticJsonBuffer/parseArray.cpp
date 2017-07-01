@@ -9,18 +9,12 @@
 #include <catch.hpp>
 
 TEST_CASE("StaticJsonBuffer::parseArray()") {
-  SECTION("TooSmallBufferForEmptyArray") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(0) - 1> bufferTooSmall;
-    char input[] = "[]";
-    JsonArray& arr = bufferTooSmall.parseArray(input);
-    REQUIRE_FALSE(arr.success());
-  }
-
   SECTION("BufferOfTheRightSizeForEmptyArray") {
     StaticJsonBuffer<JSON_ARRAY_SIZE(0)> bufferOfRightSize;
+    JsonArray& arr = bufferOfRightSize.createArray();
     char input[] = "[]";
-    JsonArray& arr = bufferOfRightSize.parseArray(input);
-    REQUIRE(arr.success());
+    bool success = parseJson(arr, input);
+    REQUIRE(success);
   }
 
   SECTION("TooSmallBufferForArrayWithOneValue") {
