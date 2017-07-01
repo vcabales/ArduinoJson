@@ -13,24 +13,15 @@ void setup() {
     // wait serial port initialization
   }
 
-  // Memory pool for JSON object tree.
+  // Declare a JSON object on the stack
   //
   // Inside the brackets, 200 is the size of the pool in bytes.
   // If the JSON object is more complex, you need to increase that value.
   // See https://bblanchon.github.io/ArduinoJson/assistant/
-  StaticJsonBuffer<200> jsonBuffer;
-
-  // StaticJsonBuffer allocates memory on the stack, it can be
-  // replaced by DynamicJsonBuffer which allocates in the heap.
   //
-  // DynamicJsonBuffer  jsonBuffer(200);
-
-  // Create the root of the object tree.
-  //
-  // It's a reference to the JsonObject, the actual bytes are inside the
-  // JsonBuffer with all the other nodes of the object tree.
-  // Memory is freed when jsonBuffer goes out of scope.
-  JsonObject& root = jsonBuffer.createObject();
+  // You can also store the object in the heap, all you need to do it to replace
+  // the type with DynamicJsonObject
+  StaticJsonObject<200> root;
 
   // Add values in the object
   //

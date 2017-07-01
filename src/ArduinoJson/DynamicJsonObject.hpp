@@ -17,6 +17,8 @@ class DynamicJsonObject : public JsonObject {
 
  public:
   DynamicJsonObject() : JsonObject(&_buffer) {}
+  DynamicJsonObject(size_t initalCapacity)
+      : JsonObject(&_buffer), _buffer(initalCapacity) {}
 
   DynamicJsonBuffer& buffer() {
     return _buffer;

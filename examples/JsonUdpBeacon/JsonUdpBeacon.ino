@@ -16,9 +16,7 @@ unsigned int remotePort = 8888;
 unsigned localPort = 8888;
 EthernetUDP udp;
 
-JsonObject& buildJson(JsonBuffer& jsonBuffer) {
-  JsonObject& root = jsonBuffer.createObject();
-
+void buildJson(JsonObject& root) {
   JsonArray& analogValues = root.createNestedArray("analog");
   for (int pin = 0; pin < 6; pin++) {
     int value = analogRead(pin);
@@ -51,7 +49,7 @@ void loop() {
 
   // Use https://bblanchon.github.io/ArduinoJson/assistant/ to
   // compute the right size for the buffer
-  StaticJsonBuffer<300> jsonBuffer;
-  JsonObject& json = buildJson(jsonBuffer);
+  StaticJsonObject<300> json;
+  buildJson(json);
   sendJson(json);
 }

@@ -144,11 +144,9 @@ bool readReponseContent(struct UserData* userData) {
       + MAX_CONTENT_SIZE;    // additional space for strings
 
   // Allocate a temporary memory pool
-  DynamicJsonBuffer jsonBuffer(BUFFER_SIZE);
+  DynamicJsonObject root(BUFFER_SIZE);
 
-  JsonObject& root = jsonBuffer.parseObject(client);
-
-  if (!root.success()) {
+  if (!parseJson(root, client)) {
     Serial.println("JSON parsing failed!");
     return false;
   }

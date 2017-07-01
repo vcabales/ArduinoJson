@@ -46,9 +46,9 @@ Quick start
 ```c++
 char json[] = "{\"sensor\":\"gps\",\"time\":1351824120,\"data\":[48.756080,2.302038]}";
 
-StaticJsonBuffer<200> jsonBuffer;
+StaticJsonObject<200> root;
 
-JsonObject& root = jsonBuffer.parseObject(json);
+parseJson(root, json);
 
 const char* sensor = root["sensor"];
 long time          = root["time"];
@@ -63,9 +63,7 @@ Use [ArduinoJson Assistant](https://bblanchon.github.io/ArduinoJson/assistant/) 
 #### Encoding / Generating
 
 ```c++
-StaticJsonBuffer<200> jsonBuffer;
-
-JsonObject& root = jsonBuffer.createObject();
+StaticJsonObject<200> root;
 root["sensor"] = "gps";
 root["time"] = 1351824120;
 

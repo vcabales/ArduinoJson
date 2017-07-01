@@ -27,9 +27,7 @@ bool readRequest(EthernetClient& client) {
   return false;
 }
 
-JsonObject& prepareResponse(JsonBuffer& jsonBuffer) {
-  JsonObject& root = jsonBuffer.createObject();
-
+void prepareResponse(JsonObject& root) {
   JsonArray& analogValues = root.createNestedArray("analog");
   for (int pin = 0; pin < 6; pin++) {
     int value = analogRead(pin);
@@ -41,8 +39,6 @@ JsonObject& prepareResponse(JsonBuffer& jsonBuffer) {
     int value = digitalRead(pin);
     digitalValues.add(value);
   }
-
-  return root;
 }
 
 void writeResponse(EthernetClient& client, JsonObject& json) {
@@ -66,8 +62,8 @@ void loop() {
     if (success) {
       // Use https://bblanchon.github.io/ArduinoJson/assistant/ to
       // compute the right size for the buffer
-      StaticJsonBuffer<500> jsonBuffer;
-      JsonObject& json = prepareResponse(jsonBuffer);
+      StaticJsonObject<500> json;
+      prepareResponse(json);
       writeResponse(client, json);
     }
     delay(1);
