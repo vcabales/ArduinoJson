@@ -44,12 +44,10 @@ TEST_CASE("StaticJsonBuffer::parseArray()") {
     REQUIRE(false == parseJson(arr, static_cast<char*>(0)));
   }
 
-  // TODO
-  /*  SECTION("Input is const char* NULL") {
-      StaticJsonBuffer<100> jb;
-      JsonArray& arr = jb.createArray();
-      REQUIRE(false == parseJson(arr, static_cast<const char*>(0)));
-    }*/
+  SECTION("Input is const char* NULL") {
+    StaticJsonArray<100> arr;
+    REQUIRE(false == parseJson(arr, static_cast<const char*>(0)));
+  }
 
   SECTION("CopyStringNotSpaces") {
     StaticJsonBuffer<100> jsonBuffer;

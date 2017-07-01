@@ -30,7 +30,7 @@ class List {
   // When buffer is NULL, the List is not able to grow and success() returns
   // false. This is used to identify bad memory allocations and parsing
   // failures.
-  explicit List(JsonBuffer *buf) : _buffer(buf), _firstNode(NULL) {}
+  explicit List(JsonBuffer *buffer) : _buffer(buffer), _firstNode(NULL) {}
 
   // Returns true if the object is valid
   // Would return false in the following situation:
@@ -85,10 +85,6 @@ class List {
       for (node_type *node = _firstNode; node; node = node->next)
         if (node->next == nodeToRemove) node->next = nodeToRemove->next;
     }
-  }
-
-  JsonBuffer *buffer() const {
-    return _buffer;
   }
 
  protected:
