@@ -18,8 +18,7 @@ static void check(JsonArray &array, std::string expected) {
 }
 
 TEST_CASE("JsonArray::printTo()") {
-  StaticJsonBuffer<JSON_ARRAY_SIZE(2)> jb;
-  JsonArray &array = jb.createArray();
+  StaticJsonArray<JSON_ARRAY_SIZE(2)> array;
 
   SECTION("Empty") {
     check(array, "[]");

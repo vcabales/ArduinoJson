@@ -11,8 +11,7 @@
 using namespace Catch::Matchers;
 
 TEST_CASE("JsonArray::set()") {
-  DynamicJsonBuffer _jsonBuffer;
-  JsonArray& _array = _jsonBuffer.createArray();
+  DynamicJsonArray _array;
   _array.add(0);
 
   SECTION("SizeIsUnchanged") {
@@ -49,7 +48,7 @@ TEST_CASE("JsonArray::set()") {
   }
 
   SECTION("nested array") {
-    JsonArray& arr = _jsonBuffer.createArray();
+    DynamicJsonArray arr;
 
     _array.set(0, arr);
 
@@ -59,7 +58,7 @@ TEST_CASE("JsonArray::set()") {
   }
 
   SECTION("nested object") {
-    JsonObject& obj = _jsonBuffer.createObject();
+    DynamicJsonObject obj;
 
     _array.set(0, obj);
 
@@ -69,7 +68,7 @@ TEST_CASE("JsonArray::set()") {
   }
 
   SECTION("array subscript") {
-    JsonArray& arr = _jsonBuffer.createArray();
+    DynamicJsonArray arr;
     arr.add("hello");
 
     _array.set(0, arr[0]);
@@ -78,7 +77,7 @@ TEST_CASE("JsonArray::set()") {
   }
 
   SECTION("object subscript") {
-    JsonObject& obj = _jsonBuffer.createObject();
+    DynamicJsonObject obj;
     obj["x"] = "hello";
 
     _array.set(0, obj["x"]);
