@@ -9,25 +9,24 @@
 #include <catch.hpp>
 
 TEST_CASE("JsonObject::containsKey()") {
-  DynamicJsonBuffer _jsonBuffer;
-  JsonObject& _object = _jsonBuffer.createObject();
+  DynamicJsonObject object;
 
   SECTION("ContainsKeyReturnsFalseForNonExistingKey") {
-    _object.set("hello", 42);
+    object.set("hello", 42);
 
-    REQUIRE(false == _object.containsKey("world"));
+    REQUIRE(false == object.containsKey("world"));
   }
 
   SECTION("ContainsKeyReturnsTrueForDefinedValue") {
-    _object.set("hello", 42);
+    object.set("hello", 42);
 
-    REQUIRE(true == _object.containsKey("hello"));
+    REQUIRE(true == object.containsKey("hello"));
   }
 
   SECTION("ContainsKeyReturnsFalseAfterRemove") {
-    _object.set("hello", 42);
-    _object.remove("hello");
+    object.set("hello", 42);
+    object.remove("hello");
 
-    REQUIRE(false == _object.containsKey("hello"));
+    REQUIRE(false == object.containsKey("hello"));
   }
 }

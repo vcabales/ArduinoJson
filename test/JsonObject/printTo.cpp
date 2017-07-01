@@ -9,104 +9,107 @@
 #include <catch.hpp>
 #include <string>
 
-void check(const JsonObject &obj, const std::string &expected) {
+void check(const JsonObject &object, const std::string &expected) {
   char actual[256];
-  size_t actualLen = obj.printTo(actual);
-  size_t measuredLen = obj.measureLength();
+  size_t actualLen = object.printTo(actual);
+  size_t measuredLen = object.measureLength();
 
   REQUIRE(expected == actual);
   REQUIRE(expected.size() == actualLen);
   REQUIRE(expected.size() == measuredLen);
 }
 TEST_CASE("JsonObject::printTo()") {
-  DynamicJsonBuffer _jsonBuffer;
-  JsonObject &obj = _jsonBuffer.createObject();
+  DynamicJsonObject object;
 
   SECTION("EmptyObject") {
-    check(obj, "{}");
+    check(object, "{}");
   }
 
   SECTION("TwoStrings") {
-    obj["key1"] = "value1";
-    obj.set("key2", "value2");
+    object["key1"] = "value1";
+    object.set("key2", "value2");
 
-    check(obj, "{\"key1\":\"value1\",\"key2\":\"value2\"}");
+    check(object, "{\"key1\":\"value1\",\"key2\":\"value2\"}");
   }
 
   SECTION("RemoveFirst") {
-    obj["key1"] = "value1";
-    obj["key2"] = "value2";
-    obj.remove("key1");
+    object["key1"] = "value1";
+    object["key2"] = "value2";
+    object.remove("key1");
 
-    check(obj, "{\"key2\":\"value2\"}");
+    check(object, "{\"key2\":\"value2\"}");
   }
 
   SECTION("RemoveLast") {
-    obj["key1"] = "value1";
-    obj["key2"] = "value2";
-    obj.remove("key2");
+    object["key1"] = "value1";
+    object["key2"] = "value2";
+    object.remove("key2");
 
-    check(obj, "{\"key1\":\"value1\"}");
+    check(object, "{\"key1\":\"value1\"}");
   }
 
   SECTION("RemoveUnexistingKey") {
-    obj["key1"] = "value1";
-    obj["key2"] = "value2";
-    obj.remove("key3");
+    object["key1"] = "value1";
+    object["key2"] = "value2";
+    object.remove("key3");
 
-    check(obj, "{\"key1\":\"value1\",\"key2\":\"value2\"}");
+    check(object, "{\"key1\":\"value1\",\"key2\":\"value2\"}");
   }
 
   SECTION("ReplaceExistingKey") {
-    obj["key"] = "value1";
-    obj["key"] = "value2";
+    object["key"] = "value1";
+    object["key"] = "value2";
 
-    check(obj, "{\"key\":\"value2\"}");
+    check(object, "{\"key\":\"value2\"}");
   }
 
   SECTION("TwoIntegers") {
-    obj["a"] = 1;
-    obj.set("b", 2);
-    check(obj, "{\"a\":1,\"b\":2}");
+    object["a"] = 1;
+    object.set("b", 2);
+    check(object, "{\"a\":1,\"b\":2}");
   }
 
   SECTION("RawJson") {
-    obj["a"] = RawJson("[1,2]");
-    obj.set("b", RawJson("[4,5]"));
-    check(obj, "{\"a\":[1,2],\"b\":[4,5]}");
+    object["a"] = RawJson("[1,2]");
+    object.set("b", RawJson("[4,5]"));
+    check(object, "{\"a\":[1,2],\"b\":[4,5]}");
   }
 
   SECTION("Two doubles") {
-    obj["a"] = 12.34;
-    obj.set("b", 56.78);
-    check(obj, "{\"a\":12.34,\"b\":56.78}");
+    object["a"] = 12.34;
+    object.set("b", 56.78);
+    check(object, "{\"a\":12.34,\"b\":56.78}");
   }
 
   SECTION("TwoNull") {
-    obj["a"] = static_cast<char *>(0);
-    obj.set("b", static_cast<char *>(0));
-    check(obj, "{\"a\":null,\"b\":null}");
+    object["a"] = static_cast<char *>(0);
+    object.set("b", static_cast<char *>(0));
+    check(object, "{\"a\":null,\"b\":null}");
   }
 
   SECTION("TwoBooleans") {
-    obj["a"] = true;
-    obj.set("b", false);
-    check(obj, "{\"a\":true,\"b\":false}");
+    object["a"] = true;
+    object.set("b", false);
+    check(object, "{\"a\":true,\"b\":false}");
   }
 
   SECTION("ThreeNestedArrays") {
-    obj.createNestedArray("a");
-    obj["b"] = _jsonBuffer.createArray();
-    obj.set("c", _jsonBuffer.createArray());
+    DynamicJsonArray arr;
 
-    check(obj, "{\"a\":[],\"b\":[],\"c\":[]}");
+    object.createNestedArray("a");
+    object["b"] = arr;
+    object.set("c", arr);
+
+    check(object, "{\"a\":[],\"b\":[],\"c\":[]}");
   }
 
   SECTION("ThreeNestedObjects") {
-    obj.createNestedObject("a");
-    obj["b"] = _jsonBuffer.createObject();
-    obj.set("c", _jsonBuffer.createObject());
+    DynamicJsonObject obj;
 
-    check(obj, "{\"a\":{},\"b\":{},\"c\":{}}");
+    object.createNestedObject("a");
+    object["b"] = obj;
+    object.set("c", obj);
+
+    check(object, "{\"a\":{},\"b\":{},\"c\":{}}");
   }
 }

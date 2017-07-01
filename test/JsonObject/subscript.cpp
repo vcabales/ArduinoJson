@@ -9,116 +9,115 @@
 #include <catch.hpp>
 
 TEST_CASE("JsonObject::operator[]") {
-  DynamicJsonBuffer _jsonBuffer;
-  JsonObject& _object = _jsonBuffer.createObject();
+  DynamicJsonObject object;
 
   SECTION("SizeIncreased_WhenValuesAreAdded") {
-    _object["hello"] = 1;
-    REQUIRE(1 == _object.size());
+    object["hello"] = 1;
+    REQUIRE(1 == object.size());
   }
 
   SECTION("SizeUntouched_WhenSameValueIsAdded") {
-    _object["hello"] = 1;
-    _object["hello"] = 2;
-    REQUIRE(1 == _object.size());
+    object["hello"] = 1;
+    object["hello"] = 2;
+    REQUIRE(1 == object.size());
   }
 
   SECTION("int") {
-    _object["hello"] = 123;
+    object["hello"] = 123;
 
-    REQUIRE(123 == _object["hello"].as<int>());
-    REQUIRE(true == _object["hello"].is<int>());
-    REQUIRE(false == _object["hello"].is<bool>());
+    REQUIRE(123 == object["hello"].as<int>());
+    REQUIRE(true == object["hello"].is<int>());
+    REQUIRE(false == object["hello"].is<bool>());
   }
 
   SECTION("volatile int") {  // issue #415
     volatile int i = 123;
-    _object["hello"] = i;
+    object["hello"] = i;
 
-    REQUIRE(123 == _object["hello"].as<int>());
-    REQUIRE(true == _object["hello"].is<int>());
-    REQUIRE(false == _object["hello"].is<bool>());
+    REQUIRE(123 == object["hello"].as<int>());
+    REQUIRE(true == object["hello"].is<int>());
+    REQUIRE(false == object["hello"].is<bool>());
   }
 
   SECTION("double") {
-    _object["hello"] = 123.45;
+    object["hello"] = 123.45;
 
-    REQUIRE(true == _object["hello"].is<double>());
-    REQUIRE(false == _object["hello"].is<long>());
-    REQUIRE(123.45 == _object["hello"].as<double>());
+    REQUIRE(true == object["hello"].is<double>());
+    REQUIRE(false == object["hello"].is<long>());
+    REQUIRE(123.45 == object["hello"].as<double>());
   }
 
   SECTION("bool") {
-    _object["hello"] = true;
+    object["hello"] = true;
 
-    REQUIRE(true == _object["hello"].is<bool>());
-    REQUIRE(false == _object["hello"].is<long>());
-    REQUIRE(true == _object["hello"].as<bool>());
+    REQUIRE(true == object["hello"].is<bool>());
+    REQUIRE(false == object["hello"].is<long>());
+    REQUIRE(true == object["hello"].as<bool>());
   }
 
   SECTION("const char*") {
-    _object["hello"] = "h3110";
+    object["hello"] = "h3110";
 
-    REQUIRE(true == _object["hello"].is<const char*>());
-    REQUIRE(false == _object["hello"].is<long>());
-    REQUIRE(std::string("h3110") == _object["hello"].as<const char*>());
+    REQUIRE(true == object["hello"].is<const char*>());
+    REQUIRE(false == object["hello"].is<long>());
+    REQUIRE(std::string("h3110") == object["hello"].as<const char*>());
     REQUIRE(std::string("h3110") ==
-            _object["hello"].as<char*>());  // <- short hand
+            object["hello"].as<char*>());  // <- short hand
   }
 
   SECTION("array") {
-    JsonArray& arr = _jsonBuffer.createArray();
+    DynamicJsonArray arr;
 
-    _object["hello"] = arr;
+    object["hello"] = arr;
 
-    REQUIRE(&arr == &_object["hello"].as<JsonArray&>());
-    REQUIRE(&arr == &_object["hello"].as<JsonArray>());  // <- short hand
-    REQUIRE(&arr == &_object["hello"].as<const JsonArray&>());
-    REQUIRE(&arr == &_object["hello"].as<const JsonArray>());  // <- short hand
-    REQUIRE(true == _object["hello"].is<JsonArray&>());
-    REQUIRE(true == _object["hello"].is<JsonArray>());
-    REQUIRE(true == _object["hello"].is<const JsonArray&>());
-    REQUIRE(true == _object["hello"].is<const JsonArray>());
-    REQUIRE(false == _object["hello"].is<JsonObject&>());
+    REQUIRE(&arr == &object["hello"].as<JsonArray&>());
+    REQUIRE(&arr == &object["hello"].as<JsonArray>());  // <- short hand
+    REQUIRE(&arr == &object["hello"].as<const JsonArray&>());
+    REQUIRE(&arr == &object["hello"].as<const JsonArray>());  // <- short hand
+    REQUIRE(true == object["hello"].is<JsonArray&>());
+    REQUIRE(true == object["hello"].is<JsonArray>());
+    REQUIRE(true == object["hello"].is<const JsonArray&>());
+    REQUIRE(true == object["hello"].is<const JsonArray>());
+    REQUIRE(false == object["hello"].is<JsonObject&>());
   }
 
   SECTION("object") {
-    JsonObject& obj = _jsonBuffer.createObject();
+    DynamicJsonObject obj;
 
-    _object["hello"] = obj;
+    object["hello"] = obj;
 
-    REQUIRE(&obj == &_object["hello"].as<JsonObject&>());
-    REQUIRE(&obj == &_object["hello"].as<JsonObject>());  // <- short hand
-    REQUIRE(&obj == &_object["hello"].as<const JsonObject&>());
-    REQUIRE(&obj == &_object["hello"].as<const JsonObject>());  // <- short hand
-    REQUIRE(true == _object["hello"].is<JsonObject&>());
-    REQUIRE(true == _object["hello"].is<JsonObject>());
-    REQUIRE(true == _object["hello"].is<const JsonObject&>());
-    REQUIRE(true == _object["hello"].is<const JsonObject>());
-    REQUIRE(false == _object["hello"].is<JsonArray&>());
+    REQUIRE(&obj == &object["hello"].as<JsonObject&>());
+    REQUIRE(&obj == &object["hello"].as<JsonObject>());  // <- short hand
+    REQUIRE(&obj == &object["hello"].as<const JsonObject&>());
+    REQUIRE(&obj == &object["hello"].as<const JsonObject>());  // <- short hand
+    REQUIRE(true == object["hello"].is<JsonObject&>());
+    REQUIRE(true == object["hello"].is<JsonObject>());
+    REQUIRE(true == object["hello"].is<const JsonObject&>());
+    REQUIRE(true == object["hello"].is<const JsonObject>());
+    REQUIRE(false == object["hello"].is<JsonArray&>());
   }
 
   SECTION("array subscript") {
-    JsonArray& arr = _jsonBuffer.createArray();
+    DynamicJsonArray arr;
     arr.add(42);
 
-    _object["a"] = arr[0];
+    object["a"] = arr[0];
 
-    REQUIRE(42 == _object["a"]);
+    REQUIRE(42 == object["a"]);
   }
 
   SECTION("object subscript") {
-    JsonObject& obj = _jsonBuffer.createObject();
+    DynamicJsonObject obj;
     obj.set("x", 42);
 
-    _object["a"] = obj["x"];
+    object["a"] = obj["x"];
 
-    REQUIRE(42 == _object["a"]);
+    REQUIRE(42 == object["a"]);
   }
 
   SECTION("KeyAsCharArray") {  // issue #423
     char key[] = "hello";
-    _object[key] = 42;
-    REQUIRE(42 == _object[key]);
+    object[key] = 42;
+    REQUIRE(42 == object[key]);
   }
 }

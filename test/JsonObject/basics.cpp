@@ -9,14 +9,13 @@
 #include <catch.hpp>
 
 TEST_CASE("JsonObject basics") {
-  DynamicJsonBuffer _jsonBuffer;
-  JsonObject& _object = _jsonBuffer.createObject();
+  DynamicJsonObject object;
 
   SECTION("InitialSizeIsZero") {
-    REQUIRE(0 == _object.size());
+    REQUIRE(0 == object.size());
   }
 
   SECTION("SuccessIsTrue") {
-    REQUIRE(_object.success());
+    REQUIRE(object.success());
   }
 }

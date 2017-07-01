@@ -11,12 +11,11 @@
 using namespace Catch::Matchers;
 
 TEST_CASE("JsonObject::get()") {
-  DynamicJsonBuffer jb;
-  JsonObject& obj = jb.createObject();
+  DynamicJsonObject object;
 
   SECTION("GetConstCharPointer_GivenStringLiteral") {
-    obj.set("hello", "world");
-    const char* value = obj.get<const char*>("hello");
+    object.set("hello", "world");
+    const char* value = object.get<const char*>("hello");
     REQUIRE_THAT(value, Equals("world"));
   }
 }
