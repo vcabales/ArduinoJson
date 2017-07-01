@@ -8,6 +8,7 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
+// TODO: move
 TEST_CASE("StaticJsonBuffer::parseArray()") {
   SECTION("StaticJsonArray of the right size of 0 elements") {
     StaticJsonArray<JSON_ARRAY_SIZE(0)> arr;
@@ -49,10 +50,10 @@ TEST_CASE("StaticJsonBuffer::parseArray()") {
     REQUIRE(false == parseJson(arr, static_cast<const char*>(0)));
   }
 
-  SECTION("CopyStringNotSpaces") {
-    StaticJsonBuffer<100> jsonBuffer;
-    jsonBuffer.parseArray("  [ \"1234567\" ] ");
-    REQUIRE(JSON_ARRAY_SIZE(1) + sizeof("1234567") == jsonBuffer.size());
+  SECTION("Copy string not spaces") {
+    StaticJsonArray<100> arr;
+    parseJson(arr, "  [ \"1234567\" ] ");
+    REQUIRE(JSON_ARRAY_SIZE(1) + sizeof("1234567") == arr.buffer().size());
     // note we use a string of 8 bytes to be sure that the StaticJsonBuffer
     // will not insert bytes to enforce alignement
   }

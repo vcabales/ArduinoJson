@@ -22,8 +22,8 @@ class StaticJsonArray : public JsonArray {
     _buffer.alloc(sizeof(JsonArray));
   }
 
-  StaticJsonBufferBase* buffer() {
-    return &_buffer;
+  StaticJsonBufferBase& buffer() {
+    return _buffer;
   }
 };
 }
