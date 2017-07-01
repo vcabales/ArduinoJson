@@ -28,8 +28,6 @@ void buildJson(JsonObject& root) {
     int value = digitalRead(pin);
     digitalValues.add(value);
   }
-
-  return root;
 }
 
 void sendJson(JsonObject& json) {
