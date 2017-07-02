@@ -94,15 +94,13 @@ TEST_CASE("JsonObject::set()") {
   }
 
   SECTION("ShouldReturnTrue_WhenAllocationSucceeds") {
-    StaticJsonBuffer<JSON_OBJECT_SIZE(1) + 15> jsonBuffer;
-    JsonObject& obj = jsonBuffer.createObject();
+    StaticJsonObject<JSON_OBJECT_SIZE(1) + 15> obj;
 
     REQUIRE(true == obj.set(std::string("hello"), std::string("world")));
   }
 
   SECTION("ShouldReturnFalse_WhenAllocationFails") {
-    StaticJsonBuffer<JSON_OBJECT_SIZE(1) + 10> jsonBuffer;
-    JsonObject& obj = jsonBuffer.createObject();
+    StaticJsonObject<JSON_OBJECT_SIZE(1) + 10> obj;
 
     REQUIRE(false == obj.set(std::string("hello"), std::string("world")));
   }
