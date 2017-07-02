@@ -28,9 +28,6 @@ class JsonParser {
         _writer(writer),
         _nestingLimit(nestingLimit) {}
 
-  JsonArray &parseArray();
-  JsonObject &parseObject();
-
   JsonVariant parseVariant() {
     JsonVariant result;
     parseAnythingTo(&result);

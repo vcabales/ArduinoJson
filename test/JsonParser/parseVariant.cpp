@@ -69,6 +69,7 @@ TEST_CASE("parseJson(JsonVariant&)") {
     REQUIRE(variant == false);
   }
 
+  // TODO
   SECTION("OpenBrace") {
     JsonVariant variant = jb.parse("{");
     REQUIRE_FALSE(variant.success());
