@@ -8,7 +8,7 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
-TEST_CASE("JsonBuffer nested objects") {
+TEST_CASE("Nested objects and arrays") {
   SECTION("ArrayNestedInObject") {
     DynamicJsonObject object;
     char jsonString[] = " { \"ab\" : [ 1 , 2 ] , \"cd\" : [ 3 , 4 ] } ";

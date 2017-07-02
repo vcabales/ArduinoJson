@@ -5,13 +5,13 @@
 # https://bblanchon.github.io/ArduinoJson/
 # If you like this project, please add a star!
 
-add_executable(JsonBufferTests
+add_executable(JsonParserTests
 	nested.cpp
 	nestingLimit.cpp
-	parse.cpp
 	parseArray.cpp
 	parseObject.cpp
+	parseVariant.cpp
 )
 
-target_link_libraries(JsonBufferTests catch)
-add_test(JsonBuffer JsonBufferTests)
+target_link_libraries(JsonParserTests catch)
+add_test(JsonParser JsonParserTests)

@@ -10,7 +10,7 @@
 
 using namespace Catch::Matchers;
 
-TEST_CASE("JsonBuffer::parse()") {
+TEST_CASE("parseJson(JsonVariant&)") {
   DynamicJsonBuffer jb;
 
   SECTION("EmptyObject") {

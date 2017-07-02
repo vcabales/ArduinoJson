@@ -8,7 +8,7 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
-TEST_CASE("JsonBuffer::parseArray()") {
+TEST_CASE("parseJson(JsonArray&)") {
   DynamicJsonBuffer jb;
 
   SECTION("EmptyArray") {

@@ -18,7 +18,7 @@ bool tryParseObject(const char *json, uint8_t nestingLimit) {
   return parseJson(obj, json, nestingLimit);
 }
 
-TEST_CASE("JsonParser nestingLimit") {
+TEST_CASE("Nesting limit") {
   SECTION("ParseArrayWithNestingLimit0") {
     REQUIRE(true == tryParseArray("[]", 0));
     REQUIRE(false == tryParseArray("[[]]", 0));
