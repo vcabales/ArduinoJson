@@ -1,6 +1,13 @@
 ArduinoJson: change log
 =======================
 
+HEAD
+----
+
+* Added `DynamicJsonArray`, `DynamicJsonObject`, `StaticJsonArray` etc.
+* Added `parseJson()`
+* Removed `JsonBuffer::parserArray()` and `parseObject()`
+
 v5.11.0
 -------
 
