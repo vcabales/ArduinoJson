@@ -8,24 +8,27 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
-TEST_CASE("DynamicJsonBuffer::createArray()") {
-  DynamicJsonBuffer jsonBuffer;
-  JsonArray &array = jsonBuffer.createArray();
+size_t getSize(DynamicJsonArray& array) {
+  return array.buffer().size() + sizeof(JsonArray);
+}
 
-  SECTION("GrowsWithArray") {
-    REQUIRE(JSON_ARRAY_SIZE(0) == jsonBuffer.size());
+TEST_CASE("DynamicJsonArray") {
+  DynamicJsonArray array;
+
+  SECTION("growths when values are added") {
+    REQUIRE(JSON_ARRAY_SIZE(0) == getSize(array));
 
     array.add("hello");
-    REQUIRE(JSON_ARRAY_SIZE(1) == jsonBuffer.size());
+    REQUIRE(JSON_ARRAY_SIZE(1) == getSize(array));
 
     array.add("world");
-    REQUIRE(JSON_ARRAY_SIZE(2) == jsonBuffer.size());
+    REQUIRE(JSON_ARRAY_SIZE(2) == getSize(array));
   }
 
   SECTION("CanAdd1000Values") {
     for (size_t i = 1; i <= 1000; i++) {
       array.add("hello");
-      REQUIRE(array.size() == i);
     }
+    REQUIRE(1000 == array.size());
   }
 }
