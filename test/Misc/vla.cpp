@@ -248,7 +248,7 @@ TEST_CASE("Variable Length Array") {
       obj.createNestedArray(vla);
     }
 
-    SECTION("createObject(char[n])") {
+    SECTION("createNestedObject(char[n])") {
       int i = 16;
       char vla[i];
       strcpy(vla, "hello");

@@ -9,10 +9,8 @@
 #include <catch.hpp>
 
 TEST_CASE("JsonVariant::operator[]") {
-  DynamicJsonBuffer _jsonBuffer;
-
   SECTION("Array") {
-    JsonArray &array = _jsonBuffer.createArray();
+    DynamicJsonArray array;
     array.add("element at index 0");
     array.add("element at index 1");
 
@@ -29,7 +27,7 @@ TEST_CASE("JsonVariant::operator[]") {
   }
 
   SECTION("Object") {
-    JsonObject &object = _jsonBuffer.createObject();
+    DynamicJsonObject object;
     object["a"] = "element at key \"a\"";
     object["b"] = "element at key \"b\"";
 
@@ -57,7 +55,8 @@ TEST_CASE("JsonVariant::operator[]") {
   }
 
   SECTION("ObjectSetValue") {
-    JsonVariant var = _jsonBuffer.createObject();
+    DynamicJsonObject object;
+    JsonVariant var = object;
     var["hello"] = "world";
     REQUIRE(1 == var.size());
     REQUIRE(std::string("world") == var["hello"]);
