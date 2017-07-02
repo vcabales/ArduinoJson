@@ -64,14 +64,20 @@ TEST_CASE("JsonVariant::operator[]") {
   }
 
   SECTION("ArraySetValue") {
-    JsonVariant var = _jsonBuffer.parseArray("[\"hello\"]");
+    DynamicJsonArray array;
+    array.add("hello");
+
+    JsonVariant var = array;
     var[0] = "world";
     REQUIRE(1 == var.size());
     REQUIRE(std::string("world") == var[0]);
   }
 
   SECTION("NestedObjectSetValue") {
-    JsonVariant var = _jsonBuffer.parseArray("[{}]");
+    DynamicJsonArray array;
+    array.createNestedObject();
+
+    JsonVariant var = array;
     var[0]["hello"] = "world";
     REQUIRE(1 == var.size());
     REQUIRE(1 == var[0].size());
