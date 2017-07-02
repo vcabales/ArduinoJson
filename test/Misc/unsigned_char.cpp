@@ -142,7 +142,7 @@ TEST_CASE("unsigned char string") {
 
       unsigned char key[] = "hello";
 
-      REQUIRE(std::string("world") == obj[key]);
+      REQUIRE(std::string("world") == cobj[key]);
     }
 #endif
 
@@ -152,7 +152,7 @@ TEST_CASE("unsigned char string") {
 
       unsigned char key[] = "hello";
 
-      REQUIRE(std::string("world") == obj.get<char*>(key));
+      REQUIRE(std::string("world") == cobj.get<char*>(key));
     }
 
     SECTION("set(unsigned char[], const char*)") {
