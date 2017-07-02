@@ -212,14 +212,10 @@ TEST_CASE("JsonVariant comparisons") {
   }
 
   SECTION("VariantsOfDifferentTypes") {
-    DynamicJsonBuffer jsonBuffer;
+    DynamicJsonArray array;
+    DynamicJsonObject object;
     JsonVariant variants[] = {
-        true,
-        42,
-        666.667,
-        "hello",
-        jsonBuffer.createArray(),
-        jsonBuffer.createObject(),
+        true, 42, 666.667, "hello", array, object,
     };
     size_t n = sizeof(variants) / sizeof(variants[0]);
 

@@ -9,7 +9,6 @@
 #include <catch.hpp>
 
 TEST_CASE("JsonVariant copy") {
-  DynamicJsonBuffer _jsonBuffer;
   JsonVariant _variant1;
   JsonVariant _variant2;
 
@@ -46,7 +45,7 @@ TEST_CASE("JsonVariant copy") {
   }
 
   SECTION("ObjectsAreCopiedByReference") {
-    JsonObject &object = _jsonBuffer.createObject();
+    DynamicJsonObject object;
 
     _variant1 = object;
 
@@ -56,7 +55,7 @@ TEST_CASE("JsonVariant copy") {
   }
 
   SECTION("ArraysAreCopiedByReference") {
-    JsonArray &array = _jsonBuffer.createArray();
+    DynamicJsonArray array;
 
     _variant1 = array;
 
