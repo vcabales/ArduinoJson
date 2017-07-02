@@ -151,4 +151,12 @@ TEST_CASE("parseJson(JsonObject&)") {
     bool result = parseJson(obj, "null:\"value\"}");
     REQUIRE(result == false);
   }
+
+  SECTION("Input is char* NULL") {
+    REQUIRE(false == parseJson(obj, static_cast<char*>(0)));
+  }
+
+  SECTION("Input is const char* NULL") {
+    REQUIRE(false == parseJson(obj, static_cast<const char*>(0)));
+  }
 }

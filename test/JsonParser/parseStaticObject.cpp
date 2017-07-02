@@ -7,7 +7,8 @@
 
 #include <ArduinoJson.h>
 #include <catch.hpp>
-TEST_CASE("StaticJsonBuffer::parseObject()") {
+
+TEST_CASE("parseJson(StaticJsonObject&)") {
   SECTION("StaticJsonObject of the right size of 0 elements") {
     StaticJsonObject<JSON_OBJECT_SIZE(0)> obj;
     char input[] = "{}";
@@ -36,15 +37,5 @@ TEST_CASE("StaticJsonBuffer::parseObject()") {
     StaticJsonObject<JSON_OBJECT_SIZE(1) + JSON_ARRAY_SIZE(0)> obj;
     char input[] = "{\"a\":[]}";
     REQUIRE(true == parseJson(obj, input));
-  }
-
-  SECTION("Input is char* NULL") {
-    StaticJsonObject<100> obj;
-    REQUIRE(false == parseJson(obj, static_cast<char*>(0)));
-  }
-
-  SECTION("Input is const char* NULL") {
-    StaticJsonObject<100> obj;
-    REQUIRE(false == parseJson(obj, static_cast<const char*>(0)));
   }
 }

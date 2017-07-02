@@ -10,6 +10,8 @@ add_executable(JsonParserTests
 	nestingLimit.cpp
 	parseArray.cpp
 	parseObject.cpp
+	parseStaticArray.cpp
+	parseStaticObject.cpp
 	parseVariant.cpp
 )
 

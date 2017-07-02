@@ -8,8 +8,7 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
-// TODO: move
-TEST_CASE("StaticJsonBuffer::parseArray()") {
+TEST_CASE("parseJson(StaticJsonArray&)") {
   SECTION("StaticJsonArray of the right size of 0 elements") {
     StaticJsonArray<JSON_ARRAY_SIZE(0)> arr;
     char input[] = "[]";
