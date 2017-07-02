@@ -182,9 +182,8 @@ TEST_CASE("JsonVariant comparisons") {
   }
 
   SECTION("ArrayInVariant") {
-    DynamicJsonBuffer jsonBuffer;
-    JsonArray& array1 = jsonBuffer.createArray();
-    JsonArray& array2 = jsonBuffer.createArray();
+    DynamicJsonArray array1;
+    DynamicJsonArray array2;
 
     JsonVariant variant1 = array1;
     JsonVariant variant2 = array1;
@@ -198,9 +197,8 @@ TEST_CASE("JsonVariant comparisons") {
   }
 
   SECTION("ObjectInVariant") {
-    DynamicJsonBuffer jsonBuffer;
-    JsonObject& obj1 = jsonBuffer.createObject();
-    JsonObject& obj2 = jsonBuffer.createObject();
+    DynamicJsonObject obj1;
+    DynamicJsonObject obj2;
 
     JsonVariant variant1 = obj1;
     JsonVariant variant2 = obj1;
