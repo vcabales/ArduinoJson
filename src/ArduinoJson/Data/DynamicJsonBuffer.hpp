@@ -22,6 +22,8 @@
 #endif
 
 namespace ArduinoJson {
+namespace Internals {
+
 class DefaultAllocator {
  public:
   void* allocate(size_t size) {
@@ -170,4 +172,5 @@ class DynamicJsonBufferBase : public JsonBuffer {
 // You are strongly encouraged to consider using StaticJsonBuffer which is much
 // more suitable for embedded systems.
 typedef DynamicJsonBufferBase<DefaultAllocator> DynamicJsonBuffer;
+}
 }

@@ -8,12 +8,13 @@
 #pragma once
 
 #include "Data/StaticJsonBuffer.hpp"
+#include "JsonArray.hpp"
 
 namespace ArduinoJson {
 
 template <size_t CAPACITY>
 class StaticJsonArray : public JsonArray {
-  StaticJsonBuffer<CAPACITY - sizeof(JsonArray)> _buffer;
+  Internals::StaticJsonBuffer<CAPACITY - sizeof(JsonArray)> _buffer;
 
  public:
   StaticJsonArray() : JsonArray(&_buffer) {}
@@ -22,7 +23,7 @@ class StaticJsonArray : public JsonArray {
     return _buffer.size() + sizeof(JsonArray);
   }
 
-  StaticJsonBufferBase& buffer() {
+  Internals::StaticJsonBufferBase& buffer() {
     return _buffer;
   }
 };

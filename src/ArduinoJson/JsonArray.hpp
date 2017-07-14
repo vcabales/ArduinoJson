@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "Data/JsonBuffer.hpp"
 #include "Data/JsonBufferAllocated.hpp"
 #include "Data/List.hpp"
 #include "Data/ReferenceType.hpp"
@@ -28,7 +29,6 @@ namespace ArduinoJson {
 
 // Forward declarations
 class JsonObject;
-class JsonBuffer;
 class JsonArraySubscript;
 
 // An array of JsonVariant.
@@ -41,7 +41,7 @@ class JsonArray : public Internals::JsonPrintable<JsonArray>,
                   public Internals::JsonBufferAllocated {
  public:
   // Create an empty JsonArray attached to the specified JsonBuffer.
-  explicit JsonArray(JsonBuffer *buffer) throw()
+  explicit JsonArray(Internals::JsonBuffer *buffer) throw()
       : Internals::List<JsonVariant>(buffer) {}
 
   // Gets the value at the specified index

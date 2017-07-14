@@ -8,6 +8,8 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
+using namespace ArduinoJson::Internals;
+
 static void eraseString(std::string &str) {
   char *p = const_cast<char *>(str.c_str());
   while (*p) *p++ = '*';

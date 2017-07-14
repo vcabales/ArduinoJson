@@ -14,10 +14,10 @@ namespace ArduinoJson {
 
 template <size_t CAPACITY>
 class StaticJsonVariant : public JsonVariant {
-  StaticJsonBuffer<CAPACITY> _buffer;
+  Internals::StaticJsonBuffer<CAPACITY> _buffer;
 
  public:
-  StaticJsonBufferBase& buffer() {
+  Internals::StaticJsonBufferBase& buffer() {
     return _buffer;
   }
 };

@@ -8,6 +8,8 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
+using namespace ArduinoJson::Internals;
+
 TEST_CASE("DynamicJsonBuffer::startString()") {
   SECTION("WorksWhenBufferIsBigEnough") {
     DynamicJsonBuffer jsonBuffer(6);

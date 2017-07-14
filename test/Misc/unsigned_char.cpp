@@ -12,6 +12,8 @@
 #define CONFLICTS_WITH_BUILTIN_OPERATOR
 #endif
 
+using namespace ArduinoJson::Internals;
+
 TEST_CASE("unsigned char string") {
   SECTION("JsonBuffer::strdup()") {
     unsigned char value[] = "world";

@@ -28,12 +28,9 @@
 #endif
 
 namespace ArduinoJson {
-class JsonArray;
-class JsonObject;
-
-// Entry point for using the library.
-//
-// Handle the memory management (done in derived classes) and calls the parser.
+namespace Internals {
+// Handles the memory management (done in derived classes) and calls the
+// parser.
 // This abstract class is implemented by StaticJsonBuffer which implements a
 // fixed memory allocation.
 class JsonBuffer : Internals::NonCopyable {
@@ -76,6 +73,7 @@ class JsonBuffer : Internals::NonCopyable {
 #endif
   }
 };
+}
 }
 
 #if defined(__clang__)

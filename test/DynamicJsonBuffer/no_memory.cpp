@@ -8,6 +8,8 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
+using namespace ArduinoJson::Internals;
+
 struct NoMemoryAllocator {
   void* allocate(size_t) {
     return NULL;

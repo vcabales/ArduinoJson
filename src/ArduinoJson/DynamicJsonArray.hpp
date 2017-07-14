@@ -13,12 +13,12 @@
 namespace ArduinoJson {
 
 class DynamicJsonArray : public JsonArray {
-  DynamicJsonBuffer _buffer;
+  Internals::DynamicJsonBuffer _buffer;
 
  public:
   DynamicJsonArray() : JsonArray(&_buffer) {}
 
-  DynamicJsonBuffer& buffer() {
+  Internals::DynamicJsonBuffer& buffer() {
     return _buffer;
   }
 };

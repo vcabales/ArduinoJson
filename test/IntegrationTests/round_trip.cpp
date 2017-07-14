@@ -8,6 +8,8 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
+using namespace ArduinoJson::Internals;
+
 void check(std::string originalJson) {
   DynamicJsonBuffer jb;
 

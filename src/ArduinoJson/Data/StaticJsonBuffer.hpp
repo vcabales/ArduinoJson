@@ -21,7 +21,7 @@
 #endif
 
 namespace ArduinoJson {
-
+namespace Internals {
 class StaticJsonBufferBase : public JsonBuffer {
  public:
   class String {
@@ -113,6 +113,7 @@ class StaticJsonBuffer : public StaticJsonBufferBase {
  private:
   char _buffer[TypeTraits::Max<1, CAPACITY>::value];
 };
+}
 }
 
 #if defined(__clang__)

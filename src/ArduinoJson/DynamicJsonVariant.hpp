@@ -13,10 +13,10 @@
 namespace ArduinoJson {
 
 class DynamicJsonVariant : public JsonVariant {
-  DynamicJsonBuffer _buffer;
+  Internals::DynamicJsonBuffer _buffer;
 
  public:
-  DynamicJsonBuffer& buffer() {
+  Internals::DynamicJsonBuffer& buffer() {
     return _buffer;
   }
 };

@@ -8,6 +8,8 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
+using namespace ArduinoJson::Internals;
+
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wvla-extension"
 #define CONFLICTS_WITH_BUILTIN_OPERATOR

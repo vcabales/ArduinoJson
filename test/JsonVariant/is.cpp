@@ -72,8 +72,6 @@ void checkIsString(JsonVariant var) {
 }
 
 TEST_CASE("JsonVariant::is()") {
-  DynamicJsonBuffer jsonBuffer;
-
   SECTION("JsonArray") {
     DynamicJsonArray array;
     checkIsArray(array);

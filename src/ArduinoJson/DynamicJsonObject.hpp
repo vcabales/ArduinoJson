@@ -13,14 +13,14 @@
 namespace ArduinoJson {
 
 class DynamicJsonObject : public JsonObject {
-  DynamicJsonBuffer _buffer;
+  Internals::DynamicJsonBuffer _buffer;
 
  public:
   DynamicJsonObject() : JsonObject(&_buffer) {}
   DynamicJsonObject(size_t initalCapacity)
       : JsonObject(&_buffer), _buffer(initalCapacity) {}
 
-  DynamicJsonBuffer& buffer() {
+  Internals::DynamicJsonBuffer& buffer() {
     return _buffer;
   }
 };
