@@ -9,9 +9,11 @@
 
 #include "ArduinoJson/DynamicJsonArray.hpp"
 #include "ArduinoJson/DynamicJsonObject.hpp"
+#include "ArduinoJson/DynamicJsonVariant.hpp"
 #include "ArduinoJson/JsonVariantComparisons.hpp"
 #include "ArduinoJson/StaticJsonArray.hpp"
 #include "ArduinoJson/StaticJsonObject.hpp"
+#include "ArduinoJson/StaticJsonVariant.hpp"
 #include "ArduinoJson/parseJson.hpp"
 
 #include "ArduinoJson/Deserialization/JsonParserImpl.hpp"

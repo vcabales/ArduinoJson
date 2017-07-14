@@ -100,8 +100,8 @@ TEST_CASE("JsonVariant comparisons") {
   }
 
   SECTION("StringLiteral") {
-    DynamicJsonBuffer jsonBuffer;
-    JsonVariant variant = jsonBuffer.parse("\"hello\"");
+    DynamicJsonVariant variant;
+    parseJson(variant, "\"hello\"");
 
     REQUIRE(variant == "hello");
     REQUIRE_FALSE(variant != "hello");
@@ -117,8 +117,8 @@ TEST_CASE("JsonVariant comparisons") {
   }
 
   SECTION("String") {
-    DynamicJsonBuffer jsonBuffer;
-    JsonVariant variant = jsonBuffer.parse("\"hello\"");
+    DynamicJsonVariant variant;
+    parseJson(variant, "\"hello\"");
 
     REQUIRE(variant == std::string("hello"));
     REQUIRE_FALSE(variant != std::string("hello"));

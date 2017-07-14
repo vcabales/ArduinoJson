@@ -8,7 +8,8 @@
 #pragma once
 
 namespace ArduinoJson {
-// bool parseJson(JsonArray& destination, TString json);
+// bool parseJson(TDestination& destination, TString json);
+// TDestination = JsonArray, JsonObject, JsonVariant
 // TString = const std::string&, const String&
 template <typename TDestination, typename TString>
 typename TypeTraits::EnableIf<!TypeTraits::IsArray<TString>::value, bool>::type
@@ -18,7 +19,8 @@ parseJson(TDestination &destination, const TString &json,
       .parse(destination);
 }
 //
-//  bool parseJson(JsonArray& destination, TString json);
+// bool parseJson(TDestination& destination, TString json);
+// TDestination = JsonArray, JsonObject, JsonVariant
 // TString = const char*, const char[N], const FlashStringHelper*
 template <typename TDestination, typename TString>
 bool parseJson(TDestination &destination, TString *json,
@@ -27,7 +29,8 @@ bool parseJson(TDestination &destination, TString *json,
       .parse(destination);
 }
 //
-//  bool parseJson(JsonArray& destination, TString json);
+// bool parseJson(TDestination& destination, TString json);
+// TDestination = JsonArray, JsonObject, JsonVariant
 // TString = std::istream&, Stream&
 template <typename TDestination, typename TString>
 bool parseJson(TDestination &destination, TString &json,

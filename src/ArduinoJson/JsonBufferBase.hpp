@@ -22,36 +22,6 @@
 namespace ArduinoJson {
 template <typename TDerived>
 class JsonBufferBase : public JsonBuffer {
- public:
-  // Generalized version of parseArray() and parseObject(), also works for
-  // integral types.
-  //
-  // JsonVariant parse(TString);
-  // TString = const std::string&, const String&
-  template <typename TString>
-  typename TypeTraits::EnableIf<!TypeTraits::IsArray<TString>::value,
-                                JsonVariant>::type
-  parse(const TString &json,
-        uint8_t nestingLimit = ARDUINOJSON_DEFAULT_NESTING_LIMIT) {
-    return Internals::makeParser(that(), json, nestingLimit).parseVariant();
-  }
-  //
-  // JsonVariant parse(TString);
-  // TString = const char*, const char[N], const FlashStringHelper*
-  template <typename TString>
-  JsonVariant parse(TString *json,
-                    uint8_t nestingLimit = ARDUINOJSON_DEFAULT_NESTING_LIMIT) {
-    return Internals::makeParser(that(), json, nestingLimit).parseVariant();
-  }
-  //
-  // JsonVariant parse(TString);
-  // TString = std::istream&, Stream&
-  template <typename TString>
-  JsonVariant parse(TString &json,
-                    uint8_t nestingLimit = ARDUINOJSON_DEFAULT_NESTING_LIMIT) {
-    return Internals::makeParser(that(), json, nestingLimit).parseVariant();
-  }
-
  private:
   TDerived *that() {
     return static_cast<TDerived *>(this);

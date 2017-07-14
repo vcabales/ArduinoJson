@@ -11,73 +11,73 @@
 using namespace Catch::Matchers;
 
 TEST_CASE("parseJson(JsonVariant&)") {
-  DynamicJsonBuffer jb;
+  DynamicJsonVariant variant;
 
   SECTION("EmptyObject") {
-    JsonVariant variant = jb.parse("{}");
-    REQUIRE(variant.success());
+    bool result = parseJson(variant, "{}");
+    REQUIRE(result);
     REQUIRE(variant.is<JsonObject>());
   }
 
   SECTION("EmptyArray") {
-    JsonVariant variant = jb.parse("[]");
-    REQUIRE(variant.success());
+    bool result = parseJson(variant, "[]");
+    REQUIRE(result);
     REQUIRE(variant.is<JsonArray>());
   }
 
   SECTION("Integer") {
-    JsonVariant variant = jb.parse("-42");
-    REQUIRE(variant.success());
+    bool result = parseJson(variant, "-42");
+    REQUIRE(result);
     REQUIRE(variant.is<int>());
     REQUIRE_FALSE(variant.is<bool>());
     REQUIRE(variant == -42);
   }
 
   SECTION("Double") {
-    JsonVariant variant = jb.parse("-1.23e+4");
-    REQUIRE(variant.success());
+    bool result = parseJson(variant, "-1.23e+4");
+    REQUIRE(result);
     REQUIRE_FALSE(variant.is<int>());
     REQUIRE(variant.is<double>());
     REQUIRE(variant.as<double>() == Approx(-1.23e+4));
   }
 
   SECTION("Double quoted string") {
-    JsonVariant variant = jb.parse("\"hello world\"");
-    REQUIRE(variant.success());
+    bool result = parseJson(variant, "\"hello world\"");
+    REQUIRE(result);
     REQUIRE(variant.is<char*>());
     REQUIRE_THAT(variant.as<char*>(), Equals("hello world"));
   }
 
   SECTION("Single quoted string") {
-    JsonVariant variant = jb.parse("\'hello world\'");
-    REQUIRE(variant.success());
+    bool result = parseJson(variant, "\'hello world\'");
+    REQUIRE(result);
     REQUIRE(variant.is<char*>());
     REQUIRE_THAT(variant.as<char*>(), Equals("hello world"));
   }
 
   SECTION("True") {
-    JsonVariant variant = jb.parse("true");
-    REQUIRE(variant.success());
+    bool result = parseJson(variant, "true");
+    REQUIRE(result);
     REQUIRE(variant.is<bool>());
     REQUIRE(variant == true);
   }
 
   SECTION("False") {
-    JsonVariant variant = jb.parse("false");
-    REQUIRE(variant.success());
+    bool result = parseJson(variant, "false");
+    REQUIRE(result);
     REQUIRE(variant.is<bool>());
     REQUIRE(variant == false);
   }
 
   // TODO
   /*  SECTION("OpenBrace") {
-      JsonVariant variant = jb.parse("{");
-      REQUIRE_FALSE(variant.success());
+      bool result = parseJson(variant, "{");
+      REQUIRE_FALSE(result);
     }*/
 
   SECTION("Incomplete string") {
-    JsonVariant variant = jb.parse("\"hello");
-    REQUIRE(variant.success());
+    bool result = parseJson(variant, "\"hello");
+    REQUIRE(result);
     REQUIRE(variant.is<char*>());
     REQUIRE_THAT(variant.as<char*>(), Equals("hello"));
   }

@@ -28,14 +28,9 @@ class JsonParser {
         _writer(writer),
         _nestingLimit(nestingLimit) {}
 
-  JsonVariant parseVariant() {
-    JsonVariant result;
-    parseAnythingTo(&result);
-    return result;
-  }
-
   bool parse(JsonArray &destination);
   bool parse(JsonObject &destination);
+  bool parse(JsonVariant &destination);
 
  private:
   JsonParser &operator=(const JsonParser &);  // non-copiable

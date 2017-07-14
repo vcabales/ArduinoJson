@@ -79,16 +79,6 @@ ERROR_NO_MEMORY:
 }
 
 template <typename TReader, typename TWriter>
-inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseArrayTo(
-    JsonVariant *destination) {
-  JsonArray &array = _buffer->createArray();
-  ;
-  if (!array.success()) return false;
-  *destination = array;
-  return parse(array);
-}
-
-template <typename TReader, typename TWriter>
 inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::parse(
     JsonObject &object) {
   // Check opening brace
@@ -123,6 +113,22 @@ ERROR_MISSING_COLON:
 ERROR_MISSING_COMMA:
 ERROR_NO_MEMORY:
   return false;
+}
+
+template <typename TReader, typename TWriter>
+inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::parse(
+    JsonVariant &variant) {
+  return parseAnythingTo(&variant);
+}
+
+template <typename TReader, typename TWriter>
+inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseArrayTo(
+    JsonVariant *destination) {
+  JsonArray &array = _buffer->createArray();
+  ;
+  if (!array.success()) return false;
+  *destination = array;
+  return parse(array);
 }
 
 template <typename TReader, typename TWriter>

@@ -51,14 +51,13 @@ TEST_CASE("Variable Length Array") {
       REQUIRE(parseJson(obj, vla));
     }
 
-    // TODO
     SECTION("parseJson(JsonVariant&)") {
       int i = 16;
       char vla[i];
       strcpy(vla, "42");
 
-      StaticJsonBuffer<1> jsonBuffer;
-      JsonVariant variant = jsonBuffer.parse(vla);
+      DynamicJsonVariant variant;
+      parseJson(variant, vla);
 
       REQUIRE(42 == variant.as<int>());
     }
