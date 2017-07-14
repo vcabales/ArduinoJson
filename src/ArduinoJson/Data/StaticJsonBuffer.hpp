@@ -7,8 +7,8 @@
 
 #pragma once
 
+#include "../TypeTraits/Max.hpp"
 #include "JsonBuffer.hpp"
-#include "TypeTraits/Max.hpp"
 
 #if defined(__clang__)
 #pragma clang diagnostic push

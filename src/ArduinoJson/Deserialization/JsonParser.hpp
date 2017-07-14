@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "../JsonBuffer.hpp"
+#include "../Data/JsonBuffer.hpp"
 #include "../JsonVariant.hpp"
 #include "../TypeTraits/IsConst.hpp"
 #include "StringWriter.hpp"

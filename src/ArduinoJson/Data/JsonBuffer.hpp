@@ -9,12 +9,13 @@
 
 #include <stddef.h>  // for size_t
 #include <stdint.h>  // for uint8_t
-#include <string.h>
 
-#include "Data/NonCopyable.hpp"
-#include "JsonVariant.hpp"
-#include "TypeTraits/EnableIf.hpp"
-#include "TypeTraits/IsArray.hpp"
+#include "../Configuration.hpp"
+#include "../Polyfills/attributes.hpp"
+#include "../StringTraits/StringTraits.hpp"
+#include "../TypeTraits/EnableIf.hpp"
+#include "../TypeTraits/IsArray.hpp"
+#include "NonCopyable.hpp"
 
 #if defined(__clang__)
 #pragma clang diagnostic push

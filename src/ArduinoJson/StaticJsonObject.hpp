@@ -7,8 +7,8 @@
 
 #pragma once
 
+#include "Data/StaticJsonBuffer.hpp"
 #include "JsonObject.hpp"
-#include "StaticJsonBuffer.hpp"
 
 namespace ArduinoJson {
 

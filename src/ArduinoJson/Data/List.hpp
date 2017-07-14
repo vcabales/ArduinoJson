@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "../JsonBuffer.hpp"
+#include "JsonBuffer.hpp"
 #include "ListConstIterator.hpp"
 #include "ListIterator.hpp"
 

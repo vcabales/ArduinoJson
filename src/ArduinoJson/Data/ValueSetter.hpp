@@ -7,10 +7,10 @@
 
 #pragma once
 
-#include "../JsonBuffer.hpp"
 #include "../JsonVariant.hpp"
 #include "../StringTraits/StringTraits.hpp"
 #include "../TypeTraits/EnableIf.hpp"
+#include "JsonBuffer.hpp"
 
 namespace ArduinoJson {
 namespace Internals {
