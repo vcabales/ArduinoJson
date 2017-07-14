@@ -52,7 +52,7 @@ TEST_CASE("parseJson(StaticJsonArray&)") {
   SECTION("Copy string not spaces") {
     StaticJsonArray<100> arr;
     parseJson(arr, "  [ \"1234567\" ] ");
-    REQUIRE(JSON_ARRAY_SIZE(1) + sizeof("1234567") == arr.buffer().size());
+    REQUIRE(JSON_ARRAY_SIZE(1) + sizeof("1234567") == arr.memoryUsage());
     // note we use a string of 8 bytes to be sure that the StaticJsonBuffer
     // will not insert bytes to enforce alignement
   }

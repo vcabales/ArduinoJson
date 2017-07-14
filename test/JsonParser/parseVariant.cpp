@@ -69,11 +69,10 @@ TEST_CASE("parseJson(JsonVariant&)") {
     REQUIRE(variant == false);
   }
 
-  // TODO
-  /*  SECTION("OpenBrace") {
-      bool result = parseJson(variant, "{");
-      REQUIRE_FALSE(result);
-    }*/
+  SECTION("OpenBrace") {
+    bool result = parseJson(variant, "{");
+    REQUIRE_FALSE(result);
+  }
 
   SECTION("Incomplete string") {
     bool result = parseJson(variant, "\"hello");

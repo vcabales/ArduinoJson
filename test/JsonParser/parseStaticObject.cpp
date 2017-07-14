@@ -34,8 +34,10 @@ TEST_CASE("parseJson(StaticJsonObject&)") {
   }
 
   SECTION("StaticJsonObject of the right size of 1 nested array") {
-    StaticJsonObject<JSON_OBJECT_SIZE(1) + JSON_ARRAY_SIZE(0)> obj;
+    const size_t SIZE = JSON_OBJECT_SIZE(1) + JSON_ARRAY_SIZE(0);
+    StaticJsonObject<SIZE> obj;
     char input[] = "{\"a\":[]}";
     REQUIRE(true == parseJson(obj, input));
+    REQUIRE(SIZE == obj.memoryUsage());
   }
 }

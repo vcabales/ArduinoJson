@@ -8,6 +8,7 @@
 #pragma once
 
 #include "JsonBuffer.hpp"
+#include "TypeTraits/Max.hpp"
 
 #if defined(__clang__)
 #pragma clang diagnostic push
@@ -110,7 +111,7 @@ class StaticJsonBuffer : public StaticJsonBufferBase {
   explicit StaticJsonBuffer() : StaticJsonBufferBase(_buffer, CAPACITY) {}
 
  private:
-  char _buffer[CAPACITY];
+  char _buffer[TypeTraits::Max<1, CAPACITY>::value];
 };
 }
 

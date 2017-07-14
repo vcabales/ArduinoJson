@@ -13,13 +13,13 @@ namespace ArduinoJson {
 
 template <size_t CAPACITY>
 class StaticJsonArray : public JsonArray {
-  StaticJsonBuffer<CAPACITY> _buffer;
+  StaticJsonBuffer<CAPACITY - sizeof(JsonArray)> _buffer;
 
  public:
-  StaticJsonArray() : JsonArray(&_buffer) {
-    // TODO: remove !!!!!!
-    // it's just here to make the old test suite pass
-    _buffer.alloc(sizeof(JsonArray));
+  StaticJsonArray() : JsonArray(&_buffer) {}
+
+  size_t memoryUsage() const {
+    return _buffer.size() + sizeof(JsonArray);
   }
 
   StaticJsonBufferBase& buffer() {
