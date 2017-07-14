@@ -8,54 +8,33 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
-TEST_CASE("StaticJsonBuffer::createObject()") {
-  SECTION("TooSmallBufferForEmptyObject") {
-    StaticJsonBuffer<JSON_OBJECT_SIZE(0) - 1> bufferTooSmall;
-    JsonObject &obj = bufferTooSmall.createObject();
-    REQUIRE_FALSE(obj.success());
-  }
-
+// TODO: move
+TEST_CASE("StaticJsonObject::memoryUsage()") {
   SECTION("GrowsWithObject") {
-    StaticJsonBuffer<JSON_OBJECT_SIZE(3)> buffer;
+    StaticJsonObject<JSON_OBJECT_SIZE(3)> obj;
 
-    JsonObject &obj = buffer.createObject();
-    REQUIRE(JSON_OBJECT_SIZE(0) == buffer.size());
+    REQUIRE(JSON_OBJECT_SIZE(0) == obj.memoryUsage());
 
     obj["hello"];
-    REQUIRE(JSON_OBJECT_SIZE(0) == buffer.size());
+    REQUIRE(JSON_OBJECT_SIZE(0) == obj.memoryUsage());
 
     obj["hello"] = 1;
-    REQUIRE(JSON_OBJECT_SIZE(1) == buffer.size());
+    REQUIRE(JSON_OBJECT_SIZE(1) == obj.memoryUsage());
 
     obj["world"] = 2;
-    REQUIRE(JSON_OBJECT_SIZE(2) == buffer.size());
+    REQUIRE(JSON_OBJECT_SIZE(2) == obj.memoryUsage());
 
     obj["world"] = 3;  // <- same key, should not grow
-    REQUIRE(JSON_OBJECT_SIZE(2) == buffer.size());
-  }
-
-  SECTION("SucceedWhenBigEnough") {
-    StaticJsonBuffer<JSON_OBJECT_SIZE(0)> buffer;
-
-    JsonObject &object = buffer.createObject();
-    REQUIRE(object.success());
-  }
-
-  SECTION("FailsWhenTooSmall") {
-    StaticJsonBuffer<JSON_OBJECT_SIZE(0) - 1> buffer;
-
-    JsonObject &object = buffer.createObject();
-    REQUIRE_FALSE(object.success());
+    REQUIRE(JSON_OBJECT_SIZE(2) == obj.memoryUsage());
   }
 
   SECTION("ObjectDoesntGrowWhenFull") {
-    StaticJsonBuffer<JSON_OBJECT_SIZE(1)> buffer;
+    StaticJsonObject<JSON_OBJECT_SIZE(1)> obj;
 
-    JsonObject &obj = buffer.createObject();
     obj["hello"] = 1;
     obj["world"] = 2;
 
-    REQUIRE(JSON_OBJECT_SIZE(1) == buffer.size());
+    REQUIRE(JSON_OBJECT_SIZE(1) == obj.memoryUsage());
     REQUIRE(1 == obj.size());
 
     char json[64];

@@ -8,47 +8,27 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
-TEST_CASE("StaticJsonBuffer::createArray()") {
-  SECTION("TooSmallBufferForEmptyArray") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(0) - 1> bufferTooSmall;
-    JsonArray &arr = bufferTooSmall.createArray();
-    REQUIRE_FALSE(arr.success());
-  }
-
+// TODO: move
+TEST_CASE("StaticJsonArray::memoryUsage()") {
   SECTION("GrowsWithArray") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(2)> json;
+    StaticJsonArray<JSON_ARRAY_SIZE(2)> arr;
 
-    JsonArray &array = json.createArray();
-    REQUIRE(JSON_ARRAY_SIZE(0) == json.size());
+    REQUIRE(JSON_ARRAY_SIZE(0) == arr.memoryUsage());
 
-    array.add("hello");
-    REQUIRE(JSON_ARRAY_SIZE(1) == json.size());
+    arr.add("hello");
+    REQUIRE(JSON_ARRAY_SIZE(1) == arr.memoryUsage());
 
-    array.add("world");
-    REQUIRE(JSON_ARRAY_SIZE(2) == json.size());
-  }
-
-  SECTION("SucceedWhenBigEnough") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(0)> json;
-
-    JsonArray &array = json.createArray();
-    REQUIRE(array.success());
-  }
-
-  SECTION("FailsWhenTooSmall") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(0) - 1> json;
-
-    JsonArray &array = json.createArray();
-    REQUIRE_FALSE(array.success());
+    arr.add("world");
+    REQUIRE(JSON_ARRAY_SIZE(2) == arr.memoryUsage());
   }
 
   SECTION("ArrayDoesntGrowWhenFull") {
-    StaticJsonBuffer<JSON_ARRAY_SIZE(1)> json;
+    StaticJsonArray<JSON_ARRAY_SIZE(1)> arr;
 
-    JsonArray &array = json.createArray();
-    array.add("hello");
-    array.add("world");
+    arr.add("hello");
+    arr.add("world");
 
-    REQUIRE(1 == array.size());
+    REQUIRE(1 == arr.size());
+    REQUIRE(JSON_ARRAY_SIZE(1) == arr.memoryUsage());
   }
 }

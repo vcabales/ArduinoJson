@@ -124,20 +124,19 @@ inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::parse(
 template <typename TReader, typename TWriter>
 inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseArrayTo(
     JsonVariant *destination) {
-  JsonArray &array = _buffer->createArray();
-  ;
-  if (!array.success()) return false;
-  *destination = array;
-  return parse(array);
+  JsonArray *array = new (_buffer) JsonArray(_buffer);
+  if (!array) return false;
+  *destination = *array;
+  return parse(*array);
 }
 
 template <typename TReader, typename TWriter>
 inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseObjectTo(
     JsonVariant *destination) {
-  JsonObject &object = _buffer->createObject();
-  if (!object.success()) return false;
-  *destination = object;
-  return parse(object);
+  JsonObject *object = new (_buffer) JsonObject(_buffer);
+  if (!object) return false;
+  *destination = *object;
+  return parse(*object);
 }
 
 template <typename TReader, typename TWriter>

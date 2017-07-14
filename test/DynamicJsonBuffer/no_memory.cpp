@@ -23,14 +23,6 @@ TEST_CASE("DynamicJsonBuffer no memory") {
     NoMemoryAllocator().deallocate(NULL);
   }
 
-  SECTION("createArray()") {
-    REQUIRE_FALSE(_jsonBuffer.createArray().success());
-  }
-
-  SECTION("createObject()") {
-    REQUIRE_FALSE(_jsonBuffer.createObject().success());
-  }
-
   SECTION("startString()") {
     DynamicJsonBufferBase<NoMemoryAllocator>::String str =
         _jsonBuffer.startString();
