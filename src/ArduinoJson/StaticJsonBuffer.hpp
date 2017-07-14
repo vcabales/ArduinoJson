@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "JsonBufferBase.hpp"
+#include "JsonBuffer.hpp"
 
 #if defined(__clang__)
 #pragma clang diagnostic push
@@ -21,7 +21,7 @@
 
 namespace ArduinoJson {
 
-class StaticJsonBufferBase : public JsonBufferBase<StaticJsonBufferBase> {
+class StaticJsonBufferBase : public JsonBuffer {
  public:
   class String {
    public:

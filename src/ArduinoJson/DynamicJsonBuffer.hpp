@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "JsonBufferBase.hpp"
+#include "JsonBuffer.hpp"
 
 #include <stdlib.h>
 
@@ -33,8 +33,7 @@ class DefaultAllocator {
 };
 
 template <typename TAllocator>
-class DynamicJsonBufferBase
-    : public JsonBufferBase<DynamicJsonBufferBase<TAllocator> > {
+class DynamicJsonBufferBase : public JsonBuffer {
   struct Block;
   struct EmptyBlock {
     Block* next;

@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "Deserialization/JsonParser.hpp"
+
 namespace ArduinoJson {
 // bool parseJson(TDestination& destination, TString json);
 // TDestination = JsonArray, JsonObject, JsonVariant
