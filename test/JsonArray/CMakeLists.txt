@@ -17,6 +17,7 @@ add_executable(JsonArrayTests
 	printTo.cpp
 	remove.cpp
 	set.cpp
+	StaticJsonArray.cpp
 	subscript.cpp
 )
 

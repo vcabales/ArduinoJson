@@ -16,6 +16,7 @@ add_executable(JsonObjectTests
 	printTo.cpp
 	remove.cpp
 	set.cpp
+	StaticJsonObject.cpp
 	subscript.cpp
 )
 

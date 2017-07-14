@@ -8,7 +8,6 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
-// TODO: move
 TEST_CASE("StaticJsonObject::memoryUsage()") {
   SECTION("GrowsWithObject") {
     StaticJsonObject<JSON_OBJECT_SIZE(3)> obj;

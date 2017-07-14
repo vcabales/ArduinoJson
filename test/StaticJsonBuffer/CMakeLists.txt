@@ -7,8 +7,6 @@
 
 add_executable(StaticJsonBufferTests 
 	alloc.cpp
-	createArray.cpp
-	createObject.cpp
 	size.cpp
 	startString.cpp
 )

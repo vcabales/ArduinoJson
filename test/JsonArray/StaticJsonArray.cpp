@@ -8,7 +8,6 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
-// TODO: move
 TEST_CASE("StaticJsonArray::memoryUsage()") {
   SECTION("GrowsWithArray") {
     StaticJsonArray<JSON_ARRAY_SIZE(2)> arr;
