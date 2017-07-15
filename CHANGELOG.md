@@ -8,6 +8,31 @@ HEAD
 * Added `parseJson()`
 * Removed `JsonBuffer::parserArray()` and `parseObject()`
 
+### BREAKING CHANGES :warning:
+
+#### Creating a JsonObject
+
+```c++
+// Old syntax:
+StaticJsonBuffer<200> jb;
+JsonObject& obj = jb.createObject();
+
+// New syntax:
+StaticJsonObject<200> obj;
+```
+
+#### Parsing a JsonObject
+
+```c++
+// Old syntax:
+StaticJsonBuffer<200> jb;
+JsonObject& obj = jb.parseObject(input);
+
+// New syntax:
+StaticJsonObject<200> obj;
+bool success = parseJson(obj, input);
+```
+
 v5.11.1
 -------
 
