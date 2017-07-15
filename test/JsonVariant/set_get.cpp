@@ -12,13 +12,13 @@
 
 template <typename T>
 void checkValue(T expected) {
-  JsonVariant variant = expected;
+  DynamicJsonVariant variant = expected;
   REQUIRE(expected == variant.as<T>());
 }
 
 template <typename T>
 void checkReference(T &expected) {
-  JsonVariant variant = expected;
+  DynamicJsonVariant variant = expected;
   REQUIRE(expected == variant.as<T &>());
 }
 
@@ -27,8 +27,8 @@ void checkNumericType() {
   T min = std::numeric_limits<T>::min();
   T max = std::numeric_limits<T>::max();
 
-  JsonVariant variantMin(min);
-  JsonVariant variantMax(max);
+  DynamicJsonVariant variantMin(min);
+  DynamicJsonVariant variantMax(max);
 
   REQUIRE(min == variantMin.as<T>());
   REQUIRE(max == variantMax.as<T>());

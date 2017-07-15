@@ -9,12 +9,14 @@
 #include <catch.hpp>
 
 TEST_CASE("JsonVariant::operator[]") {
+  DynamicJsonVariant var;
+
   SECTION("Array") {
     DynamicJsonArray array;
     array.add("element at index 0");
     array.add("element at index 1");
 
-    JsonVariant var = array;
+    var = array;
 
     REQUIRE(2 == var.size());
     REQUIRE(std::string("element at index 0") == var[0]);
@@ -31,7 +33,7 @@ TEST_CASE("JsonVariant::operator[]") {
     object["a"] = "element at key \"a\"";
     object["b"] = "element at key \"b\"";
 
-    JsonVariant var = object;
+    var = object;
 
     REQUIRE(2 == var.size());
     REQUIRE(std::string("element at key \"a\"") == var["a"]);
@@ -41,14 +43,13 @@ TEST_CASE("JsonVariant::operator[]") {
   }
 
   SECTION("Undefined") {
-    JsonVariant var = JsonVariant();
     REQUIRE(0 == var.size());
     REQUIRE_FALSE(var["0"].success());
     REQUIRE_FALSE(var[0].success());
   }
 
   SECTION("String") {
-    JsonVariant var = "hello world";
+    var = "hello world";
     REQUIRE(0 == var.size());
     REQUIRE_FALSE(var["0"].success());
     REQUIRE_FALSE(var[0].success());
@@ -56,7 +57,7 @@ TEST_CASE("JsonVariant::operator[]") {
 
   SECTION("ObjectSetValue") {
     DynamicJsonObject object;
-    JsonVariant var = object;
+    var = object;
     var["hello"] = "world";
     REQUIRE(1 == var.size());
     REQUIRE(std::string("world") == var["hello"]);
@@ -66,7 +67,7 @@ TEST_CASE("JsonVariant::operator[]") {
     DynamicJsonArray array;
     array.add("hello");
 
-    JsonVariant var = array;
+    var = array;
     var[0] = "world";
     REQUIRE(1 == var.size());
     REQUIRE(std::string("world") == var[0]);
@@ -76,7 +77,7 @@ TEST_CASE("JsonVariant::operator[]") {
     DynamicJsonArray array;
     array.createNestedObject();
 
-    JsonVariant var = array;
+    var = array;
     var[0]["hello"] = "world";
     REQUIRE(1 == var.size());
     REQUIRE(1 == var[0].size());

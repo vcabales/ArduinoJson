@@ -12,14 +12,15 @@
 TEST_CASE("std::stream") {
   SECTION("JsonVariantFalse") {
     std::ostringstream os;
-    JsonVariant variant = false;
+    DynamicJsonVariant variant;
+    variant = false;
     os << variant;
     REQUIRE("false" == os.str());
   }
 
   SECTION("JsonVariantString") {
     std::ostringstream os;
-    JsonVariant variant = "coucou";
+    DynamicJsonVariant variant("coucou");
     os << variant;
     REQUIRE("\"coucou\"" == os.str());
   }

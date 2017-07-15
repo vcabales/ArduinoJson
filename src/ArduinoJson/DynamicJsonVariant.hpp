@@ -16,6 +16,25 @@ class DynamicJsonVariant : public JsonVariant {
   Internals::DynamicJsonBuffer _buffer;
 
  public:
+  DynamicJsonVariant() : JsonVariant(&_buffer) {}
+
+  DynamicJsonVariant(const DynamicJsonVariant& other) : JsonVariant(&_buffer) {
+    JsonVariant::operator=(other);
+  }
+
+  template <typename T>
+  DynamicJsonVariant(const T& value) : JsonVariant(&_buffer, value) {}
+
+  template <typename T>
+  DynamicJsonVariant(const T* value) : JsonVariant(&_buffer, value) {}
+
+  DynamicJsonVariant& operator=(const DynamicJsonVariant& other) {
+    JsonVariant::operator=(other);
+    return *this;
+  }
+
+  using JsonVariant::operator=;
+
   Internals::DynamicJsonBuffer& buffer() {
     return _buffer;
   }

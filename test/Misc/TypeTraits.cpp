@@ -32,6 +32,7 @@ TEST_CASE("TypeTraits") {
     REQUIRE(
         static_cast<bool>(IsVariant<JsonObjectSubscript<const char*> >::value));
     REQUIRE(static_cast<bool>(IsVariant<JsonVariant>::value));
+    REQUIRE(static_cast<bool>(IsVariant<DynamicJsonVariant>::value));
   }
 
   SECTION("IsString") {

@@ -9,7 +9,7 @@
 #include <catch.hpp>
 
 TEST_CASE("JsonVariant undefined") {
-  JsonVariant variant;
+  DynamicJsonVariant variant;
 
   SECTION("AsLongReturns0") {
     REQUIRE(0 == variant.as<long>());

@@ -9,37 +9,38 @@
 #include <catch.hpp>
 
 TEST_CASE("JsonVariant::success()") {
+  DynamicJsonVariant variant;
+
   SECTION("ReturnsFalse_WhenUndefined") {
-    JsonVariant variant;
     REQUIRE(false == variant.success());
   }
 
   SECTION("ReturnsTrue_WhenInteger") {
-    JsonVariant variant = 0;
+    variant = 0;
     REQUIRE(true == variant.success());
   }
 
   SECTION("ReturnsTrue_WhenEmptyArray") {
     DynamicJsonArray array;
 
-    JsonVariant variant = array;
+    variant = array;
     REQUIRE(true == variant.success());
   }
 
   SECTION("ReturnsTrue_WhenEmptyObject") {
     DynamicJsonObject object;
 
-    JsonVariant variant = object;
+    variant = object;
     REQUIRE(true == variant.success());
   }
 
   SECTION("ReturnsFalse_WhenInvalidArray") {
-    JsonVariant variant = JsonArray::invalid();
+    variant = JsonArray::invalid();
     REQUIRE(false == variant.success());
   }
 
   SECTION("ReturnsFalse_WhenInvalidObject") {
-    JsonVariant variant = JsonObject::invalid();
+    variant = JsonObject::invalid();
     REQUIRE(false == variant.success());
   }
 }

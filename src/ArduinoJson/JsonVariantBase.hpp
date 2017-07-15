@@ -18,8 +18,11 @@ class JsonArraySubscript;
 template <typename TKey>
 class JsonObjectSubscript;
 
+struct JsonVariantTag {};
+
 template <typename TImpl>
-class JsonVariantBase : public Internals::JsonPrintable<TImpl> {
+class JsonVariantBase : public Internals::JsonPrintable<TImpl>,
+                        public JsonVariantTag {
  public:
   // Gets the variant as an array.
   // Returns a reference to the JsonArray or JsonArray::invalid() if the
@@ -117,6 +120,6 @@ class JsonVariantBase : public Internals::JsonPrintable<TImpl> {
 
 namespace TypeTraits {
 template <typename T>
-struct IsVariant : IsBaseOf<JsonVariantBase<T>, T> {};
+struct IsVariant : IsBaseOf<JsonVariantTag, T> {};
 }
 }

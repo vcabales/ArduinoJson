@@ -9,8 +9,8 @@
 #include <catch.hpp>
 
 TEST_CASE("JsonVariant copy") {
-  JsonVariant _variant1;
-  JsonVariant _variant2;
+  DynamicJsonVariant _variant1;
+  DynamicJsonVariant _variant2;
 
   SECTION("IntegersAreCopiedByValue") {
     _variant1 = 123;

@@ -10,6 +10,7 @@
 #include <stddef.h>
 #include <stdint.h>  // for uint8_t
 
+#include "Data/JsonBuffer.hpp"
 #include "Data/JsonVariantContent.hpp"
 #include "Data/JsonVariantDefault.hpp"
 #include "Data/JsonVariantType.hpp"
@@ -45,37 +46,47 @@ class JsonVariant : public JsonVariantBase<JsonVariant> {
 
  public:
   // Creates an uninitialized JsonVariant
-  JsonVariant() : _type(Internals::JSON_UNDEFINED) {}
+  JsonVariant(Internals::JsonBuffer *buffer)
+      : _buffer(buffer), _type(Internals::JSON_UNDEFINED) {}
+
+  template <typename T>
+  JsonVariant(Internals::JsonBuffer *buffer, const T &value) : _buffer(buffer) {
+    operator=(value);
+  }
 
   // Create a JsonVariant containing a boolean value.
   // It will be serialized as "true" or "false" in JSON.
-  JsonVariant(bool value) {
+  JsonVariant &operator=(bool value) {
     using namespace Internals;
     _type = JSON_BOOLEAN;
     _content.asInteger = static_cast<JsonUInt>(value);
+    return *this;
   }
 
   // Create a JsonVariant containing a floating point value.
-  // JsonVariant(double value);
-  // JsonVariant(float value);
+  // operator=(double value);
+  // operator=(float value);
   template <typename T>
-  JsonVariant(T value, typename TypeTraits::EnableIf<
-                           TypeTraits::IsFloatingPoint<T>::value>::type * = 0) {
+  typename TypeTraits::EnableIf<TypeTraits::IsFloatingPoint<T>::value,
+                                JsonVariant &>::type
+  operator=(T value) {
     using namespace Internals;
     _type = JSON_FLOAT;
     _content.asFloat = static_cast<JsonFloat>(value);
+    return *this;
   }
 
   // Create a JsonVariant containing an integer value.
-  // JsonVariant(char)
-  // JsonVariant(signed short)
-  // JsonVariant(signed int)
-  // JsonVariant(signed long)
-  // JsonVariant(signed char)
+  // operator=(char)
+  // operator=(signed short)
+  // operator=(signed int)
+  // operator=(signed long)
+  // operator=(signed char)
   template <typename T>
-  JsonVariant(T value, typename TypeTraits::EnableIf<
-                           TypeTraits::IsSignedIntegral<T>::value ||
-                           TypeTraits::IsSame<T, char>::value>::type * = 0) {
+  typename TypeTraits::EnableIf<TypeTraits::IsSignedIntegral<T>::value ||
+                                    TypeTraits::IsSame<T, char>::value,
+                                JsonVariant &>::type
+  operator=(T value) {
     using namespace Internals;
     if (value >= 0) {
       _type = JSON_POSITIVE_INTEGER;
@@ -84,47 +95,56 @@ class JsonVariant : public JsonVariantBase<JsonVariant> {
       _type = JSON_NEGATIVE_INTEGER;
       _content.asInteger = static_cast<JsonUInt>(-value);
     }
+    return *this;
   }
-  // JsonVariant(unsigned short)
-  // JsonVariant(unsigned int)
-  // JsonVariant(unsigned long)
+  // operator=(unsigned short)
+  // operator=(unsigned int)
+  // operator=(unsigned long)
   template <typename T>
-  JsonVariant(T value,
-              typename TypeTraits::EnableIf<
-                  TypeTraits::IsUnsignedIntegral<T>::value>::type * = 0) {
+  typename TypeTraits::EnableIf<TypeTraits::IsUnsignedIntegral<T>::value,
+                                JsonVariant &>::type
+  operator=(T value) {
     using namespace Internals;
     _type = JSON_POSITIVE_INTEGER;
     _content.asInteger = static_cast<JsonUInt>(value);
+    return *this;
   }
 
   // Create a JsonVariant containing a string.
-  // JsonVariant(const char*);
-  // JsonVariant(const signed char*);
-  // JsonVariant(const unsigned char*);
+  // operator=(const char*);
+  // operator=(const signed char*);
+  // operator=(const unsigned char*);
   template <typename TChar>
-  JsonVariant(
-      const TChar *value,
-      typename TypeTraits::EnableIf<TypeTraits::IsChar<TChar>::value>::type * =
-          0) {
+  typename TypeTraits::EnableIf<TypeTraits::IsChar<TChar>::value,
+                                JsonVariant &>::type
+  operator=(const TChar *value) {
     _type = Internals::JSON_STRING;
     _content.asString = reinterpret_cast<const char *>(value);
+    return *this;
   }
 
   // Create a JsonVariant containing an unparsed string
-  JsonVariant(RawJson value) {
+  JsonVariant &operator=(RawJson value) {
     _type = Internals::JSON_UNPARSED;
     _content.asString = value;
+    return *this;
   }
 
   // Create a JsonVariant containing a reference to an array.
   // CAUTION: we are lying about constness, because the array can be modified if
   // the variant is converted back to a JsonArray&
-  JsonVariant(const JsonArray &array);
+  JsonVariant &operator=(const JsonArray &array);
 
   // Create a JsonVariant containing a reference to an object.
   // CAUTION: we are lying about constness, because the object can be modified
   // if the variant is converted back to a JsonObject&
-  JsonVariant(const JsonObject &object);
+  JsonVariant &operator=(const JsonObject &object);
+
+  template <typename T>
+  JsonVariant &operator=(const JsonVariantBase<T> &variant) {
+    *this = variant.as<JsonVariant>();
+    return *this;
+  }
 
   // Get the variant as the specified type.
   //
@@ -331,6 +351,8 @@ class JsonVariant : public JsonVariantBase<JsonVariant> {
            (_type == Internals::JSON_UNPARSED && _content.asString &&
             !strcmp("null", _content.asString));
   }
+
+  Internals::JsonBuffer *_buffer;
 
   // The current type of the variant
   Internals::JsonVariantType _type;

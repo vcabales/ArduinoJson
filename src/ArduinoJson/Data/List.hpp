@@ -49,7 +49,7 @@ class List {
   }
 
   iterator add() {
-    node_type *newNode = new (_buffer) node_type();
+    node_type *newNode = new (_buffer) node_type(_buffer);
 
     if (_firstNode) {
       node_type *lastNode = _firstNode;
