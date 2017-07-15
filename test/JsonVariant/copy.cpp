@@ -8,59 +8,70 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
-TEST_CASE("JsonVariant copy") {
-  DynamicJsonVariant _variant1;
-  DynamicJsonVariant _variant2;
+TEST_CASE("JsonVariant::operator=(const JsonVariant&)") {
+  DynamicJsonVariant variant1;
+  DynamicJsonVariant variant2;
 
-  SECTION("IntegersAreCopiedByValue") {
-    _variant1 = 123;
-    _variant2 = _variant1;
-    _variant1 = 456;
+  SECTION("integer") {
+    variant1 = 123;
+    variant2 = variant1;
+    variant1 = 456;
 
-    REQUIRE(123 == _variant2.as<int>());
+    REQUIRE(123 == variant2.as<int>());
   }
 
-  SECTION("DoublesAreCopiedByValue") {
-    _variant1 = 123.45;
-    _variant2 = _variant1;
-    _variant1 = 456.78;
+  SECTION("double") {
+    variant1 = 123.45;
+    variant2 = variant1;
+    variant1 = 456.78;
 
-    REQUIRE(123.45 == _variant2.as<double>());
+    REQUIRE(123.45 == variant2.as<double>());
   }
 
-  SECTION("BooleansAreCopiedByValue") {
-    _variant1 = true;
-    _variant2 = _variant1;
-    _variant1 = false;
+  SECTION("boolean") {
+    variant1 = true;
+    variant2 = variant1;
+    variant1 = false;
 
-    REQUIRE(_variant2.as<bool>());
+    REQUIRE(variant2.as<bool>());
   }
 
-  SECTION("StringsAreCopiedByValue") {
-    _variant1 = "hello";
-    _variant2 = _variant1;
-    _variant1 = "world";
+  SECTION("char pointer") {
+    variant1 = "hello";
+    variant2 = variant1;
+    variant1 = "world";
 
-    REQUIRE(std::string("hello") == _variant2.as<const char *>());
+    REQUIRE(std::string("hello") == variant2.as<const char *>());
   }
 
-  SECTION("ObjectsAreCopiedByReference") {
+  SECTION("string") {
+    std::string s("hello");
+
+    variant1 = "hello";
+    variant2 = variant1;
+    variant1 = "world";
+
+    REQUIRE(std::string("hello") == variant2.as<std::string>());
+  }
+
+  SECTION("object") {
     DynamicJsonObject object;
 
-    _variant1 = object;
-
     object["hello"] = "world";
+    variant1 = object;
+    object["hello"] = "dummy";
 
-    REQUIRE(1 == _variant1.as<JsonObject>().size());
+    REQUIRE(1 == variant1.as<JsonObject>().size());
+    REQUIRE(std::string("world") == variant1["hello"]);
   }
 
   SECTION("ArraysAreCopiedByReference") {
     DynamicJsonArray array;
 
-    _variant1 = array;
+    variant1 = array;
 
     array.add("world");
 
-    REQUIRE(1 == _variant1.as<JsonArray>().size());
+    REQUIRE(1 == variant1.as<JsonArray>().size());
   }
 }

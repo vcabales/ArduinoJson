@@ -17,12 +17,6 @@ void checkValue(T expected) {
 }
 
 template <typename T>
-void checkReference(T &expected) {
-  DynamicJsonVariant variant = expected;
-  REQUIRE(expected == variant.as<T &>());
-}
-
-template <typename T>
 void checkNumericType() {
   T min = std::numeric_limits<T>::min();
   T max = std::numeric_limits<T>::max();
@@ -123,9 +117,4 @@ TEST_CASE("JsonVariant set()/get()") {
     checkNumericType<uint64_t>();
   }
 #endif
-
-  SECTION("CanStoreObject") {
-    DynamicJsonObject object;
-    checkReference<JsonObject>(object);
-  }
 }

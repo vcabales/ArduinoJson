@@ -142,7 +142,7 @@ class JsonVariant : public JsonVariantBase<JsonVariant> {
 
   template <typename T>
   JsonVariant &operator=(const JsonVariantBase<T> &variant) {
-    *this = variant.as<JsonVariant>();
+    *this = variant.template as<JsonVariant>();
     return *this;
   }
 

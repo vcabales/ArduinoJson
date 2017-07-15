@@ -31,12 +31,21 @@ inline JsonVariant &JsonVariant::operator=(const JsonArray &array) {
 }
 
 inline JsonVariant &JsonVariant::operator=(const JsonObject &object) {
-  if (object.success()) {
-    _type = Internals::JSON_OBJECT;
-    _content.asObject = const_cast<JsonObject *>(&object);
-  } else {
-    _type = Internals::JSON_UNDEFINED;
+  if (!object.success()) goto fail;
+
+  _content.asObject = new (_buffer) JsonObject(_buffer);
+  if (!_content.asObject) goto fail;
+
+  for (JsonObject::const_iterator it = object.begin(); it != object.end();
+       ++it) {
+    _content.asObject->set(it->key, it->value);
   }
+
+  _type = Internals::JSON_OBJECT;
+  return *this;
+
+fail:
+  _type = Internals::JSON_UNDEFINED;
   return *this;
 }
 
