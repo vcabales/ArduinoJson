@@ -7,6 +7,7 @@ HEAD
 * Added `DynamicJsonArray`, `DynamicJsonObject`, `StaticJsonArray` etc.
 * Added `parseJson()`
 * Removed `JsonBuffer::parserArray()` and `parseObject()`
+* Removed all deprecated features.
 
 ### BREAKING CHANGES :warning:
 

@@ -6,7 +6,6 @@
 # If you like this project, please add a star!
 
 add_executable(MiscTests 
-	deprecated.cpp
 	FloatParts.cpp
 	std_stream.cpp
 	std_string.cpp

@@ -68,14 +68,6 @@ class JsonArray : public Internals::JsonPrintable<JsonArray>,
   bool add(const T *value) {
     return add_impl<const T *>(value);
   }
-  //
-  // bool add(TValue value, uint8_t decimals);
-  // TValue = float, double
-  template <typename T>
-  DEPRECATED("Second argument is not supported anymore")
-  bool add(T value, uint8_t) {
-    return add_impl<const JsonVariant &>(JsonVariant(value));
-  }
 
   // Sets the value at specified index.
   //
@@ -191,13 +183,6 @@ class JsonArray : public Internals::JsonPrintable<JsonArray>,
       it->as<JsonArray>().copyTo(array[i++]);
     }
   }
-
-#if ARDUINOJSON_ENABLE_DEPRECATED
-  DEPRECATED("use remove() instead")
-  FORCE_INLINE void removeAt(size_t index) {
-    return remove(index);
-  }
-#endif
 
  private:
   template <typename TValueRef>

@@ -21,23 +21,6 @@ class JsonObjectSubscript;
 template <typename TImpl>
 class JsonVariantBase : public Internals::JsonPrintable<TImpl> {
  public:
-#if ARDUINOJSON_ENABLE_DEPRECATED
-  DEPRECATED("use as<JsonArray>() instead")
-  FORCE_INLINE JsonArray &asArray() const {
-    return as<JsonArray>();
-  }
-
-  DEPRECATED("use as<JsonObject>() instead")
-  FORCE_INLINE JsonObject &asObject() const {
-    return as<JsonObject>();
-  }
-
-  DEPRECATED("use as<char*>() instead")
-  FORCE_INLINE const char *asString() const {
-    return as<const char *>();
-  }
-#endif
-
   // Gets the variant as an array.
   // Returns a reference to the JsonArray or JsonArray::invalid() if the
   // variant
