@@ -49,11 +49,6 @@ class JsonVariant : public JsonVariantBase<JsonVariant> {
   JsonVariant(Internals::JsonBuffer *buffer)
       : _buffer(buffer), _type(Internals::JSON_UNDEFINED) {}
 
-  template <typename T>
-  JsonVariant(Internals::JsonBuffer *buffer, const T &value) : _buffer(buffer) {
-    operator=(value);
-  }
-
   // Create a JsonVariant containing a boolean value.
   // It will be serialized as "true" or "false" in JSON.
   JsonVariant &operator=(bool value) {
