@@ -52,21 +52,22 @@ TEST_CASE("JsonArray::set()") {
 
     _array.set(0, arr);
 
-    REQUIRE(&arr == &_array[0].as<JsonArray&>());
+    // TODO: requires array comparison
+    // REQUIRE(&arr == &_array[0].as<JsonArray&>());
     REQUIRE(_array[0].is<JsonArray&>());
     REQUIRE_FALSE(_array[0].is<int>());
   }
 
-  /* TODO: requires object comparison
-   SECTION("nested object") {
-     DynamicJsonObject obj;
+  SECTION("nested object") {
+    DynamicJsonObject obj;
 
-     _array.set(0, obj);
+    _array.set(0, obj);
 
-     REQUIRE(&obj == &_array[0].as<JsonObject&>());
-     REQUIRE(_array[0].is<JsonObject&>());
-     REQUIRE_FALSE(_array[0].is<int>());
-   }*/
+    // TODO: requires object comparison
+    // REQUIRE(&obj == &_array[0].as<JsonObject&>());
+    REQUIRE(_array[0].is<JsonObject&>());
+    REQUIRE_FALSE(_array[0].is<int>());
+  }
 
   SECTION("array subscript") {
     DynamicJsonArray arr;

@@ -126,7 +126,7 @@ inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseArrayTo(
     JsonVariant *destination) {
   JsonArray *array = new (_buffer) JsonArray(_buffer);
   if (!array) return false;
-  *destination = *array;
+  *destination = array;
   return parse(*array);
 }
 
@@ -135,7 +135,7 @@ inline bool ArduinoJson::Internals::JsonParser<TReader, TWriter>::parseObjectTo(
     JsonVariant *destination) {
   JsonObject *object = new (_buffer) JsonObject(_buffer);
   if (!object) return false;
-  *destination = *object;
+  *destination = object;
   return parse(*object);
 }
 
