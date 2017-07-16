@@ -76,12 +76,15 @@ TEST_CASE("JsonVariant::operator=(const JsonVariant&)") {
 
   SECTION("JsonArray") {
     DynamicJsonArray array;
-
-    array.add("hello");
-    array.add("world");
+    array.add(42);
+    JsonObject& object = array.createNestedObject();
+    object["hello"] = "world";
     variant1 = array;
-    array[1] = 666;
 
-    REQUIRE("[\"hello\",\"world\"]" == variant1.as<std::string>());
+    // modify the array to make sure we make a copy
+    array[0] = 666;
+    object["hello"] = "dummy";
+
+    REQUIRE("[42,{\"hello\":\"world\"}]" == variant1.as<std::string>());
   }
 }

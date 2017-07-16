@@ -25,7 +25,7 @@ template <typename TStringRef>
 inline JsonObject &JsonObject::createNestedObject_impl(TStringRef key) {
   JsonObject *object = new (_buffer) JsonObject(_buffer);
   if (!object) return JsonObject::invalid();
-  set(key, *object);
+  set(key, object);
   return *object;
 }
 }

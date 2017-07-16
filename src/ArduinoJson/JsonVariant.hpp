@@ -151,6 +151,12 @@ class JsonVariant : public JsonVariantBase<JsonVariant> {
     return *this;
   }
 
+  inline JsonVariant &operator=(JsonObject *object) {
+    _content.asObject = object;
+    _type = Internals::JSON_OBJECT;
+    return *this;
+  }
+
   // Get the variant as the specified type.
   //
   // char as<char>() const;
