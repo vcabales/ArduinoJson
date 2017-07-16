@@ -84,8 +84,9 @@ class JsonObject : public Internals::JsonPrintable<JsonObject>,
   //
   // bool set(TKey, TValue);
   // TKey = const std::string&, const String&
-  // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
+  // TValue = bool, long, int, short, float, double, RawJson,
   //          const std::string&, const String&,
+  //          const JsonVariant&,
   //          const JsonArray&, const JsonObject&
   template <typename TValue, typename TString>
   typename TypeTraits::EnableIf<!TypeTraits::IsArray<TString>::value &&

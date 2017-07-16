@@ -141,8 +141,13 @@ class JsonVariant : public JsonVariantBase<JsonVariant> {
   JsonVariant &operator=(const JsonObject &object);
 
   template <typename T>
-  JsonVariant &operator=(const JsonVariantBase<T> &variant) {
-    *this = variant.template as<JsonVariant>();
+  JsonVariant &operator=(const JsonVariantBase<T> &variant);
+
+  JsonVariant &operator=(const JsonVariant &variant);
+
+  inline JsonVariant &operator=(JsonArray *array) {
+    _content.asArray = array;
+    _type = Internals::JSON_ARRAY;
     return *this;
   }
 

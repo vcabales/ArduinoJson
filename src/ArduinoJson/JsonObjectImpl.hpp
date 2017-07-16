@@ -17,7 +17,7 @@ template <typename TStringRef>
 inline JsonArray &JsonObject::createNestedArray_impl(TStringRef key) {
   JsonArray *array = new (_buffer) JsonArray(_buffer);
   if (!array) return JsonArray::invalid();
-  set(key, *array);
+  set(key, array);
   return *array;
 }
 

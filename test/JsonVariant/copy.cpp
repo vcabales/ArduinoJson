@@ -41,7 +41,7 @@ TEST_CASE("JsonVariant::operator=(const JsonVariant&)") {
     variant2 = variant1;
     variant1 = "world";
 
-    REQUIRE(std::string("hello") == variant2.as<const char *>());
+    REQUIRE(std::string("hello") == variant2.as<const char*>());
   }
 
   SECTION("string") {
@@ -54,24 +54,34 @@ TEST_CASE("JsonVariant::operator=(const JsonVariant&)") {
     REQUIRE(std::string("hello") == variant2.as<std::string>());
   }
 
-  SECTION("object") {
+  SECTION("JsonObject") {
     DynamicJsonObject object;
-
     object["hello"] = "world";
-    variant1 = object;
-    object["hello"] = "dummy";
+    JsonArray& arr = object.createNestedArray("values");
+    arr.add(42);
 
-    REQUIRE(1 == variant1.as<JsonObject>().size());
-    REQUIRE(std::string("world") == variant1["hello"]);
+    std::string s;
+    object.printTo(s);
+    REQUIRE("{\"hello\":\"world\",\"values\":[42]}" == s);
+
+    variant1 = object;
+
+    // modifiy object to make sure we made a copy
+    object["hello"] = "dummy";
+    arr.add(666);
+
+    REQUIRE("{\"hello\":\"world\",\"values\":[42]}" ==
+            variant1.as<std::string>());
   }
 
-  SECTION("ArraysAreCopiedByReference") {
+  SECTION("JsonArray") {
     DynamicJsonArray array;
 
-    variant1 = array;
-
+    array.add("hello");
     array.add("world");
+    variant1 = array;
+    array[1] = 666;
 
-    REQUIRE(1 == variant1.as<JsonArray>().size());
+    REQUIRE("[\"hello\",\"world\"]" == variant1.as<std::string>());
   }
 }
