@@ -44,6 +44,15 @@ class JsonArray : public Internals::JsonPrintable<JsonArray>,
   explicit JsonArray(Internals::JsonBuffer *buffer) throw()
       : Internals::List<JsonVariant>(buffer) {}
 
+  JsonArray &operator=(const JsonArray &other) {
+    clear();
+    for (JsonArray::const_iterator it = other.begin(); it != other.end();
+         ++it) {
+      add(*it);
+    }
+    return *this;
+  }
+
   // Gets the value at the specified index
   const JsonArraySubscript operator[](size_t index) const;
 

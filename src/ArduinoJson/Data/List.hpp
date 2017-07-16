@@ -90,6 +90,10 @@ class List {
  protected:
   JsonBuffer *_buffer;
 
+  void clear() {
+    _firstNode = NULL;
+  }
+
  private:
   node_type *_firstNode;
 };

@@ -18,6 +18,8 @@ class DynamicJsonArray : public JsonArray {
  public:
   DynamicJsonArray() : JsonArray(&_buffer) {}
 
+  using JsonArray::operator=;
+
   Internals::DynamicJsonBuffer& buffer() {
     return _buffer;
   }

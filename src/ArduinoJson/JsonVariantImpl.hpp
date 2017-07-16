@@ -26,9 +26,7 @@ inline JsonVariant &JsonVariant::operator=(const JsonArray &array) {
   _content.asArray = new (_buffer) JsonArray(_buffer);
   if (!_content.asArray) goto fail;
 
-  for (JsonArray::const_iterator it = array.begin(); it != array.end(); ++it) {
-    _content.asArray->add(*it);
-  }
+  _content.asArray->operator=(array);
 
   _type = Internals::JSON_ARRAY;
   return *this;
@@ -59,7 +57,7 @@ fail:
 
 template <typename T>
 inline JsonVariant &JsonVariant::operator=(const JsonVariantBase<T> &variant) {
-  return operator=(variant.as<JsonVariant>());
+  return operator=(variant.template as<JsonVariant>());
 }
 
 inline JsonVariant &JsonVariant::operator=(const JsonVariant &variant) {
