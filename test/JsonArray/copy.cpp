@@ -59,4 +59,9 @@ TEST_CASE("StaticJsonArray::operator=()") {
     array = buildArray<StaticJsonArray<SIZE> >();
     validateArray(array);
   }
+
+  SECTION("operator=(const StaticJsonArray<N+1>&)") {
+    array = buildArray<StaticJsonArray<SIZE + 1> >();
+    validateArray(array);
+  }
 }
