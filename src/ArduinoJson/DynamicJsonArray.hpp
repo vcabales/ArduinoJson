@@ -18,7 +18,20 @@ class DynamicJsonArray : public JsonArray {
  public:
   DynamicJsonArray() : JsonArray(&_buffer) {}
 
+  DynamicJsonArray(const DynamicJsonArray& other) : JsonArray(&_buffer) {
+    JsonArray::operator=(other);
+  }
+
+  DynamicJsonArray(const JsonArray& other) : JsonArray(&_buffer) {
+    JsonArray::operator=(other);
+  }
+
   using JsonArray::operator=;
+
+  DynamicJsonArray& operator=(const DynamicJsonArray& other) {
+    JsonArray::operator=(other);
+    return *this;
+  }
 
   Internals::DynamicJsonBuffer& buffer() {
     return _buffer;
