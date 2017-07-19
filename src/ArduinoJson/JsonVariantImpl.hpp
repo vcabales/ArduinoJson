@@ -42,10 +42,7 @@ inline JsonVariant &JsonVariant::operator=(const JsonObject &object) {
   _content.asObject = new (_buffer) JsonObject(_buffer);
   if (!_content.asObject) goto fail;
 
-  for (JsonObject::const_iterator it = object.begin(); it != object.end();
-       ++it) {
-    _content.asObject->set(it->key, it->value);
-  }
+  _content.asObject->operator=(object);
 
   _type = Internals::JSON_OBJECT;
   return *this;

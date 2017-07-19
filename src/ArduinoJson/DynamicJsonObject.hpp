@@ -17,11 +17,36 @@ class DynamicJsonObject : public JsonObject {
 
  public:
   DynamicJsonObject() : JsonObject(&_buffer) {}
+
   DynamicJsonObject(size_t initalCapacity)
       : JsonObject(&_buffer), _buffer(initalCapacity) {}
 
+  DynamicJsonObject(const DynamicJsonObject& other) : JsonObject(&_buffer) {
+    JsonObject::operator=(other);
+  }
+
+  DynamicJsonObject(const JsonObject& other) : JsonObject(&_buffer) {
+    JsonObject::operator=(other);
+  }
+
+  DynamicJsonObject& operator=(const DynamicJsonObject& other) {
+    _buffer.clear();
+    JsonObject::operator=(other);
+    return *this;
+  }
+
+  DynamicJsonObject& operator=(const JsonObject& other) {
+    _buffer.clear();
+    JsonObject::operator=(other);
+    return *this;
+  }
+
   Internals::DynamicJsonBuffer& buffer() {
     return _buffer;
+  }
+
+  size_t memoryUsage() const {
+    return _buffer.size() + sizeof(JsonObject);
   }
 };
 }

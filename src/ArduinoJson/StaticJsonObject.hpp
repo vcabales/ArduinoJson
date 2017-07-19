@@ -19,6 +19,28 @@ class StaticJsonObject : public JsonObject {
  public:
   StaticJsonObject() : JsonObject(&_buffer) {}
 
+  StaticJsonObject(const StaticJsonObject<CAPACITY>& other)
+      : JsonObject(&_buffer) {
+    JsonObject::operator=(other);
+  }
+
+  StaticJsonObject(const JsonObject& other) : JsonObject(&_buffer) {
+    JsonObject::operator=(other);
+  }
+
+  StaticJsonObject<CAPACITY>& operator=(
+      const StaticJsonObject<CAPACITY>& other) {
+    _buffer.clear();
+    JsonObject::operator=(other);
+    return *this;
+  }
+
+  StaticJsonObject<CAPACITY>& operator=(const JsonObject& other) {
+    _buffer.clear();
+    JsonObject::operator=(other);
+    return *this;
+  }
+
   size_t memoryUsage() const {
     return _buffer.size() + sizeof(JsonObject);
   }

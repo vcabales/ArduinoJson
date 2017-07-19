@@ -40,6 +40,15 @@ class JsonObject : public Internals::JsonPrintable<JsonObject>,
   explicit JsonObject(Internals::JsonBuffer* buffer) throw()
       : Internals::List<JsonPair>(buffer) {}
 
+  JsonObject& operator=(const JsonObject& other) {
+    clear();
+    for (JsonObject::const_iterator it = other.begin(); it != other.end();
+         ++it) {
+      set(it->key, it->value);
+    }
+    return *this;
+  }
+
   // Gets or sets the value associated with the specified key.
   //
   // JsonObjectSubscript operator[](TKey)

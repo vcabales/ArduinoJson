@@ -8,6 +8,7 @@
 add_executable(JsonObjectTests 
 	basics.cpp
 	containsKey.cpp
+	copy.cpp
 	DynamicJsonObject.cpp
 	get.cpp
 	invalid.cpp
