@@ -24,6 +24,18 @@ class StaticJsonArray : public JsonArray {
     JsonArray::operator=(other);
   }
 
+  StaticJsonArray<CAPACITY>& operator=(const StaticJsonArray<CAPACITY>& other) {
+    _buffer.clear();
+    JsonArray::operator=(other);
+    return *this;
+  }
+
+  StaticJsonArray<CAPACITY>& operator=(const JsonArray& other) {
+    _buffer.clear();
+    JsonArray::operator=(other);
+    return *this;
+  }
+
   size_t memoryUsage() const {
     return _buffer.size() + sizeof(JsonArray);
   }

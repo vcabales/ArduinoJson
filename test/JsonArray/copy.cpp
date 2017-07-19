@@ -16,11 +16,15 @@ TArray buildArray() {
   return array;
 }
 
-void validateArray(JsonArray& array) {
+template <typename TArray>
+void validateArray(TArray& array) {
   CHECK(array.size() == 2);
   REQUIRE(array[0] == 42);
-  REQUIRE(array[1].is<JsonObject>());
+  REQUIRE(array[1].template is<JsonObject>());
   REQUIRE(array[1]["hello"] == std::string("world"));
+
+  const int expectedSize = JSON_ARRAY_SIZE(2) + JSON_OBJECT_SIZE(1);
+  REQUIRE(expectedSize == array.memoryUsage());
 }
 
 TEST_CASE("DynamicJsonArray::operator=()") {
@@ -35,6 +39,23 @@ TEST_CASE("DynamicJsonArray::operator=()") {
 
   SECTION("operator=(const StaticJsonArray<N>&)") {
     const size_t SIZE = JSON_ARRAY_SIZE(2) + JSON_OBJECT_SIZE(1);
+    array = buildArray<StaticJsonArray<SIZE> >();
+    validateArray(array);
+  }
+}
+
+TEST_CASE("StaticJsonArray::operator=()") {
+  const size_t SIZE = JSON_ARRAY_SIZE(2) + JSON_OBJECT_SIZE(1);
+  StaticJsonArray<SIZE> array;
+  array.add(666);
+  array.add(666);
+
+  SECTION("operator=(const DynamicJsonArray&)") {
+    array = buildArray<DynamicJsonArray>();
+    validateArray(array);
+  }
+
+  SECTION("operator=(const StaticJsonArray<N>&)") {
     array = buildArray<StaticJsonArray<SIZE> >();
     validateArray(array);
   }

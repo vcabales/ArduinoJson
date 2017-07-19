@@ -26,11 +26,20 @@ class DynamicJsonArray : public JsonArray {
     JsonArray::operator=(other);
   }
 
-  using JsonArray::operator=;
-
   DynamicJsonArray& operator=(const DynamicJsonArray& other) {
+    _buffer.clear();
     JsonArray::operator=(other);
     return *this;
+  }
+
+  DynamicJsonArray& operator=(const JsonArray& other) {
+    _buffer.clear();
+    JsonArray::operator=(other);
+    return *this;
+  }
+
+  size_t memoryUsage() const {
+    return _buffer.size() + sizeof(JsonArray);
   }
 
   Internals::DynamicJsonBuffer& buffer() {
