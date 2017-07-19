@@ -8,6 +8,7 @@
 add_executable(JsonArrayTests 
 	add.cpp
 	basics.cpp
+	copy.cpp
 	copyFrom.cpp
 	copyTo.cpp
 	DynamicJsonArray.cpp
