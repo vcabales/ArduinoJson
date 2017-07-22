@@ -100,13 +100,13 @@ function generateParser(jsonString, expression) {
   prg.addEmptyLine();
   if (root instanceof Array) {
     prg.addLine('JsonArray& root = jsonBuffer.parseArray(json);');
+    extractValue(prg, root, "root", "root_");
   } else if (root instanceof Object) {
     prg.addLine('JsonObject& root = jsonBuffer.parseObject(json);');
+    extractValue(prg, root, "root");
   } else {
     prg.addLine('JsonVariant root = jsonBuffer.parse(json);');
   }
-
-  extractValue(prg, root, "root");
 
   return prg.toString();
 }
