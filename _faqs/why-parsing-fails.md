@@ -6,13 +6,14 @@ faq-group: Deserialization
 faq-popularity: 151
 ---
 
-The parsing functions, `parseArray()` and `parseObject()`, may fail for 5 reasons:
+The parsing functions, `parseArray()` and `parseObject()`, may fail for 6 reasons:
 
 1. [The input is not a valid JSON](#case-1-the-input-is-not-a-valid-json)
 2. [The `StaticJsonBuffer` is too small](#case-2-the-staticjsonbuffer-is-too-small)
 3. [The `StaticJsonBuffer` is too big (stack overflow)](#case-3-the-staticjsonbuffer-is-too-big)
 4. [The `DynamicJsonBuffer` fails to allocate memory](#case-4-the-dynamicjsonbuffer-fails-to-allocate-memory)
 5. [You called `parseObject()` instead of `parseArray()`](#case-5-you-called-parseobject-instead-of-parsearray)
+6. [The nesting limit is too low](#case-6-the-nesting-limit-is-too-low)
 
 ## Case 1: The input is not a valid JSON
 
@@ -89,3 +90,12 @@ then you must call [`parseArray()`]({{site.baseurl}}/api/jsonbuffer/parsearray) 
 Finally, if you cannot know in advance the type of the root, simply use [`JsonBuffer::parse()`]({{site.baseurl}}/api/jsonbuffer/parse/) which returns a `JsonVariant`.
 
 See also: [Parsing succeeds but I can't read the values!]({{site.baseurl}}/faq/parsing-succeeds-but-i-cant-read-the-values/)
+
+## Case 6: The nesting limit is too low
+
+This can happen if you're parsing an array or an object with many nesting levels, i.e. with a very deep layout.
+
+You can solve this in two ways:
+
+1. You can pass an additional argument to [`parseObject()`]({{site.baseurl}}/api/jsonbuffer/parseobject) to specify the new limit.
+2. You can define [`ARDUINOJSON_DEFAULT_NESTING_LIMIT`]({{site.baseurl}}/api/config/default_nesting_limit) which is the default for this argument
