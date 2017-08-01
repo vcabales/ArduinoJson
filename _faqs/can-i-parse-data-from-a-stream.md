@@ -14,12 +14,14 @@ Since ArduinoJson 5.8, `parseArray()` and `parseObject()` accept Arduino's `Stre
 JsonObject& root = jsonObject.parseObject(myStream);
 ```
 
-CAUTION: parts of the input need to be copied into the `JsonBuffer`, so you need to increase its capacity accordingly.
+Parts of the input need to be copied into the `JsonBuffer`, so you need to increase its capacity accordingly (the [Assistant]({{site.baseurl}}/assistant/) gives the required size).
+
+The parser only copies the relevant part of the input, skipping the spaces and the punctuation.
+This is way more efficient than copying the whole input in a `char[]` and then call `parseObject()`.
 
 See:
 
-* [Examples: JsonHttpClient.ino](https://github.com/bblanchon/ArduinoJson/blob/master/examples/JsonHttpClient/JsonHttpClient.ino#L149)
-* [API Reference: JsonBuffer::parseArray()](https://github.com/bblanchon/ArduinoJson/wiki/API%20Reference#jsonbufferparsearray)
-* [API Reference: JsonBuffer::parseObject()](https://github.com/bblanchon/ArduinoJson/wiki/API%20Reference#jsonbufferparseobject)
-* [JsonBuffer size calculator](https://bblanchon.github.io/ArduinoJson/)
-* Issues [#119](https://github.com/bblanchon/ArduinoJson/issues/119), [#300](https://github.com/bblanchon/ArduinoJson/issues/300), [#422](https://github.com/bblanchon/ArduinoJson/issues/422) and [#429](https://github.com/bblanchon/ArduinoJson/issues/429)
+* [Examples: JsonHttpClient.ino]({{site.baseurl}}/example/http-client/)
+* [API Reference: JsonBuffer::parseArray()]({{site.baseurl}}/api/jsonbuffer/parsearray/)
+* [API Reference: JsonBuffer::parseObject()]({{site.baseurl}}/api/jsonbuffer/parseobject/)
+
