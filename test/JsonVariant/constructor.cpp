@@ -8,41 +8,37 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
-TEST_CASE("DynamicJsonVariant::operator=") {
-  DynamicJsonVariant variant = std::string("ensures JsonBuffer is cleared");
-
+TEST_CASE("DynamicJsonVariant::DynamicJsonVariant()") {
   SECTION("int") {
-    variant = 123;
+    DynamicJsonVariant variant = 123;
 
     REQUIRE(123 == variant.as<int>());
     REQUIRE(sizeof(JsonVariant) == variant.memoryUsage());
   }
 
   SECTION("double") {
-    variant = 123.45;
+    DynamicJsonVariant variant = 123.45;
 
     REQUIRE(123.45 == variant.as<double>());
     REQUIRE(sizeof(JsonVariant) == variant.memoryUsage());
   }
 
   SECTION("bool") {
-    variant = true;
+    DynamicJsonVariant variant = true;
 
     REQUIRE(variant.as<bool>());
     REQUIRE(sizeof(JsonVariant) == variant.memoryUsage());
   }
 
   SECTION("const char*") {
-    variant = "hello";
+    DynamicJsonVariant variant = "hello";
 
     REQUIRE(std::string("hello") == variant.as<const char*>());
     REQUIRE(sizeof(JsonVariant) == variant.memoryUsage());
   }
 
   SECTION("std::string") {
-    std::string s("hello");
-
-    variant = s;
+    DynamicJsonVariant variant = std::string("hello");
 
     REQUIRE(std::string("hello") == variant.as<std::string>());
     REQUIRE(sizeof(JsonVariant) + 6 == variant.memoryUsage());
@@ -53,7 +49,8 @@ TEST_CASE("DynamicJsonVariant::operator=") {
     object["hello"] = "world";
     JsonArray& arr = object.createNestedArray("values");
     arr.add(42);
-    variant = object;
+
+    DynamicJsonVariant variant = object;
 
     // modifiy object to make sure we made a copy
     object["hello"] = "dummy";
@@ -68,7 +65,8 @@ TEST_CASE("DynamicJsonVariant::operator=") {
     array.add(42);
     JsonObject& object = array.createNestedObject();
     object["hello"] = "world";
-    variant = array;
+
+    DynamicJsonVariant variant = array;
 
     // modify the array to make sure we make a copy
     array[0] = 666;
