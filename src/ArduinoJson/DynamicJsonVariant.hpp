@@ -24,15 +24,18 @@ class DynamicJsonVariant : public JsonVariant {
 
   template <typename T>
   DynamicJsonVariant(const T& value) : JsonVariant(&_buffer) {
+    // TODO: clear
     JsonVariant::operator=(value);
   }
 
   template <typename T>
   DynamicJsonVariant(const T* value) : JsonVariant(&_buffer) {
+    // TODO: clear
     JsonVariant::operator=(value);
   }
 
   DynamicJsonVariant& operator=(const DynamicJsonVariant& other) {
+    // TODO: clear
     JsonVariant::operator=(other);
     return *this;
   }
@@ -41,6 +44,10 @@ class DynamicJsonVariant : public JsonVariant {
 
   Internals::DynamicJsonBuffer& buffer() {
     return _buffer;
+  }
+
+  size_t memoryUsage() const {
+    return _buffer.size() + sizeof(JsonVariant);
   }
 };
 }

@@ -23,7 +23,7 @@ void validateArray(TArray& array) {
   REQUIRE(array[1].template is<JsonObject>());
   REQUIRE(array[1]["hello"] == std::string("world"));
 
-  const int expectedSize = JSON_ARRAY_SIZE(2) + JSON_OBJECT_SIZE(1);
+  const size_t expectedSize = JSON_ARRAY_SIZE(2) + JSON_OBJECT_SIZE(1);
   REQUIRE(expectedSize == array.memoryUsage());
 }
 

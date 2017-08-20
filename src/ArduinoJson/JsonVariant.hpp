@@ -17,6 +17,7 @@
 #include "JsonVariantBase.hpp"
 #include "RawJson.hpp"
 #include "Serialization/JsonPrintable.hpp"
+#include "StringTraits/StringTraits.hpp"
 #include "TypeTraits/EnableIf.hpp"
 #include "TypeTraits/IsChar.hpp"
 #include "TypeTraits/IsFloatingPoint.hpp"
@@ -115,6 +116,20 @@ class JsonVariant : public JsonVariantBase<JsonVariant> {
   operator=(const TChar *value) {
     _type = Internals::JSON_STRING;
     _content.asString = reinterpret_cast<const char *>(value);
+    return *this;
+  }
+
+  template <typename TString>
+  typename TypeTraits::EnableIf<
+      Internals::StringTraits<TString>::should_duplicate, JsonVariant &>::type
+  operator=(const TString &value) {
+    const char *copy = _buffer->strdup(value);
+    if (copy) {
+      _type = Internals::JSON_STRING;
+      _content.asString = copy;
+    } else {
+      _type = Internals::JSON_UNDEFINED;
+    }
     return *this;
   }
 
