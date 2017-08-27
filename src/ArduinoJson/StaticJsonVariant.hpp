@@ -38,5 +38,9 @@ class StaticJsonVariant : public JsonVariant {
   Internals::StaticJsonBufferBase& buffer() {
     return _buffer;
   }
+
+  size_t memoryUsage() const {
+    return _buffer.size() + sizeof(JsonVariant);
+  }
 };
 }
