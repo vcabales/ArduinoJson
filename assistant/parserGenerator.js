@@ -89,6 +89,15 @@ function extractValue(prg, value, member, prefix)
   }
 }
 
+function measureNesting(obj) {
+  if (obj instanceof Object === false) return 0;
+  var innerNesting = 0;
+  for (var key in obj) {
+    innerNesting = Math.max(innerNesting, measureNesting(obj[key]));
+  }
+  return 1 + innerNesting;
+}
+
 function generateParser(jsonString, expression) {
   var prg = new ProgramWriter();
   var root = JSON.parse(jsonString);
@@ -98,14 +107,18 @@ function generateParser(jsonString, expression) {
   prg.addEmptyLine();
   prg.addLine('const char* json = "'+ JSON.stringify(root).replace(/"/g, '\\"') + '";');
   prg.addEmptyLine();
+  var nesting = measureNesting(root);
+  var argsToParse = "json";
+  if (nesting>10)
+    argsToParse  = argsToParse + ", " + nesting;
   if (root instanceof Array) {
-    prg.addLine('JsonArray& root = jsonBuffer.parseArray(json);');
+    prg.addLine('JsonArray& root = jsonBuffer.parseArray(' + argsToParse + ');');
     extractValue(prg, root, "root", "root_");
   } else if (root instanceof Object) {
-    prg.addLine('JsonObject& root = jsonBuffer.parseObject(json);');
+    prg.addLine('JsonObject& root = jsonBuffer.parseObject(' + argsToParse + ');');
     extractValue(prg, root, "root");
   } else {
-    prg.addLine('JsonVariant root = jsonBuffer.parse(json);');
+    prg.addLine('JsonVariant root = jsonBuffer.parse(' + argsToParse + ');');
   }
 
   return prg.toString();
