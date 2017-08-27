@@ -50,7 +50,8 @@ TEST_CASE("DynamicJsonVariant::DynamicJsonVariant()") {
     JsonArray& arr = object.createNestedArray("values");
     arr.add(42);
 
-    const size_t size = JSON_OBJECT_SIZE(2) + JSON_ARRAY_SIZE(1);
+    const size_t size =
+        sizeof(JsonVariant) + JSON_OBJECT_SIZE(2) + JSON_ARRAY_SIZE(1);
     DynamicJsonVariant variant = object;
 
     // modifiy object to make sure we made a copy
@@ -59,7 +60,7 @@ TEST_CASE("DynamicJsonVariant::DynamicJsonVariant()") {
 
     REQUIRE("{\"hello\":\"world\",\"values\":[42]}" ==
             variant.as<std::string>());
-    REQUIRE(size == variant.memoryUsage());  // BUG: copies the keys
+    REQUIRE(size == variant.memoryUsage());
   }
 
   SECTION("JsonArray") {
@@ -68,7 +69,8 @@ TEST_CASE("DynamicJsonVariant::DynamicJsonVariant()") {
     JsonObject& object = array.createNestedObject();
     object["hello"] = "world";
 
-    const size_t size = JSON_ARRAY_SIZE(2) + JSON_OBJECT_SIZE(1);
+    const size_t size =
+        sizeof(JsonVariant) + JSON_ARRAY_SIZE(2) + JSON_OBJECT_SIZE(1);
     DynamicJsonVariant variant = array;
 
     // modify the array to make sure we make a copy
@@ -76,7 +78,7 @@ TEST_CASE("DynamicJsonVariant::DynamicJsonVariant()") {
     object["hello"] = "dummy";
 
     REQUIRE("[42,{\"hello\":\"world\"}]" == variant.as<std::string>());
-    REQUIRE(size == variant.memoryUsage());  // BUG: copies the keys
+    REQUIRE(size == variant.memoryUsage());
   }
 
   SECTION("DynamicJsonVariant") {
@@ -91,7 +93,7 @@ TEST_CASE("DynamicJsonVariant::DynamicJsonVariant()") {
   // StaticJsonVariant
   //
   // SECTION("StaticJsonVariant") {
-  //   StaticJsonVariant<10> original = 123;
+  //   StaticJsonVariant<200> original = 123;
   //   DynamicJsonVariant variant = original;
 
   //   REQUIRE(123 == variant.as<int>());
@@ -101,35 +103,35 @@ TEST_CASE("DynamicJsonVariant::DynamicJsonVariant()") {
 
 TEST_CASE("StaticJsonVariant::StaticJsonVariant()") {
   SECTION("int") {
-    StaticJsonVariant<10> variant = 123;
+    StaticJsonVariant<200> variant = 123;
 
     REQUIRE(123 == variant.as<int>());
     REQUIRE(sizeof(JsonVariant) == variant.memoryUsage());
   }
 
   SECTION("double") {
-    StaticJsonVariant<10> variant = 123.45;
+    StaticJsonVariant<200> variant = 123.45;
 
     REQUIRE(123.45 == variant.as<double>());
     REQUIRE(sizeof(JsonVariant) == variant.memoryUsage());
   }
 
   SECTION("bool") {
-    StaticJsonVariant<10> variant = true;
+    StaticJsonVariant<200> variant = true;
 
     REQUIRE(variant.as<bool>());
     REQUIRE(sizeof(JsonVariant) == variant.memoryUsage());
   }
 
   SECTION("const char*") {
-    StaticJsonVariant<10> variant = "hello";
+    StaticJsonVariant<200> variant = "hello";
 
     REQUIRE(std::string("hello") == variant.as<const char*>());
     REQUIRE(sizeof(JsonVariant) == variant.memoryUsage());
   }
 
   SECTION("std::string") {
-    StaticJsonVariant<10> variant = std::string("hello");
+    StaticJsonVariant<200> variant = std::string("hello");
 
     REQUIRE(std::string("hello") == variant.as<std::string>());
     REQUIRE(sizeof(JsonVariant) + 6 == variant.memoryUsage());
@@ -141,7 +143,8 @@ TEST_CASE("StaticJsonVariant::StaticJsonVariant()") {
     JsonArray& arr = object.createNestedArray("values");
     arr.add(42);
 
-    const size_t size = JSON_OBJECT_SIZE(2) + JSON_ARRAY_SIZE(1);
+    const size_t size =
+        sizeof(JsonVariant) + JSON_OBJECT_SIZE(2) + JSON_ARRAY_SIZE(1);
     StaticJsonVariant<size> variant = object;
 
     // modifiy object to make sure we made a copy
@@ -150,7 +153,7 @@ TEST_CASE("StaticJsonVariant::StaticJsonVariant()") {
 
     REQUIRE("{\"hello\":\"world\",\"values\":[42]}" ==
             variant.as<std::string>());
-    REQUIRE(size == variant.memoryUsage());  // BUG: copies the keys
+    REQUIRE(size == variant.memoryUsage());
   }
 
   SECTION("JsonArray") {
@@ -159,7 +162,8 @@ TEST_CASE("StaticJsonVariant::StaticJsonVariant()") {
     JsonObject& object = array.createNestedObject();
     object["hello"] = "world";
 
-    const size_t size = JSON_ARRAY_SIZE(2) + JSON_OBJECT_SIZE(1);
+    const size_t size =
+        sizeof(JsonVariant) + JSON_ARRAY_SIZE(2) + JSON_OBJECT_SIZE(1);
     StaticJsonVariant<size> variant = array;
 
     // modify the array to make sure we make a copy
@@ -167,7 +171,7 @@ TEST_CASE("StaticJsonVariant::StaticJsonVariant()") {
     object["hello"] = "dummy";
 
     REQUIRE("[42,{\"hello\":\"world\"}]" == variant.as<std::string>());
-    REQUIRE(size == variant.memoryUsage());  // BUG: copies the keys
+    REQUIRE(size == variant.memoryUsage());
   }
 
   // BUG: it's not possible to construct a StaticJsonVariant from a
@@ -175,7 +179,7 @@ TEST_CASE("StaticJsonVariant::StaticJsonVariant()") {
   //
   // SECTION("DynamicJsonVariant") {
   //   DynamicJsonVariant original = 123;
-  //   StaticJsonVariant<10> variant = original;
+  //   StaticJsonVariant<200> variant = original;
 
   //   REQUIRE(123 == variant.as<int>());
   //   REQUIRE(sizeof(JsonVariant) == variant.memoryUsage());

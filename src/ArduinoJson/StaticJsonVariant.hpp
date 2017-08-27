@@ -14,7 +14,7 @@ namespace ArduinoJson {
 
 template <size_t CAPACITY>
 class StaticJsonVariant : public JsonVariant {
-  Internals::StaticJsonBuffer<CAPACITY> _buffer;
+  Internals::StaticJsonBuffer<CAPACITY - sizeof(JsonVariant)> _buffer;
 
  public:
   StaticJsonVariant() : JsonVariant(&_buffer) {}
@@ -29,11 +29,24 @@ class StaticJsonVariant : public JsonVariant {
   }
 
   StaticJsonVariant& operator=(const StaticJsonVariant& copy) {
+    _buffer.clear();
     JsonVariant::operator=(copy);
     return *this;
   }
 
-  using JsonVariant::operator=;
+  template <typename T>
+  StaticJsonVariant& operator=(const T& value) {
+    _buffer.clear();
+    JsonVariant::operator=(value);
+    return *this;
+  }
+
+  template <typename T>
+  StaticJsonVariant& operator=(const T* value) {
+    _buffer.clear();
+    JsonVariant::operator=(value);
+    return *this;
+  }
 
   Internals::StaticJsonBufferBase& buffer() {
     return _buffer;
