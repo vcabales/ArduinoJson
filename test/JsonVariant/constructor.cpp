@@ -74,4 +74,23 @@ TEST_CASE("DynamicJsonVariant::DynamicJsonVariant()") {
 
     REQUIRE("[42,{\"hello\":\"world\"}]" == variant.as<std::string>());
   }
+
+  SECTION("DynamicJsonVariant") {
+    DynamicJsonVariant original = 123;
+    DynamicJsonVariant variant = original;
+
+    REQUIRE(123 == variant.as<int>());
+    REQUIRE(sizeof(JsonVariant) == variant.memoryUsage());
+  }
+
+  // BUG: it's not possible to construct a DynamicJsonVariant from a
+  // StaticJsonVariant
+  //
+  // SECTION("StaticJsonVariant") {
+  //   StaticJsonVariant<10> original = 123;
+  //   DynamicJsonVariant variant = original;
+
+  //   REQUIRE(123 == variant.as<int>());
+  //   REQUIRE(sizeof(JsonVariant) == variant.memoryUsage());
+  // }
 }
