@@ -19,8 +19,14 @@ class StaticJsonVariant : public JsonVariant {
  public:
   StaticJsonVariant() : JsonVariant(&_buffer) {}
 
+  StaticJsonVariant(const StaticJsonVariant& other) : JsonVariant(&_buffer) {
+    JsonVariant::operator=(other);
+  }
+
   template <typename T>
-  StaticJsonVariant(const T& value) : JsonVariant(&_buffer, value) {}
+  StaticJsonVariant(const T& value) : JsonVariant(&_buffer) {
+    JsonVariant::operator=(value);
+  }
 
   StaticJsonVariant& operator=(const StaticJsonVariant& copy) {
     JsonVariant::operator=(copy);

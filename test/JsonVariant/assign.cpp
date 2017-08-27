@@ -76,4 +76,21 @@ TEST_CASE("DynamicJsonVariant::operator=") {
 
     REQUIRE("[42,{\"hello\":\"world\"}]" == variant.as<std::string>());
   }
+
+  SECTION("DynamicJsonVariant") {
+    DynamicJsonVariant v = 42;
+
+    variant = v;
+
+    REQUIRE(42 == variant.as<int>());
+    REQUIRE(sizeof(JsonVariant) == variant.memoryUsage());
+  }
+
+  SECTION("StaticJsonVariant") {
+    StaticJsonVariant<10> v = 42;
+    variant = v;
+
+    REQUIRE(42 == variant.as<int>());
+    REQUIRE(sizeof(JsonVariant) == variant.memoryUsage());
+  }
 }
