@@ -69,6 +69,13 @@ class DynamicJsonBufferBase : public JsonBuffer {
     return canAllocInHead(bytes) ? allocInHead(bytes) : allocInNewBlock(bytes);
   }
 
+  virtual bool owns(const void* ptr) const {
+    for (const Block* b = _head; b; b = b->next) {
+      if (ptr >= b->data && ptr < b->data + b->capacity) return true;
+    }
+    return false;
+  }
+
   // Resets the buffer.
   // USE WITH CAUTION: this invalidates all previously allocated data
   void clear() {

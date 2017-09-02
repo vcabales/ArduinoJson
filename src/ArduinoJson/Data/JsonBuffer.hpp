@@ -47,6 +47,8 @@ class JsonBuffer : Internals::NonCopyable {
   // Return a pointer to the allocated memory or NULL if allocation fails.
   virtual void *alloc(size_t size) = 0;
 
+  virtual bool owns(const void *ptr) const = 0;
+
  protected:
   // CAUTION: NO VIRTUAL DESTRUCTOR!
   // If we add a virtual constructor the Arduino compiler will add malloc()

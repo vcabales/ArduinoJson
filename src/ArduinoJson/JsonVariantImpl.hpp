@@ -61,8 +61,17 @@ inline JsonVariant &JsonVariant::operator=(const JsonVariant &variant) {
   using namespace Internals;
   if (variant.is<JsonArray>()) return operator=(variant.as<JsonArray>());
   if (variant.is<JsonObject>()) return operator=(variant.as<JsonObject>());
-  _content = variant._content;
-  _type = variant._type;
+  if (variant.is<char *>()) {
+    const char *str = variant.as<char *>();
+    if (variant._buffer->owns(str)) {
+      str = _buffer->strdup(str);
+    }
+    _type = JSON_STRING;
+    _content.asString = str;
+  } else {
+    _content = variant._content;
+    _type = variant._type;
+  }
   return *this;
 }
 

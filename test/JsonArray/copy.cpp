@@ -8,23 +8,27 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
+static const size_t SIZE = JSON_ARRAY_SIZE(3) + 2 * JSON_OBJECT_SIZE(1) + 8;
+
 template <typename TArray>
 TArray buildArray() {
   TArray array;
   array.add(42);
-  array.createNestedObject()["hello"] = "world";
+  array.createNestedObject()["abcdefg"] = "abcdefg";
+  array.createNestedObject()["ABCDEFG"] = std::string("ABCDEFG");
   return array;
 }
 
 template <typename TArray>
 void validateArray(TArray& array) {
-  CHECK(array.size() == 2);
+  CHECK(array.size() == 3);
   REQUIRE(array[0] == 42);
   REQUIRE(array[1].template is<JsonObject>());
-  REQUIRE(array[1]["hello"] == std::string("world"));
+  REQUIRE(array[1]["abcdefg"] == std::string("abcdefg"));
+  REQUIRE(array[2].template is<JsonObject>());
+  REQUIRE(array[2]["ABCDEFG"] == std::string("ABCDEFG"));
 
-  const size_t expectedSize = JSON_ARRAY_SIZE(2) + JSON_OBJECT_SIZE(1);
-  REQUIRE(expectedSize == array.memoryUsage());
+  REQUIRE(SIZE == array.memoryUsage());
 }
 
 TEST_CASE("DynamicJsonArray::operator=()") {
@@ -38,14 +42,12 @@ TEST_CASE("DynamicJsonArray::operator=()") {
   }
 
   SECTION("operator=(const StaticJsonArray<N>&)") {
-    const size_t SIZE = JSON_ARRAY_SIZE(2) + JSON_OBJECT_SIZE(1);
     array = buildArray<StaticJsonArray<SIZE> >();
     validateArray(array);
   }
 }
 
 TEST_CASE("StaticJsonArray::operator=()") {
-  const size_t SIZE = JSON_ARRAY_SIZE(2) + JSON_OBJECT_SIZE(1);
   StaticJsonArray<SIZE> array;
   array.add(666);
   array.add(666);

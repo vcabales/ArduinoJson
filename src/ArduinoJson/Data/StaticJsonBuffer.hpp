@@ -62,6 +62,10 @@ class StaticJsonBufferBase : public JsonBuffer {
     return doAlloc(bytes);
   }
 
+  virtual bool owns(const void* ptr) const {
+    return ptr >= _buffer && ptr < _buffer + _size;
+  }
+
   // Resets the buffer.
   // USE WITH CAUTION: this invalidates all previously allocated data
   void clear() {
