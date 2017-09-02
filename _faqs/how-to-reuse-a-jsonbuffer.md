@@ -3,7 +3,7 @@ title: How to reuse a <code>JsonBuffer</code>?
 layout: faq
 tags: faq
 faq-group: Common
-faq-popularity: 257
+faq-popularity: 639
 ---
 
 ### Disclaimer

@@ -3,6 +3,7 @@ title: "Atmel Studio"
 layout: faq
 tags: faq
 faq-group: Known problems
+faq-popularity: 13
 ---
 
 >:warning: To use ArduinoJson within Atmel Studio 7, **do not** use the "Add Arduino Library" feature.

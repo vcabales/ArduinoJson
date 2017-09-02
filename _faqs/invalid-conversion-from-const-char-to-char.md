@@ -3,7 +3,7 @@ title: "Error: <code>invalid conversion from 'const char*' to 'char*' [-fpermiss
 layout: faq
 tags: faq
 faq-group: Deserialization
-faq-popularity: 0
+faq-popularity: 65
 ---
 
 ArduinoJson returns keys and values as `const char*`.

@@ -3,7 +3,7 @@ title: How to insert a <code>null</code>?
 layout: faq
 tags: faq
 faq-group: Serialization
-faq-popularity: 20
+faq-popularity: 53
 ---
 
 There are two ways to serialize a `null`:

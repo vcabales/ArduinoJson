@@ -3,7 +3,7 @@ title: Parsing succeeds but I can't read the values!
 layout: faq
 tags: faq
 faq-group: Deserialization
-faq-popularity: 40
+faq-popularity: 86
 ---
 
 99.999% of the time, this is caused by a confusion between arrays and objects.

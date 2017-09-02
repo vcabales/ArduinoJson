@@ -3,7 +3,7 @@ title: "Error: <code>invalid conversion from 'const char*' to 'int' [-fpermissiv
 layout: faq
 tags: faq
 faq-group: Deserialization
-faq-popularity: 67
+faq-popularity: 124
 ---
 
 Let's say you have the following JSON to parse:

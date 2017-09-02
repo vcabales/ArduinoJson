@@ -3,7 +3,7 @@ title: "ESP32"
 layout: faq
 tags: faq
 faq-group: Known problems
-faq-popularity: 63
+faq-popularity: 112
 ---
 
 There is currently a bug in the [Arduino Core for ESP32](https://github.com/espressif/arduino-esp32) causing the following error:

@@ -3,7 +3,7 @@ title: Why shouldn't I use a global <code>JsonBuffer</code>?
 layout: faq
 tags: faq
 faq-group: Common
-faq-popularity: 156
+faq-popularity: 244
 ---
 
 `StaticJsonBuffer` and `DynamicJsonBuffer` are designed to be throwaway memory pools, they are not intended to be reused.
