@@ -8,6 +8,7 @@ HEAD
 * Added `parseJson()`
 * Removed `JsonBuffer::parserArray()` and `parseObject()`
 * Removed all deprecated features.
+* Fixed `DynamicJsonBuffer::clear()` not resetting allocation size (issue #561)
 
 ### BREAKING CHANGES :warning:
 

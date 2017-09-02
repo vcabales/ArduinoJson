@@ -53,7 +53,7 @@ class DynamicJsonBufferBase : public JsonBuffer {
       : _head(NULL), _nextBlockCapacity(initialSize) {}
 
   ~DynamicJsonBufferBase() {
-    freeAllBlocks();
+    clear();
   }
 
   // Gets the number of bytes occupied in the buffer
@@ -72,7 +72,13 @@ class DynamicJsonBufferBase : public JsonBuffer {
   // Resets the buffer.
   // USE WITH CAUTION: this invalidates all previously allocated data
   void clear() {
-    freeAllBlocks();
+    Block* currentBlock = _head;
+    while (currentBlock != NULL) {
+      _nextBlockCapacity = currentBlock->capacity;
+      Block* nextBlock = currentBlock->next;
+      _allocator.deallocate(currentBlock);
+      currentBlock = nextBlock;
+    }
     _head = 0;
   }
 
@@ -143,16 +149,6 @@ class DynamicJsonBufferBase : public JsonBuffer {
     block->next = _head;
     _head = block;
     return true;
-  }
-
-  void freeAllBlocks() {
-    Block* currentBlock = _head;
-
-    while (currentBlock != NULL) {
-      Block* nextBlock = currentBlock->next;
-      _allocator.deallocate(currentBlock);
-      currentBlock = nextBlock;
-    }
   }
 
   TAllocator _allocator;
