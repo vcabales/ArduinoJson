@@ -3,7 +3,7 @@ title: CodeBender
 layout: faq
 tags: faq
 faq-group: Known problems
-faq-popularity: 6
+popularity: 6
 ---
 
 For some reason, it's not possible to use ArduinoJson with CodeBender.

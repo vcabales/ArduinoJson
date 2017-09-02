@@ -3,7 +3,7 @@ title: How to iterate over a <code>JsonVariant</code>?
 layout: faq
 tags: faq
 faq-group: Deserialization
-faq-popularity: 0
+popularity: 0
 ---
 
 There is no iterator on `JsonVariant` because it would be ambiguous.

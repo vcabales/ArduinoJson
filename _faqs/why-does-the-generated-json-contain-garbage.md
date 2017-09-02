@@ -3,7 +3,7 @@ title: Why does the generated JSON contain garbage?
 layout: faq
 tags: faq
 faq-group: Serialization
-faq-popularity: 46
+popularity: 46
 ---
 
 There are two key concepts you need to understand to use ArduinoJson:

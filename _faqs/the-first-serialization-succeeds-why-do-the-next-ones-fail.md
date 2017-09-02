@@ -3,7 +3,7 @@ title: The first serialization succeeds, why do the next ones fail?
 layout: faq
 tags: faq
 faq-group: Serialization
-faq-popularity: 61
+popularity: 61
 ---
 
 This is usually caused by a reused `JsonBuffer`.

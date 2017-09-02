@@ -3,7 +3,7 @@ title: Can I parse data from a stream?
 layout: faq
 tags: faq
 faq-group: Deserialization
-faq-popularity: 82
+popularity: 82
 ---
 
 Yes.

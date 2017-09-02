@@ -3,7 +3,7 @@ title: "Warning: floating constant exceeds range of 'double'"
 layout: faq
 tags: faq
 faq-group: Known problems
-faq-popularity: 11
+popularity: 11
 ---
 
 This may happen if you're targetting a platform where `double`s have only 32-bits.

@@ -3,7 +3,7 @@ title: Why do I have a segmentation fault?
 layout: faq
 tags: faq
 faq-group: Deserialization
-faq-popularity: 21
+popularity: 21
 ---
 
 `parseArray()` and `parseObject()` may cause a segmentation fault if the input string is in a read-only segment.

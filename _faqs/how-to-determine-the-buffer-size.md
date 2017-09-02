@@ -3,7 +3,7 @@ title: How to determine the buffer size?
 layout: faq
 tags: faq
 faq-group: Common
-faq-popularity: 296
+popularity: 296
 ---
 
 There are basically tree approaches here:

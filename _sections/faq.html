@@ -12,20 +12,23 @@ redirect_from:
  - /faq/esp8266/
 ---
 
+{% assign mostpopulars = site.faqs | sort: 'popularity' %}
+{% assign badgethreshold = mostpopulars.last.popularity | divided_by: 3 %}
+
 {% assign groups = site.faqs | group_by: 'faq-group' | sort: 'name' %}
 {% for group in groups %}
 <h3>{{ group.name }}</h3>
 <ul>
-{% assign items = group.items | sort: 'faq-popularity' | reverse %}
+{% assign items = group.items | sort: 'popularity' | reverse %}
 {% for faq in items %}
-  <li><a href="{{ site.baseurl }}{{ faq.url }}">{{ faq.title }}</a></li>
+  <li><a href="{{ site.baseurl }}{{ faq.url }}" {% if faq.popularity > badgethreshold %}class="popular"{% endif %}>{{ faq.title }}</a></li>
 {% endfor %}
 </ul>
 {% endfor %}
 
 <div class="alert alert-info">
 	<h4 class="alert-heading">Cannot find the answer?</h4>
-	<form action="https://github.com/bblanchon/ArduinoJson/issues">
+	<form paction="https://github.com/bblanchon/ArduinoJson/issues">
 		<div class="form-group">
 			<label for="question">Type in the box bellow to search in GitHub issues</label>
 			<input type="text" class="form-control" id="question" name="q" placeholder="My question">
