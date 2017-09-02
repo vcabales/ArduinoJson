@@ -8,14 +8,14 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
-static const size_t SIZE = JSON_ARRAY_SIZE(3) + 2 * JSON_OBJECT_SIZE(1) + 8;
+static const size_t SIZE = JSON_ARRAY_SIZE(3) + 2 * JSON_OBJECT_SIZE(1) + 2 * 8;
 
 template <typename TArray>
 TArray buildArray() {
   TArray array;
   array.add(42);
   array.createNestedObject()["abcdefg"] = "abcdefg";
-  array.createNestedObject()["ABCDEFG"] = std::string("ABCDEFG");
+  array.createNestedObject()[std::string("ABCDEFG")] = std::string("ABCDEFG");
   return array;
 }
 

@@ -44,6 +44,8 @@ class JsonObject : public Internals::JsonPrintable<JsonObject>,
     clear();
     for (JsonObject::const_iterator it = other.begin(); it != other.end();
          ++it) {
+      const char* key = it->key;
+      if (other._buffer->owns(key)) key = _buffer->strdup(key);
       set(it->key, it->value);
     }
     return *this;

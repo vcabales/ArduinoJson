@@ -63,7 +63,7 @@ inline JsonVariant &JsonVariant::operator=(const JsonVariant &variant) {
   if (variant.is<JsonObject>()) return operator=(variant.as<JsonObject>());
   if (variant.is<char *>()) {
     const char *str = variant.as<char *>();
-    if (variant._buffer->owns(str)) {
+    if (variant._buffer != _buffer && variant._buffer->owns(str)) {
       str = _buffer->strdup(str);
     }
     _type = JSON_STRING;
