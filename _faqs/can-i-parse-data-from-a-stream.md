@@ -19,6 +19,24 @@ Parts of the input need to be copied into the `JsonBuffer`, so you need to incre
 The parser only copies the relevant part of the input, skipping the spaces and the punctuation.
 This is way more efficient than copying the whole input in a `char[]` and then call `parseObject()`.
 
+> ## Example: parse JSON from SPIFFS
+>
+> ```c++
+> // Initialize SPIFFS
+> SPIFFS.begin();
+>
+> // Open the File (which implements Stream)
+> File file = SPIFFS.open("config.json", "r");
+>
+> // Let ArduinoJson read directly from File
+> DynamicJsonBuffer jb;
+> JsonObject& config = jb.parseObject(file);
+>
+> // We don't need the file anymore
+> file.close()
+> ```
+{:.alert .alert-success}
+
 See:
 
 * [Examples: JsonHttpClient.ino]({{site.baseurl}}/example/http-client/)
