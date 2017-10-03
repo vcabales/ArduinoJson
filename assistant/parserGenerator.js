@@ -1,10 +1,10 @@
+
 function ProgramWriter() {
   var lines = [];
   var indent = 1;
 
-
   this.addLine = function(line) {
-    lines.push(Array(indent).join("  ") + line);
+    lines.push(Array(indent).join(" ") + line);
   }
 
   this.addEmptyLine = function() {

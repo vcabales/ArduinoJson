@@ -35,6 +35,7 @@ function analyseInput() {
   extraSize = Math.ceil(extraSize / 9) * 10;
 
   $parserPre.innerText = generateParser($input.value, recipe.getExpression() + " + " + extraSize);
+  hljs.highlightBlock($parserPre);
   $parserDiv.style.display = 'block';
 }
 
