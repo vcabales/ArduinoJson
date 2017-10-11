@@ -32,9 +32,8 @@ function analyseInput() {
   }
   results.style.display = 'block';
 
-  extraSize = Math.ceil(extraSize / 9) * 10;
-
-  $parserPre.innerText = generateParser($input.value, recipe.getExpression() + " + " + extraSize);
+  var program = new ParsingProgram();
+  $parserPre.innerHTML = program.generate($input.value, recipe);
   hljs.highlightBlock($parserPre);
   $parserDiv.style.display = 'block';
 }
