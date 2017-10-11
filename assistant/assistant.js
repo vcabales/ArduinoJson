@@ -2,6 +2,7 @@ function analyseInput() {
   results.style.display = 'none';
   error.style.visibility = 'hidden';
   $parserDiv.style.display = 'none';
+  $serializerDiv.style.display = 'none';
 
   var parsedJson;
   try {
