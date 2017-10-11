@@ -7,76 +7,84 @@ popularity: 2
 ---
 
 <div class="container">
-<div class="jumbotron jumbotron-primary">
-  <h1>ArduinoJson Assistant</h1>
-  <p>
-    <i>How to use ArduinoJson?</i><br>
-    <i>How to compute the JsonBuffer size?</i><br>
-    Paste your JSON in the box and you'll know...
-  </p>
-</div>
-<div id='error' class="alert alert-danger" role="alert">
+  <div class="jumbotron jumbotron-primary">
+    <h1>ArduinoJson Assistant</h1>
+    <p>
+      <i>How to use ArduinoJson?</i><br>
+      <i>How to compute the JsonBuffer size?</i><br>
+      Paste your JSON in the box and you'll know...
+    </p>
+  </div>
+  <div id='error' class="alert alert-danger" role="alert">
     Please paste your JSON in the "input" box
-</div>
-<div class="row">
+  </div>
+  <div class="row">
     <div class="col-md-6">
-        <div class="card">
-            <h4 class="card-header card-primary card-inverse">Input</h4>
-            <div class="card-block">
-                <textarea class="form-control" rows=20 id='$input'></textarea><br>
-                <p>Examples:
-                    <a href="#" id="$openweathermapAnchor">OpenWeatherMap</a>, 
-                    <a href="#" id="$wundergroundAnchor">Weather Underground</a>
-                </p>
-            </div>
+      <div class="card">
+        <h4 class="card-header card-primary card-inverse">Input</h4>
+        <div class="card-block">
+          <textarea class="form-control" rows=20 id='$input'></textarea><br>
+          <p>Examples:
+            <a href="#" id="$openweathermapAnchor">OpenWeatherMap</a>, 
+            <a href="#" id="$wundergroundAnchor">Weather Underground</a>
+          </p>
         </div>
+      </div>
     </div>
     <div id='results' class="col-md-6" style='display:none'>
-        <div class="card">
-            <h4 class="card-header card-success card-inverse">JsonBuffer size</h4>
-            <div class="card-block">
-                <h3>Expression</h3>
-                <p><code id='$result_expr'></code></p>
-                <h3>Additional bytes for input duplication</h3>
-                <p><code id='$extra_bytes'></code></p>
-                <table class="table">
-                  <thead>
-                    <tr>
-                        <th>Platform</th>
-                        <th>Size</th>
-                    </tr>
-                  </thead>
-                  <tbody id='$result_table'>
-                  </tbody>
-                </table>
-            </div>
+      <div class="card">
+        <h4 class="card-header card-success card-inverse">JsonBuffer size</h4>
+        <div class="card-block">
+          <h3>Expression</h3>
+          <p><code id='$result_expr'></code></p>
+          <h3>Additional bytes for input duplication</h3>
+          <p><code id='$extra_bytes'></code></p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Platform</th>
+                <th>Size</th>
+              </tr>
+            </thead>
+            <tbody id='$result_table'>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-9" id="$parserDiv">
-        <div class="card">
-            <h4 class="card-header card-success card-inverse">Parsing program</h4>
-            <div class="card-block">
-                <figure>
-                    <pre><code id="$parserPre"></code></pre>
-                </figure>
-            </div>
+  </div>
+  <div class="row">
+    <div class="col-12" id="$parserDiv">
+      <div class="card">
+        <h4 class="card-header card-success card-inverse">Parsing program</h4>
+        <div class="card-block">
+          <figure>
+            <pre><code id="$parserCode"></code></pre>
+          </figure>
         </div>
+      </div>
     </div>
-    <div class="col-md-3">
-        {% include ad_responsive.html %}
+    <div class="col-12" id="$serializerDiv">
+      <div class="card">
+        <h4 class="card-header card-success card-inverse">Serializing program</h4>
+        <div class="card-block">
+          <figure>
+            <pre><code id="$serializerCode"></code></pre>
+          </figure>
+        </div>
+      </div>
     </div>
-    </div>
-<ol class="breadcrumb">
+  </div>
+  <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ site.baseurl }}/">Home</a></li>
     <li class="breadcrumb-item active">Assistant</li>
-</ol>
+  </ol>
 </div>
 <script type="text/javascript" src="architectures.js"></script>
 <script type="text/javascript" src="examples.js"></script>
 <script type="text/javascript" src="programWriter.js"></script>
 <script type="text/javascript" src="parsingProgram.js"></script>
+<script type="text/javascript" src="serializingProgram.js"></script>
 <script type="text/javascript" src="calculator.js"></script>
 <script type="text/javascript" src="highlight.pack.js"></script>
 <script type="text/javascript" src="assistant.js"></script>

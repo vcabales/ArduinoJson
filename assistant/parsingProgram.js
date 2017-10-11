@@ -1,5 +1,7 @@
 function ParsingProgram() {
 
+  var _jsonString, _sizeRecipe;
+
   function extractValue(prg, value, member, prefix) {
     if (value instanceof Array) {
       prg.addEmptyLine();
@@ -51,13 +53,17 @@ function ParsingProgram() {
     return 1 + innerNesting;
   }
 
-  this.generate = function(jsonString, sizeRecipe) {
-    var prg = new ProgramWriter();
-    var root = JSON.parse(jsonString);
+  this.setInput = function(jsonString) { _jsonString = jsonString; };
 
-    var sizeExpression = sizeRecipe.getExpression();
-    if (sizeRecipe.getExtraBytes()) {
-      sizeExpression += " + " + Math.ceil(sizeRecipe.getExtraBytes() / 9) * 10;
+  this.setSize = function(sizeRecipe) { _sizeRecipe = sizeRecipe; };
+
+  this.toString = function() {
+    var prg = new ProgramWriter();
+    var root = JSON.parse(_jsonString);
+
+    var sizeExpression = _sizeRecipe.getExpression();
+    if (_sizeRecipe.getExtraBytes()) {
+      sizeExpression += " + " + Math.ceil(_sizeRecipe.getExtraBytes() / 9) * 10;
     }
     prg.addLine('const size_t bufferSize = ' + sizeExpression + ';');
     prg.addLine('DynamicJsonBuffer jsonBuffer(bufferSize);');

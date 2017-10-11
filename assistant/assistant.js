@@ -6,8 +6,7 @@ function analyseInput() {
   var parsedJson;
   try {
     parsedJson = JSON.parse($input.value);
-  }
-  catch (ex) {
+  } catch (ex) {
     error.innerText = "ERROR: " + ex.message;
     error.style.visibility = 'visible';
     return;
@@ -21,21 +20,30 @@ function analyseInput() {
   $result_expr.innerText = recipe.getExpression();
   $extra_bytes.innerText = extraSize;
 
-  for (var i=0; i<architectures.length; i++) {
+  for (var i = 0; i < architectures.length; i++) {
     var arch = architectures[i];
     var size = recipe.computeSize(arch);
     var row = $result_table.rows[i] || $result_table.insertRow(i);
     var name_cell = row.cells[0] || row.insertCell(0);
     var size_cell = row.cells[1] || row.insertCell(1);
-          name_cell.innerHTML = arch.name;
+    name_cell.innerHTML = arch.name;
     size_cell.innerHTML = "<code>" + (size + extraSize) + "</code>";
   }
   results.style.display = 'block';
 
-  var program = new ParsingProgram();
-  $parserPre.innerHTML = program.generate($input.value, recipe);
-  hljs.highlightBlock($parserPre);
+  var parser = new ParsingProgram();
+  parser.setInput($input.value);
+  parser.setSize(recipe);
+  $parserCode.innerHTML = parser.toString();
+  hljs.highlightBlock($parserCode);
   $parserDiv.style.display = 'block';
+
+  var serializer = new SerializingProgram();
+  serializer.setJson(parsedJson);
+  serializer.setSize(recipe);
+  $serializerCode.innerHTML = serializer.toString();
+  hljs.highlightBlock($serializerCode);
+  $serializerDiv.style.display = 'block';
 }
 
 $input.addEventListener('input', analyseInput);
@@ -47,12 +55,13 @@ function setJsonInput(obj) {
 
 setJsonInput(examples.arduinoJson);
 
-$wundergroundAnchor.onclick = function(e) {
+$wundergroundAnchor.onclick =
+    function(e) {
   setJsonInput(examples.wunderground);
   e.preventDefault();
 }
 
-$openweathermapAnchor.onclick = function(e) {
+    $openweathermapAnchor.onclick = function(e) {
   setJsonInput(examples.openweathermap);
   e.preventDefault();
 }
