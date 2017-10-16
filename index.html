@@ -5,71 +5,77 @@ tags: home no-ad
 ---
 
 <div class="container">
+  <div class="row">
+    <div class="col-12">
+      <img alt="ArduinoJson" src="{{ site.baseurl }}/images/logo.svg" class="img-fluid mx-auto d-block my-5">
+    </div>
+  </div>
 
-<div id="titlePane" class="jumbotron">
-<h1 class="display-1">ArduinoJson</h1>
-<div id="titlePaneCarousel" class="carousel slide display-4" data-ride="carousel" data-interval="500">
-  <span>A JSON library for</span>
-  <ul class="carousel-inner" role="listbox">
-  {% for platform in site.data.platforms %}
-	<li class="carousel-item{%if forloop.index==1%} active{%endif%}">{{platform.name}}</li>
-   {% endfor %}
-  </ul>
-</div>
-</div>
+  <div class="row">
+    <div id="titlePane" class="jumbotron">
+      <div id="titlePaneCarousel" class="carousel slide display-4" data-ride="carousel" data-interval="500">
+        <span>A JSON library for</span>
+        <ul class="carousel-inner" role="listbox">
+          {% for platform in site.data.platforms %}
+          <li class="carousel-item{%if forloop.index==1%} active{%endif%}">{{platform.name}}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
 
-<h2 class="display-3">Features</h2>
-<div class="row">
-{% assign features = site.features | sort: 'popularity' | reverse %}
-{% for feature in features %}
-<div class="col-12 col-lg-6 p-2">
-	<div class="card m-4">
-	  <div class="card-block">
-		<h4 class="card-title">{{ feature.title }}</h4>
-		<p class="card-text">
-			{{ feature.output }}
-		</p>
-	  </div>
-	</div>
-</div>
-{% endfor %}
-</div>
+  <h2 class="display-3">Features</h2>
+  <div class="row">
+    {% assign features = site.features | sort: 'popularity' | reverse %}
+    {% for feature in features %}
+    <div class="col-12 col-lg-6 p-2">
+      <div class="card m-4">
+        <div class="card-block">
+          <h4 class="card-title">{{ feature.title }}</h4>
+          <p class="card-text">
+            {{ feature.output }}
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 
-<h2 class="display-3">Testimonials</h2>
-<div class="row">
-{% for testimonial in site.data.testimonials %}
-<div class="col-12 col-lg-6 p-2">
-	<div class="card m-4">
-	  <div class="card-block">
-	  	{%if testimonial.avatar %}
-		<img src="{{testimonial.avatar}}" class="img-thumbnail float-right" style="width: 100px; height: 100px">
-		{% endif %}
-		<blockquote class="card-blockquote">
-			<i>{{ testimonial.text }}</i>
-		</blockquote>
-	  </div>
-	  <div class="card-footer text-muted text-right">
-		{%if testimonial.url %}
-		<a href={{testimonial.url}}>{{ testimonial.source }}</a>
-		{% else %}
-		{{ testimonial.source }}
-		{% endif %}
-	  </div>
-	</div>
-</div>
-{% endfor %}
-</div>
+  <h2 class="display-3">Testimonials</h2>
+  <div class="row">
+    {% for testimonial in site.data.testimonials %}
+    <div class="col-12 col-lg-6 p-2">
+      <div class="card m-4">
+        <div class="card-block">
+          {%if testimonial.avatar %}
+          <img src="{{testimonial.avatar}}" class="img-thumbnail float-right" style="width: 100px; height: 100px">
+          {% endif %}
+          <blockquote class="card-blockquote">
+            <i>{{ testimonial.text }}</i>
+          </blockquote>
+        </div>
+        <div class="card-footer text-muted text-right">
+          {%if testimonial.url %}
+          <a href={{testimonial.url}}>{{ testimonial.source }}</a>
+          {% else %}
+          {{ testimonial.source }}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 
-<h2 class="display-3">The most popular library</h2>
+  <h2 class="display-3">The most popular library</h2>
 
-<div class="col-12">
-<p>ArduinoJson is currently the <a href="https://github.com/search?o=desc&q=arduino+library&s=stars&type=Repositories">most popular Arduino library on GitHub</a>.</p>
+  <div class="col-12">
+    <p>ArduinoJson is currently the <a href="https://github.com/search?o=desc&q=arduino+library&s=stars&type=Repositories">most popular Arduino library on GitHub</a>.</p>
 
-<div class="text-center">
-<img class="img-fluid" src="{{site.baseurl}}/images/github_search.gif">
-</div>
-</div>
+    <div class="text-center">
+      <img class="img-fluid" src="{{site.baseurl}}/images/github_search.gif">
+    </div>
+  </div>
 
-<p>We need your help to stay there, so don't forget to <a href="https://github.com/bblanchon/ArduinoJson/stargazers">add a star :star:</a>.</p>
+  <p>We need your help to stay there, so don't forget to <a href="https://github.com/bblanchon/ArduinoJson/stargazers">add a star :star:</a>.</p>
 
 </div>
