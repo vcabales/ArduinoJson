@@ -1,14 +1,15 @@
 ArduinoJson: change log
 =======================
 
-HEAD
-----
+v5.11.2
+-------
 
 * Added `DynamicJsonArray`, `DynamicJsonObject`, `StaticJsonArray` etc.
 * Added `parseJson()`
 * Removed `JsonBuffer::parserArray()` and `parseObject()`
 * Removed all deprecated features.
 * Fixed `DynamicJsonBuffer::clear()` not resetting allocation size (issue #561)
+* Fixed incorrect rounding for float values (issue #588)
 
 ### BREAKING CHANGES :warning:
 
