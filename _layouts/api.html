@@ -8,12 +8,10 @@ layout: default
 		<h2><code>{{ page.title }}</code></h2>
 	</div>
 
-	<div class="row">
-		<div class="col-md-9">
+	<div class="clearfix">
+		{% include ad.html %}
+		<div>
 			{{ content }}
-		</div>
-		<div class="col-md-3">
-			{% include ad_responsive.html %}
 		</div>
 	</div>
 
